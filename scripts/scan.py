@@ -15,14 +15,20 @@ YOUTUBE_API_KEY = os.environ.get("YOUTUBE_API_KEY", "")
 OPENAI_API_KEY = os.environ.get("OPENAI_API_KEY", "")
 
 KR_KEYWORDS = [
-    "AI로 돈벌기", "AI 부업 수익화", "ChatGPT 돈버는법", "AI 수익 자동화",
-    "AI 부업 추천", "인공지능 수익", "AI 사이드잡", "GPT 부업",
-    "AI 자동화 수익", "AI 콘텐츠 수익화"
+    "AI로 돈벌기", "AI 부업", "ChatGPT 돈버는법", "AI 수익화",
+    "AI 알바", "AI 자동화 수익", "인공지능 부업", "GPT 부업",
+    "AI 월급", "AI 수입", "AI 재택", "AI 프리랜서",
+    "AI 사이드잡", "챗GPT 수익", "AI 전업", "AI 창업",
+    "AI 온라인 수익", "AI 무자본", "AI 투잡", "인공지능 돈"
 ]
 EN_KEYWORDS = [
     "make money with AI", "AI side hustle", "AI passive income",
-    "ChatGPT earn money", "AI business ideas 2026", "AI automation income",
-    "AI freelance money", "GPT side hustle"
+    "ChatGPT earn money", "AI business ideas", "AI automation income",
+    "AI freelance money", "GPT side hustle", "AI income online",
+    "earn with ChatGPT", "AI money making", "AI job replacement",
+    "AI gig economy", "make $1000 with AI", "AI remote work money",
+    "AI content monetization", "AI dropshipping", "AI affiliate marketing",
+    "AI digital products", "quit job with AI"
 ]
 MIN_VIEWS = 1000
 DAYS_BACK = 7
@@ -127,7 +133,7 @@ Respond in valid JSON array format only. No text outside JSON."""
         print(f"  [LLM ERR] {e}"); return None
 
 def apply_analysis(items, analyses):
-    if not analyses or len(analyses) != len(items):
+    if not analyses:
         for item in items:
             item["title_ko"] = item["title"] if item["language"] == "ko" else ""
             item["title_en"] = item["title"] if item["language"] == "en" else ""
@@ -137,6 +143,9 @@ def apply_analysis(items, analyses):
             item["category"] = "기타"
             item["difficulty"] = 3; item["initial_cost"] = 3; item["time_to_profit"] = 3
         return
+    # 부분 매칭 허용 (개수 불일치 시에도 있는 만큼 적용)
+    if len(analyses) != len(items):
+        print(f"  [WARN] LLM returned {len(analyses)} items, expected {len(items)}. Applying partial.")
 
     for item, analysis in zip(items, analyses):
         item["title_ko"] = analysis.get("title_ko", item["title"])
@@ -203,36 +212,35 @@ def main():
     shorts_results = {}
     videos_results = {}
 
-    # === 쇼츠 수집 ===
-    print("=== SHORTS ===")
-    print("Scanning KR Shorts...")
-    for kw in KR_KEYWORDS[:5]:  # API 쿼터 절약
-        items = search_videos(yt, kw, "ko", after, "short", region_code="KR")
+    # === 한국 수집 (필터 없이 전체 → 코드에서 길이로 분류) ===
+    print("=== KR (ALL) ===")
+    kr_all = {}
+    for kw in KR_KEYWORDS[:8]:  # 8개 키워드 사용
+        items = search_videos(yt, kw, "ko", after, None, region_code="KR")
         ids = [i["id"]["videoId"] for i in items if "videoId" in i.get("id", {})]
         for vid, info in get_details(yt, ids).items():
-            if info["views"] >= MIN_VIEWS and vid not in shorts_results:
-                info["language"] = "ko"; info["is_short"] = True; shorts_results[vid] = info
+            if info["views"] >= MIN_VIEWS and vid not in kr_all:
+                info["language"] = "ko"
+                kr_all[vid] = info
+    print(f"  KR total: {len(kr_all)}")
+    for vid, info in kr_all.items():
+        if info["is_short"]:
+            if vid not in shorts_results: shorts_results[vid] = info
+        else:
+            if vid not in videos_results: videos_results[vid] = info
 
-    print("Scanning EN Shorts...")
-    for kw in EN_KEYWORDS[:5]:
+    # === 영어 쇼츠 ===
+    print("\n=== EN SHORTS ===")
+    for kw in EN_KEYWORDS[:8]:
         items = search_videos(yt, kw, "en", after, "short")
         ids = [i["id"]["videoId"] for i in items if "videoId" in i.get("id", {})]
         for vid, info in get_details(yt, ids).items():
             if info["views"] >= MIN_VIEWS and vid not in shorts_results:
                 info["language"] = "en"; info["is_short"] = True; shorts_results[vid] = info
 
-    # === 일반 영상 수집 ===
-    print("\n=== VIDEOS ===")
-    print("Scanning KR Videos...")
-    for kw in KR_KEYWORDS[:5]:
-        items = search_videos(yt, kw, "ko", after, "medium", region_code="KR")
-        ids = [i["id"]["videoId"] for i in items if "videoId" in i.get("id", {})]
-        for vid, info in get_details(yt, ids).items():
-            if info["views"] >= MIN_VIEWS and vid not in videos_results:
-                info["language"] = "ko"; info["is_short"] = False; videos_results[vid] = info
-
-    print("Scanning EN Videos...")
-    for kw in EN_KEYWORDS[:5]:
+    # === 영어 일반 영상 ===
+    print("\n=== EN VIDEOS ===")
+    for kw in EN_KEYWORDS[:8]:
         items = search_videos(yt, kw, "en", after, "medium")
         ids = [i["id"]["videoId"] for i in items if "videoId" in i.get("id", {})]
         for vid, info in get_details(yt, ids).items():
@@ -249,16 +257,24 @@ def main():
     if not shorts_top10 and not videos_top10:
         print("No data collected"); return
 
-    # LLM 분석
+    # LLM 분석 (실패 시 1회 재시도)
     if OPENAI_API_KEY:
         client = OpenAI(api_key=OPENAI_API_KEY)
         if shorts_top10:
             print("Analyzing Shorts with LLM...")
             analyses = analyze_with_llm(client, shorts_top10)
+            if not analyses:
+                print("  Retrying...")
+                time.sleep(3)
+                analyses = analyze_with_llm(client, shorts_top10)
             apply_analysis(shorts_top10, analyses)
         if videos_top10:
             print("Analyzing Videos with LLM...")
             analyses = analyze_with_llm(client, videos_top10)
+            if not analyses:
+                print("  Retrying...")
+                time.sleep(3)
+                analyses = analyze_with_llm(client, videos_top10)
             apply_analysis(videos_top10, analyses)
     else:
         print("OPENAI_API_KEY not set, skipping analysis")
@@ -295,17 +311,4 @@ def main():
     update_rankings(30, "monthly_videos.json", 5, "videos")
 
     # 주간/월간 파일이 비어있으면 일간 데이터로 채우기
-    for fname, src_key in [("weekly_shorts.json", "shorts_top10"), ("weekly_videos.json", "videos_top10"),
-                           ("monthly_shorts.json", "shorts_top10"), ("monthly_videos.json", "videos_top10")]:
-        fp = DATA_DIR / fname
-        if fp.exists():
-            content = json.loads(fp.read_text(encoding="utf-8"))
-            if not content.get("top5"):
-                content["top5"] = daily[src_key][:5]
-                fp.write_text(json.dumps(content, ensure_ascii=False, indent=2), encoding="utf-8")
-                print(f"  Filled {fname} with daily data")
-
-    print("Rankings updated!")
-
-if __name__ == "__main__":
-    main()
+    for fname, src_key in [("wee
