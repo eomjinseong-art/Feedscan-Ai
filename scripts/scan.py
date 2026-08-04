@@ -311,4 +311,17 @@ def main():
     update_rankings(30, "monthly_videos.json", 5, "videos")
 
     # 주간/월간 파일이 비어있으면 일간 데이터로 채우기
-    for fname, src_key in [("wee
+    for fname, src_key in [("weekly_shorts.json", "shorts_top10"), ("weekly_videos.json", "videos_top10"),
+                           ("monthly_shorts.json", "shorts_top10"), ("monthly_videos.json", "videos_top10")]:
+        fp = DATA_DIR / fname
+        if fp.exists():
+            content = json.loads(fp.read_text(encoding="utf-8"))
+            if not content.get("top5"):
+                content["top5"] = daily[src_key][:5]
+                fp.write_text(json.dumps(content, ensure_ascii=False, indent=2), encoding="utf-8")
+                print(f"  Filled {fname} with daily data")
+
+    print("Rankings updated!")
+
+if __name__ == "__main__":
+    main()
