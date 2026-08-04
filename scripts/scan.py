@@ -24,7 +24,7 @@ EN_KEYWORDS = [
     "ChatGPT earn money", "AI business ideas 2026", "AI automation income",
     "AI freelance money", "GPT side hustle"
 ]
-MIN_VIEWS = 3000
+MIN_VIEWS = 1000
 DAYS_BACK = 7
 MAX_RESULTS = 15
 TOP_N = 10
@@ -39,13 +39,15 @@ def mask_channel(name):
     if len(name) <= 5: return name[:2] + "***"
     return name[:3] + "***"
 
-def search_videos(yt, kw, lang, after, duration_filter=None):
+def search_videos(yt, kw, lang, after, duration_filter=None, region_code=None):
     """duration_filter: 'short' for shorts, 'medium'/'long' for regular videos, None for all"""
     try:
         params = dict(part="snippet", q=kw, type="video",
             order="viewCount", publishedAfter=after, relevanceLanguage=lang, maxResults=MAX_RESULTS)
         if duration_filter:
             params["videoDuration"] = duration_filter
+        if region_code:
+            params["regionCode"] = region_code
         r = yt.search().list(**params).execute()
         return r.get("items", [])
     except Exception as e:
@@ -205,7 +207,7 @@ def main():
     print("=== SHORTS ===")
     print("Scanning KR Shorts...")
     for kw in KR_KEYWORDS[:5]:  # API 쿼터 절약
-        items = search_videos(yt, kw, "ko", after, "short")
+        items = search_videos(yt, kw, "ko", after, "short", region_code="KR")
         ids = [i["id"]["videoId"] for i in items if "videoId" in i.get("id", {})]
         for vid, info in get_details(yt, ids).items():
             if info["views"] >= MIN_VIEWS and vid not in shorts_results:
@@ -223,7 +225,7 @@ def main():
     print("\n=== VIDEOS ===")
     print("Scanning KR Videos...")
     for kw in KR_KEYWORDS[:5]:
-        items = search_videos(yt, kw, "ko", after, "medium")
+        items = search_videos(yt, kw, "ko", after, "medium", region_code="KR")
         ids = [i["id"]["videoId"] for i in items if "videoId" in i.get("id", {})]
         for vid, info in get_details(yt, ids).items():
             if info["views"] >= MIN_VIEWS and vid not in videos_results:
@@ -286,11 +288,23 @@ def main():
     (DAILY_DIR / f"{today_str}.json").write_text(json.dumps(daily, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"Saved: {today_str}")
 
-    # 주간/월간 랭킹 업데이트
+    # 주간/월간 랭킹 업데이트 (첫 실행 시에도 일간 데이터로 채움)
     update_rankings(7, "weekly_shorts.json", 5, "shorts")
     update_rankings(7, "weekly_videos.json", 5, "videos")
     update_rankings(30, "monthly_shorts.json", 5, "shorts")
     update_rankings(30, "monthly_videos.json", 5, "videos")
+
+    # 주간/월간 파일이 비어있으면 일간 데이터로 채우기
+    for fname, src_key in [("weekly_shorts.json", "shorts_top10"), ("weekly_videos.json", "videos_top10"),
+                           ("monthly_shorts.json", "shorts_top10"), ("monthly_videos.json", "videos_top10")]:
+        fp = DATA_DIR / fname
+        if fp.exists():
+            content = json.loads(fp.read_text(encoding="utf-8"))
+            if not content.get("top5"):
+                content["top5"] = daily[src_key][:5]
+                fp.write_text(json.dumps(content, ensure_ascii=False, indent=2), encoding="utf-8")
+                print(f"  Filled {fname} with daily data")
+
     print("Rankings updated!")
 
 if __name__ == "__main__":
