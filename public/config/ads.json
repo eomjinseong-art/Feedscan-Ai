@@ -1,0 +1,40 @@
+{
+  "ads": [
+    {
+      "id": "dating",
+      "title": "그날의 남녀 - 사랑을 기록하세요",
+      "title_en": "Today's Couple - Record Your Love",
+      "description": "특별한 인연을 만나보세요",
+      "description_en": "Find your special connection",
+      "url": "https://couple-score-hs.vercel.app/",
+      "cta": "바로가기 →",
+      "cta_en": "Visit →",
+      "position": "banner",
+      "active": true
+    },
+    {
+      "id": "coupang",
+      "title": "쿠팡파트너스",
+      "title_en": "Coupang Partners",
+      "description": "AI 도구 & 장비 추천",
+      "description_en": "AI Tools & Equipment Picks",
+      "url": "https://여기에-쿠팡파트너스-링크-입력",
+      "cta": "바로가기 →",
+      "cta_en": "Shop now →",
+      "position": "inline",
+      "active": true
+    },
+    {
+      "id": "avoir",
+      "title": "아브아르(AVOIR) - 매일이 새로운 설렘",
+      "title_en": "AVOIR - Every Day is a New Thrill",
+      "description": "트렌디한 여성 패션 아이템",
+      "description_en": "Trendy women's fashion items",
+      "url": "https://avoir24.com/",
+      "cta": "자세히 보기 →",
+      "cta_en": "Shop now →",
+      "position": "sidebar",
+      "active": true
+    }
+  ]
+}
