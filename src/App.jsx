@@ -233,10 +233,17 @@ export default function App(){
   const [contactSent, setContactSent] = useState(false)
   // Terms
   const [showTerms, setShowTerms] = useState(false)
+  // Visitor count
+  const [visitorCount, setVisitorCount] = useState(null)
 
   useEffect(()=>{
     loadLatestDaily()
     fetch('/config/ads.json').then(r=>r.ok?r.json():null).then(setAdsConfig).catch(()=>{})
+    // Goatcounter visitor count
+    fetch('https://ai-trend.goatcounter.com/counter/.json')
+      .then(r=>r.ok?r.json():null)
+      .then(data=>{if(data&&data.count) setVisitorCount(data.count)})
+      .catch(()=>{})
   },[])
   useEffect(()=>{
     const suffix = contentType === 'shorts' ? '_shorts' : '_videos'
@@ -288,7 +295,7 @@ export default function App(){
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div><h1 className="text-xl md:text-2xl font-bold text-white"><span className="text-indigo-400">AI</span> Money Scanner</h1><p className="text-slate-400 text-sm mt-1">{t.siteTagline}</p></div>
           <div className="flex items-center gap-3">
-            <span className="hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs"><img src="https://ai-trend.goatcounter.com/counter/.json" alt="" className="h-3 inline" style={{display:'none'}}/><img src={`https://ai-trend.goatcounter.com/counter/${encodeURIComponent(typeof window!=='undefined'?window.location.pathname:'/')}.svg`} alt="visitors" className="h-4 inline"/></span>
+            {visitorCount&&<span className="hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs"><svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/></svg>{visitorCount.toLocaleString()}</span>}
             <span className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs">{formatUpdateTime()}</span>
             <button onClick={()=>setShowContact(true)} className="hidden md:inline-flex px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors">{t.contactTitle}</button>
             <button onClick={()=>setLang(lang==='ko'?'en':'ko')} className="px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors font-medium">{lang==='ko'?'EN':'한국어'}</button>
