@@ -195,7 +195,7 @@ function SidebarAdSlot({ad, lang, t}){ if(!ad) return (<div className="border bo
 
 function TrendKeywords({data}){
   const keywords = useMemo(()=>{
-    if(!data) return []; const allItems=data.top10||[]; const wordMap={}
+    if(!data) return []; const allItems=[...(data.shorts_top10||[]),...(data.videos_top10||[]),...(data.top10||[])]; const wordMap={}
     const stopwords=new Set(['the','to','with','a','an','and','or','how','make','money','ai','in','for','from','your','this','that','is','are','was','were','be','been','have','has','had','do','does','did','will','can','could','would','should','may','might','i','you','he','she','it','we','they','my','our','its','his','her','their','of','on','at','by','up','out','about','into','over','after','per','day','using'])
     allItems.forEach(item=>{ const text=`${item.title} ${item.title_en||''} ${item.method_en||''}`; const words=text.toLowerCase().replace(/[^a-z가-힣0-9\s]/g,' ').split(/\s+/); words.forEach(w=>{ if(w.length<3||stopwords.has(w)||/^\d+$/.test(w)) return; wordMap[w]=(wordMap[w]||0)+1 }) })
     return Object.entries(wordMap).sort((a,b)=>b[1]-a[1]).slice(0,15).map(([word,count])=>({word,count}))
@@ -233,17 +233,9 @@ export default function App(){
   const [contactSent, setContactSent] = useState(false)
   // Terms
   const [showTerms, setShowTerms] = useState(false)
-  // Visitor count
-  const [visitorCount, setVisitorCount] = useState(null)
-
   useEffect(()=>{
     loadLatestDaily()
     fetch('/config/ads.json').then(r=>r.ok?r.json():null).then(setAdsConfig).catch(()=>{})
-    // Goatcounter visitor count
-    fetch('https://ai-trend.goatcounter.com/counter/.json')
-      .then(r=>r.ok?r.json():null)
-      .then(data=>{if(data&&data.count) setVisitorCount(data.count)})
-      .catch(()=>{})
   },[])
   useEffect(()=>{
     const suffix = contentType === 'shorts' ? '_shorts' : '_videos'
@@ -265,8 +257,8 @@ export default function App(){
     finally{setAnalyzeLoading(false)}
   }
 
-  function getDisplayData(){ let data=[]; if(period==='daily'){ const key=contentType==='shorts'?'shorts_top10':'videos_top10'; data=dailyData?.[key]||[]; if(data.length===0 && contentType==='shorts') data=dailyData?.top10||[] } else if(period==='weekly') data=weeklyData?.top5||[]; else if(period==='monthly') data=monthlyData?.top5||[]; if(region==='kr') data=data.filter(i=>i.language==='ko'); return data }
-  function getFilteredData(){ let data=getDisplayData(); if(activeCategory!=='전체') data=data.filter(i=>i.category===activeCategory); if(searchQuery.trim()){const q=searchQuery.toLowerCase();data=data.filter(i=>i.title.toLowerCase().includes(q)||(i.title_ko||'').toLowerCase().includes(q)||(i.title_en||'').toLowerCase().includes(q)||i.channel_masked.toLowerCase().includes(q))} if(filterDifficulty) data=data.filter(i=>i.difficulty<=filterDifficulty); if(filterCost) data=data.filter(i=>i.initial_cost<=filterCost); if(filterTime) data=data.filter(i=>i.time_to_profit<=filterTime); return data }
+  function getDisplayData(){ let data=[]; if(period==='daily'){ const key=contentType==='shorts'?'shorts_top10':'videos_top10'; data=dailyData?.[key]||[]; if(data.length===0 && contentType==='shorts') data=dailyData?.top10||[] } else if(period==='weekly') data=weeklyData?.top5||[]; else if(period==='monthly') data=monthlyData?.top5||[]; return data }
+  function getFilteredData(){ let data=getDisplayData(); if(region==='korea') data=data.filter(i=>i.language==='ko'); if(activeCategory!=='전체') data=data.filter(i=>i.category===activeCategory); if(searchQuery.trim()){const q=searchQuery.toLowerCase();data=data.filter(i=>i.title.toLowerCase().includes(q)||(i.title_ko||'').toLowerCase().includes(q)||(i.title_en||'').toLowerCase().includes(q)||i.channel_masked.toLowerCase().includes(q))} if(filterDifficulty) data=data.filter(i=>i.difficulty<=filterDifficulty); if(filterCost) data=data.filter(i=>i.initial_cost<=filterCost); if(filterTime) data=data.filter(i=>i.time_to_profit<=filterTime); return data }
 
   const bannerAd=adsConfig?.ads?.find(a=>a.position==='banner'&&a.active)
   const inlineAd=adsConfig?.ads?.find(a=>a.position==='inline'&&a.active)
@@ -295,7 +287,7 @@ export default function App(){
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div><h1 className="text-xl md:text-2xl font-bold text-white"><span className="text-indigo-400">AI</span> Money Scanner</h1><p className="text-slate-400 text-sm mt-1">{t.siteTagline}</p></div>
           <div className="flex items-center gap-3">
-            {visitorCount&&<span className="hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs"><svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20"><path d="M10 12a2 2 0 100-4 2 2 0 000 4z"/><path fillRule="evenodd" d="M.458 10C1.732 5.943 5.522 3 10 3s8.268 2.943 9.542 7c-1.274 4.057-5.064 7-9.542 7S1.732 14.057.458 10zM14 10a4 4 0 11-8 0 4 4 0 018 0z" clipRule="evenodd"/></svg>{visitorCount.toLocaleString()}</span>}
+
             <span className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs">{formatUpdateTime()}</span>
             <button onClick={()=>setShowContact(true)} className="hidden md:inline-flex px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors">{t.contactTitle}</button>
             <button onClick={()=>setLang(lang==='ko'?'en':'ko')} className="px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors font-medium">{lang==='ko'?'EN':'한국어'}</button>
@@ -355,17 +347,14 @@ export default function App(){
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Main Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex gap-2 mb-3">
-              <button onClick={()=>setRegion('kr')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='kr'?'bg-blue-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionKr}</button>
-              <button onClick={()=>setRegion('global')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionGlobal}</button>
-            </div>
+
             <div className="flex gap-2 mb-3">
               <button onClick={()=>setContentType('shorts')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'📱 유튜브 쇼츠':'📱 YouTube Shorts'}</button>
               <button onClick={()=>setContentType('videos')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'🎬 유튜브 영상':'🎬 YouTube Videos'}</button>
             </div>
             <div className="flex gap-2 mb-4">{['daily','weekly','monthly'].map((p,i)=>(<button key={p} onClick={()=>setPeriod(p)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${period===p?'bg-indigo-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{[t.tabDaily,t.tabWeekly,t.tabMonthly][i]}</button>))}</div>
             <div className="flex flex-wrap gap-1.5 mb-4">{categoryKeys.map((cat,i)=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-3 py-1 rounded-full text-xs transition-all ${activeCategory===cat?'bg-purple-600 text-white':'bg-slate-800 text-slate-400 hover:text-white border border-slate-700'}`}>{categories[i]}</button>))}</div>
-            <div className="bg-slate-800/30 border border-slate-700 rounded-lg p-3 mb-4"><div className="flex items-center justify-between mb-1"><h4 className="text-slate-300 text-xs font-medium">{t.filterTitle}</h4>{hasFilters&&(<button onClick={()=>{setFilterDifficulty(null);setFilterCost(null);setFilterTime(null)}} className="text-indigo-400 text-xs hover:text-indigo-300">{t.filterReset}</button>)}</div><p className="text-slate-500 text-[10px] mb-2">{t.filterHint}</p><div className="space-y-2"><div className="flex items-center gap-2"><ClickableMeter label={t.difficulty} value={filterDifficulty} onChange={setFilterDifficulty} color="bg-orange-500"/>{filterDifficulty&&<span className="text-slate-500 text-[10px]">{t.filterLabels[filterDifficulty]}</span>}</div><div className="flex items-center gap-2"><ClickableMeter label={t.cost} value={filterCost} onChange={setFilterCost} color="bg-red-500"/>{filterCost&&<span className="text-slate-500 text-[10px]">{t.filterCostLabels[filterCost]}</span>}</div><div className="flex items-center gap-2"><ClickableMeter label={t.time} value={filterTime} onChange={setFilterTime} color="bg-yellow-500"/>{filterTime&&<span className="text-slate-500 text-[10px]">{t.filterTimeLabels[filterTime]}</span>}</div></div></div>
+            <div className="bg-slate-800/30 border border-slate-700 rounded-lg p-3 mb-4"><div className="flex items-center justify-between mb-1"><h4 className="text-slate-300 text-xs font-medium">{t.filterTitle}</h4>{(hasFilters||region!=='global')&&(<button onClick={()=>{setFilterDifficulty(null);setFilterCost(null);setFilterTime(null);setRegion('global')}} className="text-indigo-400 text-xs hover:text-indigo-300">{t.filterReset}</button>)}</div><p className="text-slate-500 text-[10px] mb-2">{t.filterHint}</p><div className="space-y-2"><div className="flex items-center gap-2"><span className="w-24 text-slate-400 text-xs shrink-0">{lang==='ko'?'지역':'Region'}</span><button onClick={()=>setRegion('global')} className={`px-2 py-0.5 rounded text-xs ${region==='global'?'bg-indigo-600 text-white':'bg-slate-700 text-slate-400 hover:text-white'}`}>{lang==='ko'?'🌍 글로벌':'🌍 Global'}</button><button onClick={()=>setRegion('korea')} className={`px-2 py-0.5 rounded text-xs ${region==='korea'?'bg-indigo-600 text-white':'bg-slate-700 text-slate-400 hover:text-white'}`}>{lang==='ko'?'🇰🇷 한국':'🇰🇷 Korea'}</button></div><div className="flex items-center gap-2"><ClickableMeter label={t.difficulty} value={filterDifficulty} onChange={setFilterDifficulty} color="bg-orange-500"/>{filterDifficulty&&<span className="text-slate-500 text-[10px]">{t.filterLabels[filterDifficulty]}</span>}</div><div className="flex items-center gap-2"><ClickableMeter label={t.cost} value={filterCost} onChange={setFilterCost} color="bg-red-500"/>{filterCost&&<span className="text-slate-500 text-[10px]">{t.filterCostLabels[filterCost]}</span>}</div><div className="flex items-center gap-2"><ClickableMeter label={t.time} value={filterTime} onChange={setFilterTime} color="bg-yellow-500"/>{filterTime&&<span className="text-slate-500 text-[10px]">{t.filterTimeLabels[filterTime]}</span>}</div></div></div>
             <div className="relative mb-4"><input type="text" placeholder={t.search} value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 pl-10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"/><svg className="absolute left-3 top-3.5 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
             {items.length===0?(<div className="bg-slate-800/50 border border-slate-700 rounded-xl p-12 text-center"><p className="text-slate-400">{t.noData}</p></div>):(<div className="space-y-3">{items.map((item,index)=>(<React.Fragment key={item.video_id}>{index===3&&bannerAd&&<AdAsRank ad={bannerAd} lang={lang}/>}<RankItem item={item} rank={index+1} lang={lang} t={t} isExpanded={expandedId===item.video_id} onToggle={()=>setExpandedId(expandedId===item.video_id?null:item.video_id)} onWatch={setPopupVideoId}/>{index===6&&inlineAd&&<AdAsRank ad={inlineAd} lang={lang}/>}</React.Fragment>))}</div>)}
           </div>
@@ -393,7 +382,7 @@ export default function App(){
             <button onClick={()=>setShowContact(true)} className="text-slate-500 text-xs hover:text-indigo-400">{t.contactTitle}</button>
             <button onClick={()=>setShowContact(true)} className="text-slate-500 text-xs hover:text-indigo-400">{t.reportBtn}</button>
           </div>
-          <div className="mt-4 text-center"><span className="text-slate-500 text-xs">{t.visitors}: </span><img src="https://ai-trend.goatcounter.com/counter//" alt="visitor count" className="inline h-4 opacity-60"/></div>
+
         </div>
       </footer>
     </div>
