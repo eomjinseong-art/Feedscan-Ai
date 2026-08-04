@@ -258,7 +258,7 @@ export default function App(){
     finally{setAnalyzeLoading(false)}
   }
 
-  function getDisplayData(){ let data=[]; if(period==='daily'){ const key=contentType==='shorts'?'shorts_top10':'videos_top10'; data=dailyData?.[key]||dailyData?.top10||[] } else if(period==='weekly') data=weeklyData?.top5||[]; else if(period==='monthly') data=monthlyData?.top5||[]; if(region==='kr') data=data.filter(i=>i.language==='ko'); return data }
+  function getDisplayData(){ let data=[]; if(period==='daily'){ const key=contentType==='shorts'?'shorts_top10':'videos_top10'; data=dailyData?.[key]||[]; if(data.length===0 && contentType==='shorts') data=dailyData?.top10||[] } else if(period==='weekly') data=weeklyData?.top5||[]; else if(period==='monthly') data=monthlyData?.top5||[]; if(region==='kr') data=data.filter(i=>i.language==='ko'); return data }
   function getFilteredData(){ let data=getDisplayData(); if(activeCategory!=='전체') data=data.filter(i=>i.category===activeCategory); if(searchQuery.trim()){const q=searchQuery.toLowerCase();data=data.filter(i=>i.title.toLowerCase().includes(q)||(i.title_ko||'').toLowerCase().includes(q)||(i.title_en||'').toLowerCase().includes(q)||i.channel_masked.toLowerCase().includes(q))} if(filterDifficulty) data=data.filter(i=>i.difficulty<=filterDifficulty); if(filterCost) data=data.filter(i=>i.initial_cost<=filterCost); if(filterTime) data=data.filter(i=>i.time_to_profit<=filterTime); return data }
 
   const bannerAd=adsConfig?.ads?.find(a=>a.position==='banner'&&a.active)
@@ -353,8 +353,8 @@ export default function App(){
               <button onClick={()=>setRegion('global')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionGlobal}</button>
             </div>
             <div className="flex gap-2 mb-3">
-              <button onClick={()=>setContentType('shorts')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'📱 쇼츠':'📱 Shorts'}</button>
-              <button onClick={()=>setContentType('videos')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'🎬 영상':'🎬 Videos'}</button>
+              <button onClick={()=>setContentType('shorts')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'📱 유튜브 쇼츠':'📱 YouTube Shorts'}</button>
+              <button onClick={()=>setContentType('videos')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'🎬 유튜브 영상':'🎬 YouTube Videos'}</button>
             </div>
             <div className="flex gap-2 mb-4">{['daily','weekly','monthly'].map((p,i)=>(<button key={p} onClick={()=>setPeriod(p)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${period===p?'bg-indigo-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{[t.tabDaily,t.tabWeekly,t.tabMonthly][i]}</button>))}</div>
             <div className="flex flex-wrap gap-1.5 mb-4">{categoryKeys.map((cat,i)=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-3 py-1 rounded-full text-xs transition-all ${activeCategory===cat?'bg-purple-600 text-white':'bg-slate-800 text-slate-400 hover:text-white border border-slate-700'}`}>{categories[i]}</button>))}</div>
