@@ -213,6 +213,7 @@ export default function App(){
   const [monthlyData, setMonthlyData] = useState(null)
   const [adsConfig, setAdsConfig] = useState(null)
   const [region, setRegion] = useState('global')
+  const [contentType, setContentType] = useState('shorts')
   const [period, setPeriod] = useState('daily')
   const [searchQuery, setSearchQuery] = useState('')
   const [activeCategory, setActiveCategory] = useState('전체')
@@ -235,10 +236,13 @@ export default function App(){
 
   useEffect(()=>{
     loadLatestDaily()
-    fetch('/data/weekly.json').then(r=>r.ok?r.json():null).then(setWeeklyData).catch(()=>{})
-    fetch('/data/monthly.json').then(r=>r.ok?r.json():null).then(setMonthlyData).catch(()=>{})
     fetch('/config/ads.json').then(r=>r.ok?r.json():null).then(setAdsConfig).catch(()=>{})
   },[])
+  useEffect(()=>{
+    const suffix = contentType === 'shorts' ? '_shorts' : '_videos'
+    fetch(`/data/weekly${suffix}.json`).then(r=>r.ok?r.json():null).then(setWeeklyData).catch(()=>setWeeklyData(null))
+    fetch(`/data/monthly${suffix}.json`).then(r=>r.ok?r.json():null).then(setMonthlyData).catch(()=>setMonthlyData(null))
+  },[contentType])
 
   async function loadLatestDaily(){ const today=new Date(); for(let i=0;i<7;i++){const d=new Date(today);d.setDate(d.getDate()-i);const ds=d.toISOString().split('T')[0];try{const r=await fetch(`/data/daily/${ds}.json`);if(r.ok){setDailyData(await r.json());return}}catch(e){}} }
 
@@ -254,7 +258,7 @@ export default function App(){
     finally{setAnalyzeLoading(false)}
   }
 
-  function getDisplayData(){ let data=[]; if(period==='daily') data=dailyData?.top10||[]; else if(period==='weekly') data=weeklyData?.top5||[]; else if(period==='monthly') data=monthlyData?.top5||[]; if(region==='kr') data=data.filter(i=>i.language==='ko'); return data }
+  function getDisplayData(){ let data=[]; if(period==='daily'){ const key=contentType==='shorts'?'shorts_top10':'videos_top10'; data=dailyData?.[key]||dailyData?.top10||[] } else if(period==='weekly') data=weeklyData?.top5||[]; else if(period==='monthly') data=monthlyData?.top5||[]; if(region==='kr') data=data.filter(i=>i.language==='ko'); return data }
   function getFilteredData(){ let data=getDisplayData(); if(activeCategory!=='전체') data=data.filter(i=>i.category===activeCategory); if(searchQuery.trim()){const q=searchQuery.toLowerCase();data=data.filter(i=>i.title.toLowerCase().includes(q)||(i.title_ko||'').toLowerCase().includes(q)||(i.title_en||'').toLowerCase().includes(q)||i.channel_masked.toLowerCase().includes(q))} if(filterDifficulty) data=data.filter(i=>i.difficulty<=filterDifficulty); if(filterCost) data=data.filter(i=>i.initial_cost<=filterCost); if(filterTime) data=data.filter(i=>i.time_to_profit<=filterTime); return data }
 
   const bannerAd=adsConfig?.ads?.find(a=>a.position==='banner'&&a.active)
@@ -284,6 +288,7 @@ export default function App(){
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
           <div><h1 className="text-xl md:text-2xl font-bold text-white"><span className="text-indigo-400">AI</span> Money Scanner</h1><p className="text-slate-400 text-sm mt-1">{t.siteTagline}</p></div>
           <div className="flex items-center gap-3">
+            <span className="hidden md:inline-flex items-center gap-1 px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs"><img src="https://ai-trend.goatcounter.com/counter/.json" alt="" className="h-3 inline" style={{display:'none'}}/><img src={`https://ai-trend.goatcounter.com/counter/${encodeURIComponent(typeof window!=='undefined'?window.location.pathname:'/')}.svg`} alt="visitors" className="h-4 inline"/></span>
             <span className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs">{formatUpdateTime()}</span>
             <button onClick={()=>setShowContact(true)} className="hidden md:inline-flex px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors">{t.contactTitle}</button>
             <button onClick={()=>setLang(lang==='ko'?'en':'ko')} className="px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors font-medium">{lang==='ko'?'EN':'한국어'}</button>
@@ -346,6 +351,10 @@ export default function App(){
             <div className="flex gap-2 mb-3">
               <button onClick={()=>setRegion('kr')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='kr'?'bg-blue-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionKr}</button>
               <button onClick={()=>setRegion('global')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionGlobal}</button>
+            </div>
+            <div className="flex gap-2 mb-3">
+              <button onClick={()=>setContentType('shorts')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'📱 쇼츠':'📱 Shorts'}</button>
+              <button onClick={()=>setContentType('videos')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'🎬 영상':'🎬 Videos'}</button>
             </div>
             <div className="flex gap-2 mb-4">{['daily','weekly','monthly'].map((p,i)=>(<button key={p} onClick={()=>setPeriod(p)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${period===p?'bg-indigo-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{[t.tabDaily,t.tabWeekly,t.tabMonthly][i]}</button>))}</div>
             <div className="flex flex-wrap gap-1.5 mb-4">{categoryKeys.map((cat,i)=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-3 py-1 rounded-full text-xs transition-all ${activeCategory===cat?'bg-purple-600 text-white':'bg-slate-800 text-slate-400 hover:text-white border border-slate-700'}`}>{categories[i]}</button>))}</div>
