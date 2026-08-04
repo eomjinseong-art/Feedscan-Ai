@@ -36,8 +36,9 @@ const UI = {
     analyzeDisclaimer: "본 분석은 AI 시스템이 공개된 메타데이터를 기반으로 자동 생성한 구조적 의견이며, 특정 개인이나 채널에 대한 주관적 평가가 아닙니다. 수익 수치는 일반적 시장 데이터에 기반한 추정이며, 실제 결과를 보장하지 않습니다. 모든 판단과 행동은 이용자 본인의 책임입니다.",
     filterHint: "레벨을 클릭하면 해당 수준 이하만 표시됩니다",
     filterLabels: {1:"매우 쉬움",2:"쉬움",3:"보통",4:"어려움",5:"매우 어려움"},
-    filterCostLabels: {1:"거의 무료",2:"$20 이하",3:"$50 이하",4:"$200 이하",5:"$200+"},
+    filterCostLabels: {1:"거의 무료",2:"2만원 이하",3:"5만원 이하",4:"20만원 이하",5:"20만원+"},
     filterTimeLabels: {1:"1주 이내",2:"1개월",3:"3개월",4:"6개월",5:"6개월+"},
+    analyzeReject: "이 영상은 AI 수익화 관련 콘텐츠가 아니므로 분석할 수 없습니다. AI, 부업, 수익화 관련 영상을 입력해주세요.",
     schedule: "하루 6회 업데이트 (07:00 / 10:00 / 13:00 / 16:00 / 19:00 / 22:00 KST)",
     revenuePotential: "수익 잠재력",
     competition: "경쟁 강도",
@@ -103,6 +104,7 @@ const UI = {
     filterLabels: {1:"Very Easy",2:"Easy",3:"Medium",4:"Hard",5:"Very Hard"},
     filterCostLabels: {1:"Nearly Free",2:"Under $20",3:"Under $50",4:"Under $200",5:"$200+"},
     filterTimeLabels: {1:"Within 1 week",2:"1 month",3:"3 months",4:"6 months",5:"6+ months"},
+    analyzeReject: "This video is not related to AI monetization and cannot be analyzed. Please enter a video about AI, side hustles, or making money.",
     schedule: "Updated 6x daily (07:00 / 10:00 / 13:00 / 16:00 / 19:00 / 22:00 KST)",
     revenuePotential: "Revenue Potential",
     competition: "Competition Level",
@@ -140,7 +142,7 @@ const UI = {
 function formatViews(n){ return n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':n+'' }
 function MeterBar({value, max=5, color}){ return <div className="flex gap-0.5">{Array.from({length:max},(_,i)=>(<div key={i} className={`h-2 w-5 rounded-sm ${i<value?color:'bg-slate-700'}`}/>))}</div> }
 function ClickableMeter({label, value, onChange, color, max=5}){
-  return (<div className="flex items-center gap-2"><span className="text-slate-400 text-xs w-16">{label}</span><div className="flex gap-0.5">{Array.from({length:max},(_,i)=>(<button key={i} onClick={()=>onChange(value===i+1?null:i+1)} className={`h-4 w-5 rounded-sm transition-all ${i<(value||0)?color:'bg-slate-700 hover:bg-slate-600'}`}/>))}</div>{value && <span className="text-slate-500 text-xs">≤{value}</span>}</div>)
+  return (<div className="flex items-center gap-2"><span className="text-slate-400 text-xs w-24 flex-shrink-0">{label}</span><div className="flex gap-0.5">{Array.from({length:max},(_,i)=>(<button key={i} onClick={()=>onChange(value===i+1?null:i+1)} className={`h-4 w-5 rounded-sm transition-all ${i<(value||0)?color:'bg-slate-700 hover:bg-slate-600'}`}/>))}</div>{value && <span className="text-slate-500 text-xs">≤{value}</span>}</div>)
 }
 
 function RankItem({item, rank, isExpanded, onToggle, lang, t, onWatch}){
@@ -245,7 +247,9 @@ export default function App(){
     try{
       const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:analyzeUrl})})
       if(!res.ok){const err=await res.json();throw new Error(err.error||'Failed')}
-      setAnalyzeResult(await res.json())
+      const data=await res.json()
+      if(data.ai_relevance==='낮음'||data.ai_relevance_en==='Low'){setAnalyzeError(t.analyzeReject);return}
+      setAnalyzeResult(data)
     }catch(e){setAnalyzeError(t.analyzeError)}
     finally{setAnalyzeLoading(false)}
   }
