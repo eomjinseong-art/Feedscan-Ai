@@ -347,7 +347,10 @@ export default function App(){
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           {/* Main Content */}
           <div className="flex-1 min-w-0">
-
+            <div className="flex gap-2 mb-3">
+              <button onClick={()=>setRegion('korea')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionKr}</button>
+              <button onClick={()=>setRegion('global')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionGlobal}</button>
+            </div>
             <div className="flex gap-2 mb-3">
               <button onClick={()=>setContentType('shorts')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'📱 유튜브 쇼츠':'📱 YouTube Shorts'}</button>
               <button onClick={()=>setContentType('videos')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'🎬 유튜브 영상':'🎬 YouTube Videos'}</button>
