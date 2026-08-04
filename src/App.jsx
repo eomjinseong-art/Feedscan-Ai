@@ -6,8 +6,8 @@ const CAT_MAP = {"전체":"All","제휴마케팅":"Affiliate","디지털상품":
 
 const UI = {
   ko: {
-    siteName: "AI Money Scanner",
-    siteTagline: "AI 수익화 쇼츠 트렌드 랭킹 & 영상 분석",
+    siteName: "FeedScan AI",
+    siteTagline: "AI 수익화 & 부업 트렌드 랭킹",
     updated: "최근 업데이트",
     waiting: "업데이트 대기 중",
     regionKr: "🇰🇷 한국",
@@ -72,8 +72,8 @@ const UI = {
     reportBtn: "삭제 요청",
   },
   en: {
-    siteName: "AI Money Scanner",
-    siteTagline: "AI Monetization Shorts Trend Ranking & Video Analyzer",
+    siteName: "FeedScan AI",
+    siteTagline: "AI Monetization & Side Hustle Trend Ranking",
     updated: "Last updated",
     waiting: "Waiting for update",
     regionKr: "🇰🇷 Korea",
@@ -285,7 +285,7 @@ export default function App(){
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
         <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div><h1 className="text-xl md:text-2xl font-bold text-white"><span className="text-indigo-400">AI</span> Money Scanner</h1><p className="text-slate-400 text-sm mt-1">{t.siteTagline}</p></div>
+          <div><h1 className="text-xl md:text-2xl font-bold text-white"><span className="text-indigo-400">Feed</span>Scan AI</h1><p className="text-slate-400 text-sm mt-1">{t.siteTagline}</p></div>
           <div className="flex items-center gap-3">
 
             <span className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs">{formatUpdateTime()}</span>
