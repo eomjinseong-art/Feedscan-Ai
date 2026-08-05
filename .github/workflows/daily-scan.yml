@@ -2,7 +2,6 @@ name: Daily Shorts Scan
 
 on:
   schedule:
-    # 한국시간 기준: 7시, 12시, 17시, 22시 (UTC: -9h → 22, 3, 8, 13)
     - cron: '0 22 * * *'
     - cron: '0 3 * * *'
     - cron: '0 8 * * *'
