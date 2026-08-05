@@ -195,7 +195,7 @@ function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch, isDark}) 
   }, [item.video_id])
 
   return (
-    <div className={`rounded-xl overflow-hidden transition-all ${isDark?'bg-slate-900/60 border border-slate-800 hover:border-slate-600':'bg-white border border-gray-200 hover:border-gray-400 shadow-sm'}`}>
+    <div className={`rounded-xl overflow-hidden transition-all w-full max-w-full ${isDark?'bg-slate-900/60 border border-slate-800 hover:border-slate-600':'bg-white border border-gray-200 hover:border-gray-400 shadow-sm'}`}>
       {/* Main row - PH style */}
       <div className="flex items-center gap-3 p-4 cursor-pointer" onClick={onToggle}>
         {/* Rank number */}
@@ -422,8 +422,8 @@ export default function App(){
         </div>
 
         {/* Navigation tabs - PH style */}
-        <div className="flex flex-col lg:flex-row gap-6 items-start overflow-hidden">
-          <div className="flex-1 min-w-0 overflow-hidden">
+        <div className="flex flex-col lg:flex-row gap-6 items-start w-full overflow-hidden">
+          <div className="flex-1 min-w-0 w-full max-w-full overflow-hidden">
             {/* Region + Content type tabs - wrap on mobile */}
             <div className="flex flex-wrap gap-2 mb-3">
               <button onClick={()=>setRegion('korea')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionKr}</button>
