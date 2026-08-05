@@ -29,7 +29,7 @@ const UI = {
     filterReset: "초기화",
     trendKeywords: "트렌드 키워드",
     analyzeTitle: "영상 분석",
-    analyzePlaceholder: "YouTube 쇼츠 URL을 붙여넣으세요",
+    analyzePlaceholder: "YouTube 또는 TikTok URL을 붙여넣으세요",
     analyzeBtn: "분석하기",
     analyzing: "분석 중...",
     analyzeError: "분석에 실패했습니다. URL을 확인해주세요.",
@@ -66,7 +66,7 @@ const UI = {
     adSlotEmpty: "광고 문의",
     ranking: "일 연속 랭킹",
     aboutTitle: "이 사이트는?",
-    aboutText: "AI Money Scanner는 매일 유튜브 쇼츠에서 AI 수익화 관련 인기 콘텐츠를 자동 수집·분석하여 랭킹으로 정리합니다. URL을 입력하면 개별 영상도 분석할 수 있습니다.",
+    aboutText: "FeedScan AI는 매일 YouTube와 TikTok에서 AI 수익화 관련 인기 콘텐츠를 자동 수집·분석하여 랭킹으로 정리합니다. URL을 입력하면 개별 영상도 분석할 수 있습니다.",
     rankTitle: "랭킹 기준",
     rankRules: ["일간: 최근 7일 내 업로드, 조회수 순","주간: 7일간 누적 등장 × 조회수","월간: 30일간 누적 등장 × 조회수"],
     reportBtn: "삭제 요청",
@@ -95,7 +95,7 @@ const UI = {
     filterReset: "Reset",
     trendKeywords: "Trend Keywords",
     analyzeTitle: "Analyze Video",
-    analyzePlaceholder: "Paste a YouTube Shorts URL here",
+    analyzePlaceholder: "Paste a YouTube or TikTok URL here",
     analyzeBtn: "Analyze",
     analyzing: "Analyzing...",
     analyzeError: "Analysis failed. Please check the URL.",
@@ -132,7 +132,7 @@ const UI = {
     adSlotEmpty: "Advertise here",
     ranking: " days on chart",
     aboutTitle: "About this site",
-    aboutText: "AI Money Scanner automatically collects and analyzes popular AI monetization YouTube Shorts daily, organizing them into rankings. You can also analyze individual videos by entering a URL.",
+    aboutText: "FeedScan AI automatically collects and analyzes popular AI monetization content from YouTube and TikTok daily, organizing them into rankings. You can also analyze individual videos by entering a URL.",
     rankTitle: "Ranking Criteria",
     rankRules: ["Daily: Uploaded within 7 days, sorted by views","Weekly: 7-day appearance count × views","Monthly: 30-day appearance count × views"],
     reportBtn: "Request Removal",
@@ -280,7 +280,7 @@ export default function App(){
       {showContact&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={()=>{setShowContact(false);setContactSent(false)}}><div className="bg-slate-900 border border-slate-700 rounded-xl p-6 w-full max-w-md mx-4" onClick={e=>e.stopPropagation()}><h3 className="text-white font-bold text-lg mb-4">{t.contactTitle}</h3>{contactSent?(<p className="text-emerald-400 text-sm">{t.contactSent}</p>):(<form action="https://formspree.io/f/xyeggkzq" method="POST" onSubmit={()=>setTimeout(()=>setContactSent(true),500)}><div className="space-y-3"><input name="name" required placeholder={t.contactName} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500"/><input name="email" type="email" required placeholder={t.contactEmail} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500"/><select name="type" className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">{t.contactTypes.map(ct=>(<option key={ct} value={ct}>{ct}</option>))}</select><textarea name="message" required rows={4} placeholder={t.contactMessage} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500"/><button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg text-sm font-medium">{t.contactSend}</button></div></form>)}<button onClick={()=>{setShowContact(false);setContactSent(false)}} className="mt-4 text-slate-400 text-xs hover:text-white">닫기 / Close</button></div></div>)}
 
       {/* Terms Modal */}
-      {showTerms&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto" onClick={()=>setShowTerms(false)}><div className="bg-slate-900 border border-slate-700 rounded-xl p-6 w-full max-w-lg mx-4 my-8 max-h-[80vh] overflow-y-auto" onClick={e=>e.stopPropagation()}><h3 className="text-white font-bold text-lg mb-4">{t.termsTitle}</h3><div className="text-slate-300 text-xs space-y-3 leading-relaxed"><p><strong>1. 서비스 목적 / Purpose</strong><br/>AI Money Scanner는 공개된 YouTube 메타데이터를 자동 수집·분석하여 정보를 제공하는 도구입니다. 투자 자문, 수익 보장, 특정 행동 권유의 목적이 아닙니다.</p><p><strong>2. 면책 / Disclaimer</strong><br/>본 사이트에 표시된 정보는 AI가 자동 생성한 것으로, 정확성·완전성·최신성을 보장하지 않습니다. 이용자의 판단과 행동에 대한 책임은 전적으로 이용자 본인에게 있습니다.</p><p><strong>3. 저작권 / Copyright</strong><br/>본 사이트는 YouTube의 공식 임베드 기능과 공개 API만을 사용합니다. 콘텐츠 제작자의 권리를 존중하며, 삭제 요청 시 즉시 대응합니다.</p><p><strong>4. 채널명 마스킹 / Channel Masking</strong><br/>모든 채널명은 개인정보 보호를 위해 일부 마스킹 처리됩니다. 특정 채널을 비방하거나 평가하는 목적이 아닙니다.</p><p><strong>5. 삭제 요청 / Removal Request</strong><br/>본인의 콘텐츠가 표시되는 것을 원하지 않는 경우, 문의 폼을 통해 삭제를 요청할 수 있습니다.</p><p><strong>6. 광고 / Advertising</strong><br/>본 사이트에는 제휴 광고가 포함되어 있습니다. 광고 클릭 시 외부 사이트로 이동하며, 해당 사이트의 내용은 AI Money Scanner와 무관합니다.</p></div><button onClick={()=>setShowTerms(false)} className="mt-4 text-indigo-400 text-sm hover:text-white">닫기 / Close</button></div></div>)}
+      {showTerms&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto" onClick={()=>setShowTerms(false)}><div className="bg-slate-900 border border-slate-700 rounded-xl p-6 w-full max-w-lg mx-4 my-8 max-h-[80vh] overflow-y-auto" onClick={e=>e.stopPropagation()}><h3 className="text-white font-bold text-lg mb-4">{t.termsTitle}</h3><div className="text-slate-300 text-xs space-y-3 leading-relaxed"><p><strong>1. 서비스 목적 / Purpose</strong><br/>FeedScan AI는 공개된 YouTube 메타데이터를 자동 수집·분석하여 정보를 제공하는 도구입니다. 투자 자문, 수익 보장, 특정 행동 권유의 목적이 아닙니다.</p><p><strong>2. 면책 / Disclaimer</strong><br/>본 사이트에 표시된 정보는 AI가 자동 생성한 것으로, 정확성·완전성·최신성을 보장하지 않습니다. 이용자의 판단과 행동에 대한 책임은 전적으로 이용자 본인에게 있습니다.</p><p><strong>3. 저작권 / Copyright</strong><br/>본 사이트는 YouTube의 공식 임베드 기능과 공개 API만을 사용합니다. 콘텐츠 제작자의 권리를 존중하며, 삭제 요청 시 즉시 대응합니다.</p><p><strong>4. 채널명 마스킹 / Channel Masking</strong><br/>모든 채널명은 개인정보 보호를 위해 일부 마스킹 처리됩니다. 특정 채널을 비방하거나 평가하는 목적이 아닙니다.</p><p><strong>5. 삭제 요청 / Removal Request</strong><br/>본인의 콘텐츠가 표시되는 것을 원하지 않는 경우, 문의 폼을 통해 삭제를 요청할 수 있습니다.</p><p><strong>6. 광고 / Advertising</strong><br/>본 사이트에는 제휴 광고가 포함되어 있습니다. 광고 클릭 시 외부 사이트로 이동하며, 해당 사이트의 내용은 FeedScan AI와 무관합니다.</p></div><button onClick={()=>setShowTerms(false)} className="mt-4 text-indigo-400 text-sm hover:text-white">닫기 / Close</button></div></div>)}
 
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
@@ -297,12 +297,12 @@ export default function App(){
 
       <main className="max-w-7xl mx-auto px-4 py-6">
         {/* Schedule info */}
-        <div className="text-center mb-4"><span className="text-slate-500 text-xs">{t.schedule}</span></div>
+        <div className="text-center mb-4"><span className="text-yellow-400 font-semibold text-sm">{t.schedule}</span></div>
 
         {/* URL Analyzer Section - Collapsible */}
         <div className="bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-500/20 rounded-xl mb-6 overflow-hidden">
           <button onClick={()=>setShowAnalyzer(!showAnalyzer)} className="w-full p-3 flex items-center justify-between hover:bg-indigo-900/10 transition-colors">
-            <span className="text-indigo-300 font-medium text-sm">{t.analyzeTitle} — {lang==='ko'?'아무 YouTube URL을 넣어보세요':'Try any YouTube URL'}</span>
+            <span className="text-indigo-300 font-medium text-sm">{t.analyzeTitle} — {lang==='ko'?'YouTube 또는 TikTok 영상의 수익 구조를 분석해보세요':'Analyze the revenue structure of any YouTube or TikTok video'}</span>
             <svg className={`w-4 h-4 text-indigo-400 transition-transform ${showAnalyzer?'rotate-180':''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
           </button>
           {showAnalyzer&&(<div className="px-4 pb-4">
