@@ -252,9 +252,7 @@ function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch, isDark}) 
             <button onClick={handleCopy} className="inline-flex items-center gap-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-colors">
               {copyFeedback ? `✅ ${t.copied}` : `📋 ${t.copyUrl}`}
             </button>
-            <button onClick={handleShare} className="inline-flex items-center gap-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-colors">
-              🔗 {t.shareText}
-            </button>
+
           </div>
         </div>
       )}
@@ -368,6 +366,7 @@ export default function App(){
           </div>
           <div className="flex items-center gap-2">
             <span className="hidden md:inline text-yellow-500 font-medium text-xs">{formatUpdateTime()}</span>
+            <button onClick={()=>{const url=window.location.href;const text=lang==='ko'?'AI 수익화 영상 일간 랭킹 - FeedScan AI':'AI Monetization Video Daily Ranking - FeedScan AI';if(navigator.share){navigator.share({title:text,url})}else{navigator.clipboard.writeText(url);alert(lang==='ko'?'링크가 복사되었습니다!':'Link copied!')}}} className={`px-2.5 py-1 rounded border text-xs transition-colors ${isDark?'border-slate-700 text-slate-400 hover:bg-slate-800':'border-gray-300 text-gray-600 hover:bg-gray-100'}`}>{lang==='ko'?'🔗 공유':'🔗 Share'}</button>
             <button onClick={()=>setTheme(isDark?'light':'dark')} className={`px-2.5 py-1 rounded border text-xs transition-colors ${isDark?'border-slate-700 text-slate-400 hover:bg-slate-800':'border-gray-300 text-gray-600 hover:bg-gray-100'}`}>{isDark?'☀️':'🌙'}</button>
             <button onClick={()=>setShowContact(true)} className={`hidden md:inline px-2.5 py-1 rounded border text-xs transition-colors ${isDark?'border-slate-700 text-slate-400 hover:bg-slate-800':'border-gray-300 text-gray-600 hover:bg-gray-100'}`}>{t.contactTitle}</button>
             <button onClick={()=>setLang(lang==='ko'?'en':'ko')} className={`px-2.5 py-1 rounded border text-xs font-medium transition-colors ${isDark?'border-slate-700 text-slate-400 hover:bg-slate-800':'border-gray-300 text-gray-600 hover:bg-gray-100'}`}>{lang==='ko'?'EN':'한국어'}</button>
@@ -424,13 +423,22 @@ export default function App(){
         {/* Navigation tabs - PH style */}
         <div className="flex flex-col lg:flex-row gap-6 items-start w-full overflow-hidden">
           <div className="flex-1 min-w-0 w-full max-w-full overflow-hidden">
-            {/* Region + Content type tabs - wrap on mobile */}
-            <div className="flex flex-wrap gap-2 mb-3">
-              <button onClick={()=>setRegion('korea')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionKr}</button>
-              <button onClick={()=>setRegion('global')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionGlobal}</button>
-              <button onClick={()=>setRegion('aitool')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='aitool'?'bg-cyan-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionAitool}</button>
-              <button onClick={()=>setContentType('shorts')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.tabShorts}</button>
-              <button onClick={()=>setContentType('videos')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.tabVideos}</button>
+            {/* Step 1: Region selection */}
+            <div className={`rounded-lg p-3 mb-3 ${isDark?'bg-slate-900/50 border border-slate-800':'bg-white border border-gray-200 shadow-sm'}`}>
+              <p className={`text-[11px] mb-2 ${isDark?'text-slate-500':'text-gray-500'}`}>{lang==='ko'?'지역 선택':'Select Region'}</p>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={()=>setRegion('korea')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white shadow-md':isDark?'bg-slate-800 text-slate-400 hover:text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{t.regionKr}</button>
+                <button onClick={()=>setRegion('global')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white shadow-md':isDark?'bg-slate-800 text-slate-400 hover:text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{t.regionGlobal}</button>
+                <button onClick={()=>setRegion('aitool')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='aitool'?'bg-cyan-600 text-white shadow-md':isDark?'bg-slate-800 text-slate-400 hover:text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{t.regionAitool}</button>
+              </div>
+            </div>
+            {/* Step 2: Content type selection */}
+            <div className={`rounded-lg p-3 mb-3 ${isDark?'bg-slate-900/50 border border-slate-800':'bg-white border border-gray-200 shadow-sm'}`}>
+              <p className={`text-[11px] mb-2 ${isDark?'text-slate-500':'text-gray-500'}`}>{lang==='ko'?'콘텐츠 유형':'Content Type'}</p>
+              <div className="flex flex-wrap gap-2">
+                <button onClick={()=>setContentType('shorts')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white shadow-md':isDark?'bg-slate-800 text-slate-400 hover:text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{t.tabShorts}</button>
+                <button onClick={()=>setContentType('videos')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white shadow-md':isDark?'bg-slate-800 text-slate-400 hover:text-white':'bg-gray-100 text-gray-600 hover:bg-gray-200'}`}>{t.tabVideos}</button>
+              </div>
             </div>
 
             {/* Period tabs */}
@@ -447,6 +455,7 @@ export default function App(){
                 <h4 className={`text-xs font-medium ${isDark?'text-slate-300':'text-gray-700'}`}>{t.filterTitle}</h4>
                 {hasFilters&&(<button onClick={()=>{setFilterDifficulty(null);setFilterCost(null);setFilterTime(null)}} className="text-indigo-400 text-xs hover:text-indigo-300">Reset</button>)}
               </div>
+              <p className={`text-[10px] mb-2 ${isDark?'text-slate-600':'text-gray-400'}`}>{t.filterHint}</p>
               <div className="flex flex-wrap gap-4">
                 <ClickableMeter label={t.difficulty} value={filterDifficulty} onChange={setFilterDifficulty} color="bg-orange-500"/>
                 <ClickableMeter label={t.cost} value={filterCost} onChange={setFilterCost} color="bg-red-500"/>
@@ -478,24 +487,24 @@ export default function App(){
           <aside className="w-full lg:w-72 lg:sticky lg:top-16 space-y-3 flex-shrink-0 overflow-hidden">
             {sidebarAds.map(ad=><SidebarAdSlot key={ad.id} ad={ad} lang={lang} t={t}/>)}
             {Array.from({length:Math.max(0,3-sidebarAds.length)},(_,i)=>(<SidebarAdSlot key={`e-${i}`} ad={null} lang={lang} t={t}/>))}
-            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-2">{t.aboutTitle}</h4><p className="text-slate-400 text-xs leading-relaxed">{t.aboutText}</p></div>
-            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-2">{t.rankTitle}</h4><ul className="text-slate-400 text-xs space-y-1">{t.rankRules.map((r,i)=><li key={i}>• {r}</li>)}</ul></div>
-            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-3">Trend Keywords</h4><TrendKeywords data={dailyData}/></div>
+            <div className={`rounded-xl p-4 ${isDark?'bg-slate-900/50 border border-slate-800':'bg-white border border-gray-200 shadow-sm'}`}><h4 className={`font-medium text-sm mb-2 ${isDark?'text-white':'text-gray-900'}`}>{t.aboutTitle}</h4><p className={`text-xs leading-relaxed ${isDark?'text-slate-400':'text-gray-600'}`}>{t.aboutText}</p></div>
+            <div className={`rounded-xl p-4 ${isDark?'bg-slate-900/50 border border-slate-800':'bg-white border border-gray-200 shadow-sm'}`}><h4 className={`font-medium text-sm mb-2 ${isDark?'text-white':'text-gray-900'}`}>{t.rankTitle}</h4><ul className={`text-xs space-y-1 ${isDark?'text-slate-400':'text-gray-600'}`}>{t.rankRules.map((r,i)=><li key={i}>• {r}</li>)}</ul></div>
+            <div className={`rounded-xl p-4 ${isDark?'bg-slate-900/50 border border-slate-800':'bg-white border border-gray-200 shadow-sm'}`}><h4 className={`font-medium text-sm mb-3 ${isDark?'text-white':'text-gray-900'}`}>Trend Keywords</h4><TrendKeywords data={dailyData}/></div>
           </aside>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800/50 mt-12">
+      <footer className={`border-t mt-12 ${isDark?'border-slate-800/50':'border-gray-200'}`}>
         <div className="max-w-6xl mx-auto px-4 py-8">
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4 mb-6"><p className="text-slate-500 text-xs leading-relaxed"><span className="text-slate-400 font-medium">{t.disclaimer}: </span>{t.disclaimerText}</p></div>
-          <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-slate-600 text-xs">
+          <div className={`rounded-lg p-4 mb-6 ${isDark?'bg-slate-900/50 border border-slate-800':'bg-gray-100 border border-gray-200'}`}><p className={`text-xs leading-relaxed ${isDark?'text-slate-500':'text-gray-600'}`}><span className={`font-medium ${isDark?'text-slate-400':'text-gray-700'}`}>{t.disclaimer}: </span>{t.disclaimerText}</p></div>
+          <div className={`flex flex-col md:flex-row items-center justify-between gap-4 text-xs ${isDark?'text-slate-600':'text-gray-500'}`}>
             <p>{t.source}</p><p>{t.masked}</p>
           </div>
           <div className="flex items-center justify-center gap-4 mt-4">
-            <button onClick={()=>setShowTerms(true)} className="text-slate-500 text-xs hover:text-indigo-400">{t.termsTitle}</button>
-            <button onClick={()=>setShowContact(true)} className="text-slate-500 text-xs hover:text-indigo-400">{t.contactTitle}</button>
-            <button onClick={()=>setShowContact(true)} className="text-slate-500 text-xs hover:text-indigo-400">{t.reportBtn}</button>
+            <button onClick={()=>setShowTerms(true)} className={`text-xs hover:text-indigo-400 ${isDark?'text-slate-500':'text-gray-500'}`}>{t.termsTitle}</button>
+            <button onClick={()=>setShowContact(true)} className={`text-xs hover:text-indigo-400 ${isDark?'text-slate-500':'text-gray-500'}`}>{t.contactTitle}</button>
+            <button onClick={()=>setShowContact(true)} className={`text-xs hover:text-indigo-400 ${isDark?'text-slate-500':'text-gray-500'}`}>{t.reportBtn}</button>
           </div>
         </div>
       </footer>
