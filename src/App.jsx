@@ -29,7 +29,7 @@ const UI = {
     filterReset: "초기화",
     trendKeywords: "트렌드 키워드",
     analyzeTitle: "영상 분석",
-    analyzePlaceholder: "YouTube 또는 TikTok URL을 붙여넣으세요",
+    analyzePlaceholder: "YouTube 영상 URL을 붙여넣으세요",
     analyzeBtn: "분석하기",
     analyzing: "분석 중...",
     analyzeError: "분석에 실패했습니다. URL을 확인해주세요.",
@@ -66,7 +66,7 @@ const UI = {
     adSlotEmpty: "광고 문의",
     ranking: "일 연속 랭킹",
     aboutTitle: "이 사이트는?",
-    aboutText: "FeedScan AI는 매일 YouTube와 TikTok에서 AI 수익화 관련 인기 콘텐츠를 자동 수집·분석하여 랭킹으로 정리합니다. URL을 입력하면 개별 영상도 분석할 수 있습니다.",
+    aboutText: "FeedScan AI는 매일 YouTube에서 AI 수익화 관련 인기 콘텐츠를 자동 수집·분석하여 랭킹으로 정리합니다. URL을 입력하면 개별 영상도 분석할 수 있습니다.",
     rankTitle: "랭킹 기준",
     rankRules: ["일간: 최근 7일 내 업로드, 조회수 순","주간: 7일간 누적 등장 × 조회수","월간: 30일간 누적 등장 × 조회수"],
     reportBtn: "삭제 요청",
@@ -95,7 +95,7 @@ const UI = {
     filterReset: "Reset",
     trendKeywords: "Trend Keywords",
     analyzeTitle: "Analyze Video",
-    analyzePlaceholder: "Paste a YouTube or TikTok URL here",
+    analyzePlaceholder: "Paste a YouTube video URL here",
     analyzeBtn: "Analyze",
     analyzing: "Analyzing...",
     analyzeError: "Analysis failed. Please check the URL.",
@@ -132,7 +132,7 @@ const UI = {
     adSlotEmpty: "Advertise here",
     ranking: " days on chart",
     aboutTitle: "About this site",
-    aboutText: "FeedScan AI automatically collects and analyzes popular AI monetization content from YouTube and TikTok daily, organizing them into rankings. You can also analyze individual videos by entering a URL.",
+    aboutText: "FeedScan AI automatically collects and analyzes popular AI monetization content from YouTube daily, organizing them into rankings. You can also analyze individual videos by entering a URL.",
     rankTitle: "Ranking Criteria",
     rankRules: ["Daily: Uploaded within 7 days, sorted by views","Weekly: 7-day appearance count × views","Monthly: 30-day appearance count × views"],
     reportBtn: "Request Removal",
@@ -179,10 +179,13 @@ function RankItem({item, rank, isExpanded, onToggle, lang, t, onWatch}){
             <div><span className="text-slate-400 text-xs block mb-1">{t.time}</span><MeterBar value={item.time_to_profit} color="bg-yellow-500"/></div>
           </div>
           {item.video_id && (
-            <button onClick={(e)=>{e.stopPropagation();onWatch(item.video_id)}} className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm rounded-lg transition-colors">
-              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-              {t.watchVideo}
-            </button>
+            <div className="flex gap-2 flex-wrap">
+              <button onClick={(e)=>{e.stopPropagation();onWatch(item.video_id)}} className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm rounded-lg transition-colors">
+                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                {t.watchVideo}
+              </button>
+              <button onClick={(e)=>{e.stopPropagation();navigator.clipboard.writeText(`https://www.youtube.com/shorts/${item.video_id}`);const btn=e.currentTarget;btn.textContent=lang==='ko'?'✅ 복사됨!':'✅ Copied!';setTimeout(()=>{btn.textContent=lang==='ko'?'📋 URL 복사':'📋 Copy URL'},2000)}} className="inline-flex items-center gap-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-colors">{lang==='ko'?'📋 URL 복사':'📋 Copy URL'}</button>
+            </div>
           )}
         </div>
       )}
@@ -302,13 +305,13 @@ export default function App(){
         {/* URL Analyzer Section - Collapsible */}
         <div className="bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-500/20 rounded-xl mb-6 overflow-hidden">
           <button onClick={()=>setShowAnalyzer(!showAnalyzer)} className="w-full p-3 flex items-center justify-between hover:bg-indigo-900/10 transition-colors">
-            <span className="text-indigo-300 font-medium text-sm">{t.analyzeTitle} — {lang==='ko'?'YouTube 또는 TikTok 영상의 수익 구조를 분석해보세요':'Analyze the revenue structure of any YouTube or TikTok video'}</span>
+            <span className="text-indigo-300 font-medium text-sm">{t.analyzeTitle} — {lang==='ko'?'YouTube 영상의 수익 구조를 분석해보세요':'Analyze the revenue structure of any YouTube video'}</span>
             <svg className={`w-4 h-4 text-indigo-400 transition-transform ${showAnalyzer?'rotate-180':''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
           </button>
           {showAnalyzer&&(<div className="px-4 pb-4">
             <div className="flex gap-2">
               <input type="text" value={analyzeUrl} onChange={e=>setAnalyzeUrl(e.target.value)} placeholder={t.analyzePlaceholder} className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500" onKeyDown={e=>{if(e.key==='Enter')handleAnalyze()}}/>
-              <button onClick={handleAnalyze} disabled={analyzeLoading} className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 text-white text-sm rounded-lg transition-colors whitespace-nowrap">{analyzeLoading?t.analyzing:t.analyzeBtn}</button>
+              <button onClick={handleAnalyze} disabled={analyzeLoading} className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 text-white text-sm rounded-lg transition-colors whitespace-nowrap">{analyzeLoading?(<span className="inline-flex items-center gap-2"><svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{lang==='ko'?'AI 분석중...':'AI Analyzing...'}</span>):t.analyzeBtn}</button>
             </div>
             {analyzeError&&<p className="text-red-400 text-xs mt-2">{analyzeError}</p>}
             {analyzeResult&&(
