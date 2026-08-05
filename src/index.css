@@ -3,7 +3,24 @@
 @tailwind utilities;
 
 body {
-  background-color: #020617;
-  color: #e2e8f0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* Scrollbar hide utility */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}
+
+/* Prevent iOS tap zoom */
+input, select, textarea, button {
+  font-size: 16px;
+}
+@media (min-width: 640px) {
+  input, select, textarea, button {
+    font-size: inherit;
+  }
 }
