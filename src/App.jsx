@@ -150,7 +150,7 @@ function formatViews(n) {
 }
 
 // Product Hunt style rank item
-function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch}) {
+function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch, isDark}) {
   const title = lang==='ko' ? (item.title_ko||item.title) : (item.title_en||item.title)
   const subtitle = lang==='ko' ? (item.title_en||'') : (item.title_ko||'')
   const method = lang==='ko' ? (item.method||'') : (item.method_en||item.method||'')
@@ -195,7 +195,7 @@ function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch}) {
   }, [item.video_id])
 
   return (
-    <div className="bg-slate-900/60 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-600 transition-all">
+    <div className={`rounded-xl overflow-hidden transition-all ${isDark?'bg-slate-900/60 border border-slate-800 hover:border-slate-600':'bg-white border border-gray-200 hover:border-gray-400 shadow-sm'}`}>
       {/* Main row - PH style */}
       <div className="flex items-center gap-3 p-4 cursor-pointer" onClick={onToggle}>
         {/* Rank number */}
@@ -203,8 +203,8 @@ function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch}) {
 
         {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-white font-medium text-sm leading-tight truncate">{title}</h3>
-          {method && <p className="text-slate-400 text-xs mt-1 truncate">{method}</p>}
+          <h3 className={`font-medium text-sm leading-tight truncate ${isDark?'text-white':'text-gray-900'}`}>{title}</h3>
+          {method && <p className={`text-xs mt-1 truncate ${isDark?'text-slate-400':'text-gray-500'}`}>{method}</p>}
           <div className="flex items-center gap-2 mt-1.5 flex-wrap">
             <span className="text-slate-500 text-xs">👁 {formatViews(item.views)}</span>
             <span className="text-slate-500 text-xs">♥ {formatViews(item.likes)}</span>
@@ -214,7 +214,7 @@ function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch}) {
         </div>
 
         {/* Right side - Upvote button (PH style) */}
-        <button onClick={handleLike} className={`flex flex-col items-center px-3 py-2 rounded-lg border transition-all shrink-0 ${liked?'border-indigo-500 bg-indigo-900/30 text-indigo-300':'border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-500'}`}>
+        <button onClick={handleLike} className={`flex flex-col items-center px-3 py-2 rounded-lg border transition-all shrink-0 ${liked?'border-indigo-500 bg-indigo-900/30 text-indigo-300':isDark?'border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-500':'border-gray-300 bg-gray-100 text-gray-500 hover:border-gray-400'}`}>
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7"/></svg>
           <span className="text-xs font-medium mt-0.5">{formatViews(item.views)}</span>
         </button>
@@ -222,21 +222,21 @@ function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch}) {
 
       {/* Expanded detail */}
       {isExpanded && (
-        <div className="border-t border-slate-800 p-4 bg-slate-950/50 space-y-4">
-          {subtitle && <p className="text-slate-400 text-xs">{subtitle}</p>}
+        <div className={`border-t p-4 space-y-4 ${isDark?'border-slate-800 bg-slate-950/50':'border-gray-100 bg-gray-50'}`}>
+          {subtitle && <p className={`text-xs ${isDark?'text-slate-400':'text-gray-500'}`}>{subtitle}</p>}
           <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
-            <div className="bg-slate-800/50 rounded-lg p-3">
-              <h4 className="text-indigo-400 text-xs font-medium mb-1">{t.method}</h4>
-              <p className="text-white text-sm">{lang==='ko'?(item.method||''):(item.method_en||item.method||'')}</p>
+            <div className={`rounded-lg p-3 ${isDark?'bg-slate-800/50':'bg-white border border-gray-200'}`}>
+              <h4 className="text-indigo-500 text-xs font-medium mb-1">{t.method}</h4>
+              <p className={`text-sm ${isDark?'text-white':'text-gray-800'}`}>{lang==='ko'?(item.method||''):(item.method_en||item.method||'')}</p>
             </div>
-            <div className="bg-slate-800/50 rounded-lg p-3">
-              <h4 className="text-indigo-400 text-xs font-medium mb-1">{t.principle}</h4>
-              <p className="text-white text-sm">{lang==='ko'?(item.principle||''):(item.principle_en||item.principle||'')}</p>
+            <div className={`rounded-lg p-3 ${isDark?'bg-slate-800/50':'bg-white border border-gray-200'}`}>
+              <h4 className="text-indigo-500 text-xs font-medium mb-1">{t.principle}</h4>
+              <p className={`text-sm ${isDark?'text-white':'text-gray-800'}`}>{lang==='ko'?(item.principle||''):(item.principle_en||item.principle||'')}</p>
             </div>
           </div>
-          <div className="bg-slate-800/50 rounded-lg p-3">
-            <h4 className="text-indigo-400 text-xs font-medium mb-1">{t.requirements}</h4>
-            <p className="text-white text-sm">{lang==='ko'?(item.requirements||''):(item.requirements_en||item.requirements||'')}</p>
+          <div className={`rounded-lg p-3 ${isDark?'bg-slate-800/50':'bg-white border border-gray-200'}`}>
+            <h4 className="text-indigo-500 text-xs font-medium mb-1">{t.requirements}</h4>
+            <p className={`text-sm ${isDark?'text-white':'text-gray-800'}`}>{lang==='ko'?(item.requirements||''):(item.requirements_en||item.requirements||'')}</p>
           </div>
           <div className="flex flex-wrap gap-6">
             <div><span className="text-slate-400 text-xs block mb-1">{t.difficulty}</span><MeterBar value={item.difficulty} color="bg-orange-500"/></div>
@@ -349,7 +349,7 @@ export default function App(){
   function formatUpdateTime(){ if(!dailyData?.scanned_at) return t.waiting; const d=new Date(dailyData.scanned_at); if(lang==='ko') return `${d.getMonth()+1}/${d.getDate()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`; return `${d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}` }
 
   return (
-    <div className={`min-h-screen ${isDark?'bg-[#0f0f1a] text-white':'bg-gray-50 text-gray-900'}`}>
+    <div className={`min-h-screen overflow-x-hidden ${isDark?'bg-[#0f0f1a] text-white':'bg-gray-50 text-gray-900'}`}>
       {/* Video Popup */}
       {popupVideoId&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={()=>setPopupVideoId(null)}><div className="relative w-full max-w-sm mx-4" onClick={e=>e.stopPropagation()}><button onClick={()=>setPopupVideoId(null)} className="absolute -top-10 right-0 text-white text-2xl hover:text-red-400">&times;</button><div className="rounded-xl overflow-hidden bg-black shadow-2xl"><iframe src={`https://www.youtube.com/embed/${popupVideoId}?autoplay=1&loop=1`} className="w-full aspect-[9/16]" allow="autoplay; encrypted-media" allowFullScreen title="YouTube Shorts"/></div><a href={`https://www.youtube.com/shorts/${popupVideoId}`} target="_blank" rel="noopener noreferrer" className="block mt-2 text-center text-indigo-400 text-xs hover:text-indigo-300">{lang==='ko'?'YouTube에서 직접 보기 →':'Open in YouTube →'}</a>{popupAd&&(<a href={popupAd.url} target="_blank" rel="noopener noreferrer nofollow" className="block mt-2 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-lg p-3 text-center hover:border-indigo-400/60 transition-all"><p className="text-white text-sm font-medium">{lang==='en'?(popupAd.title_en||popupAd.title):popupAd.title}</p><p className="text-slate-400 text-xs mt-1">{lang==='en'?(popupAd.description_en||popupAd.description):popupAd.description}</p></a>)}</div></div>)}
 
@@ -390,7 +390,7 @@ export default function App(){
           </div>
           <div className="px-4 pb-4">
             <div className="flex gap-2">
-              <input type="text" value={analyzeUrl} onChange={e=>setAnalyzeUrl(e.target.value)} placeholder={t.analyzePlaceholder} className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500" onKeyDown={e=>{if(e.key==='Enter')handleAnalyze()}}/>
+              <input type="text" value={analyzeUrl} onChange={e=>setAnalyzeUrl(e.target.value)} placeholder={t.analyzePlaceholder} className={`flex-1 rounded-lg px-4 py-2 text-sm focus:outline-none focus:border-indigo-500 ${isDark?'bg-slate-800 border border-slate-700 text-white placeholder-slate-500':'bg-white border border-gray-300 text-gray-900 placeholder-gray-400'}`} onKeyDown={e=>{if(e.key==='Enter')handleAnalyze()}}/>
               <button onClick={handleAnalyze} disabled={analyzeLoading} className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 text-white text-sm rounded-lg transition-colors whitespace-nowrap">
                 {analyzeLoading?(<span className="inline-flex items-center gap-2"><svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span className="hidden sm:inline">{t.analyzingText}</span><span className="sm:hidden">...</span></span>):t.analyzeBtn}
               </button>
@@ -424,28 +424,27 @@ export default function App(){
         {/* Navigation tabs - PH style */}
         <div className="flex flex-col lg:flex-row gap-6 items-start">
           <div className="flex-1 min-w-0">
-            {/* Region + Content type tabs - horizontal scroll on mobile */}
-            <div className="flex gap-2 mb-3 overflow-x-auto pb-1 scrollbar-hide">
-              <button onClick={()=>setRegion('korea')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap shrink-0 ${region==='korea'?'bg-blue-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionKr}</button>
-              <button onClick={()=>setRegion('global')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap shrink-0 ${region==='global'?'bg-emerald-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionGlobal}</button>
-              <button onClick={()=>setRegion('aitool')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap shrink-0 ${region==='aitool'?'bg-cyan-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionAitool}</button>
-              <div className="w-px bg-slate-700 mx-1 shrink-0 hidden sm:block"/>
-              <button onClick={()=>setContentType('shorts')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap shrink-0 ${contentType==='shorts'?'bg-rose-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.tabShorts}</button>
-              <button onClick={()=>setContentType('videos')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all whitespace-nowrap shrink-0 ${contentType==='videos'?'bg-violet-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.tabVideos}</button>
+            {/* Region + Content type tabs - wrap on mobile */}
+            <div className="flex flex-wrap gap-2 mb-3">
+              <button onClick={()=>setRegion('korea')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionKr}</button>
+              <button onClick={()=>setRegion('global')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionGlobal}</button>
+              <button onClick={()=>setRegion('aitool')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='aitool'?'bg-cyan-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionAitool}</button>
+              <button onClick={()=>setContentType('shorts')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.tabShorts}</button>
+              <button onClick={()=>setContentType('videos')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.tabVideos}</button>
             </div>
 
             {/* Period tabs */}
-            <div className="flex gap-2 mb-4">
-              {['daily','weekly','monthly'].map((p,i)=>(<button key={p} onClick={()=>setPeriod(p)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${period===p?'bg-indigo-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white'}`}>{[t.tabDaily,t.tabWeekly,t.tabMonthly][i]}</button>))}
+            <div className="flex flex-wrap gap-2 mb-4">
+              {['daily','weekly','monthly'].map((p,i)=>(<button key={p} onClick={()=>setPeriod(p)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${period===p?'bg-indigo-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{[t.tabDaily,t.tabWeekly,t.tabMonthly][i]}</button>))}
             </div>
 
             {/* Category chips */}
-            <div className="flex flex-wrap gap-1.5 mb-4">{categoryKeys.map((cat,i)=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-2.5 py-1 rounded-full text-[11px] transition-all ${activeCategory===cat?'bg-purple-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white border border-slate-700/50'}`}>{categories[i]}</button>))}</div>
+            <div className="flex flex-wrap gap-1.5 mb-4">{categoryKeys.map((cat,i)=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-2.5 py-1 rounded-full text-[11px] transition-all ${activeCategory===cat?'bg-purple-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white border border-slate-700/50':'bg-gray-200 text-gray-600 hover:text-gray-900 border border-gray-300'}`}>{categories[i]}</button>))}</div>
 
             {/* Filter bar - compact */}
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-3 mb-4">
+            <div className={`rounded-lg p-3 mb-4 ${isDark?'bg-slate-900/50 border border-slate-800':'bg-white border border-gray-200 shadow-sm'}`}>
               <div className="flex items-center justify-between mb-2">
-                <h4 className="text-slate-300 text-xs font-medium">{t.filterTitle}</h4>
+                <h4 className={`text-xs font-medium ${isDark?'text-slate-300':'text-gray-700'}`}>{t.filterTitle}</h4>
                 {hasFilters&&(<button onClick={()=>{setFilterDifficulty(null);setFilterCost(null);setFilterTime(null)}} className="text-indigo-400 text-xs hover:text-indigo-300">Reset</button>)}
               </div>
               <div className="flex flex-wrap gap-4">
@@ -457,7 +456,7 @@ export default function App(){
 
             {/* Search */}
             <div className="relative mb-4">
-              <input type="text" placeholder={t.search} value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} className="w-full bg-slate-900/50 border border-slate-800 rounded-lg px-4 py-2.5 pl-10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"/>
+              <input type="text" placeholder={t.search} value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} className={`w-full rounded-lg px-4 py-2.5 pl-10 text-sm focus:outline-none focus:border-indigo-500 ${isDark?'bg-slate-900/50 border border-slate-800 text-white placeholder-slate-500':'bg-white border border-gray-200 text-gray-900 placeholder-gray-400 shadow-sm'}`}/>
               <svg className="absolute left-3 top-3 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
             </div>
 
@@ -467,7 +466,7 @@ export default function App(){
                 {items.map((item,index)=>(
                   <React.Fragment key={item.video_id}>
                     {index===3&&bannerAd&&<AdAsRank ad={bannerAd} lang={lang}/>}
-                    <RankItem item={item} rank={index+1} lang={lang} t={t} isExpanded={expandedId===item.video_id} onToggle={()=>setExpandedId(expandedId===item.video_id?null:item.video_id)} onWatch={setPopupVideoId}/>
+                    <RankItem item={item} rank={index+1} lang={lang} t={t} isDark={isDark} isExpanded={expandedId===item.video_id} onToggle={()=>setExpandedId(expandedId===item.video_id?null:item.video_id)} onWatch={setPopupVideoId}/>
                     {index===6&&inlineAd&&<AdAsRank ad={inlineAd} lang={lang}/>}
                   </React.Fragment>
                 ))}
