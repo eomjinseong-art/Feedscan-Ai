@@ -85,10 +85,28 @@ TITLE_BLACKLIST = [
     "asmr", "mukbang", "먹방",
 ]
 
-# 인도 관련 차단 (힌디어 + 키워드)
+# 인도 관련 차단 (힌디어 + 키워드 + 도시 + 플랫폼)
 INDIA_BLACKLIST = [
-    "india", "indian", "hindi", "bollywood", "desi",
-    "rupee", "lakh", "crore", "भारत", "हिंदी",
+    # 국가/지역
+    "india", "indian", "indians", "hindi", "hindustan",
+    "mumbai", "delhi", "bangalore", "hyderabad", "chennai",
+    "kolkata", "pune", "ahmedabad", "jaipur", "lucknow",
+    "kerala", "tamil nadu", "karnataka", "maharashtra", "gujarat",
+    "rajasthan", "uttar pradesh", "bihar", "bengal",
+    # 문화/엔터
+    "bollywood", "desi",
+    # 통화/단위
+    "rupee", "rupees", "\u20b9", "lakh", "lakhs", "crore", "crores",
+    # 힌디어
+    "\u092d\u093e\u0930\u0924", "\u0939\u093f\u0902\u0926\u0940", "\u092a\u0948\u0938\u093e", "\u0915\u092e\u093e\u0908",
+    # 인도 플랫폼
+    "flipkart", "meesho", "zerodha", "groww", "upstox",
+    "phonepe", "paytm", "razorpay", "naukri",
+    # 인도 유튜버 흔한 표현
+    "earn in india", "india 2024", "india 2025", "india 2026",
+    "indian students", "for indians", "in india",
+    "bhai", "yaar", "kaise", "kare", "kamaye", "paise",
+    "without investment india", "work from home india",
 ]
 
 # AI 관련성 키워드 (제목+설명에 최소 1개 포함 필수)
@@ -128,11 +146,11 @@ def is_blacklisted(title, description=""):
             return True
     return False
 
-def is_india_content(title, description=""):
-    """인도 관련 콘텐츠 여부"""
-    combined = (title + " " + description).lower()
-    # 인도 문자 포함
-    if has_indian_script(title) or has_indian_script(description):
+def is_india_content(title, description="", channel_name=""):
+    """인도 관련 콘텐츠 여부 - 제목, 설명, 채널명 모두 체크"""
+    combined = (title + " " + description + " " + channel_name).lower()
+    # 인도 문자 포함 (제목, 설명, 채널명 모두)
+    if has_indian_script(title) or has_indian_script(description) or has_indian_script(channel_name):
         return True
     # 인도 키워드 포함
     for kw in INDIA_BLACKLIST:
@@ -148,16 +166,16 @@ def has_ai_relevance(title, description=""):
             return True
     return False
 
-def passes_content_filter(title, description=""):
+def passes_content_filter(title, description="", channel_name=""):
     """모든 필터를 통과하는지 확인"""
     # 1. 블랙리스트 체크
     if is_blacklisted(title, description):
         return False
-    # 2. 인도 콘텐츠 차단
-    if is_india_content(title, description):
+    # 2. 인도 콘텐츠 차단 (채널명 포함)
+    if is_india_content(title, description, channel_name):
         return False
-    # 3. 아랍어 차단
-    if has_arabic(title):
+    # 3. 아랍어 차단 (채널명 포함)
+    if has_arabic(title) or has_arabic(channel_name):
         return False
     # 4. AI 관련성 검증
     if not has_ai_relevance(title, description):
@@ -205,15 +223,16 @@ def get_details(yt, ids):
                 seconds = parse_duration_seconds(duration)
                 title = item["snippet"]["title"]
                 desc = item["snippet"].get("description", "")[:300]
+                channel_name = item["snippet"].get("channelTitle", "")
 
-                # 콘텐츠 필터 적용
-                if not passes_content_filter(title, desc):
+                # 콘텐츠 필터 적용 (채널명 포함)
+                if not passes_content_filter(title, desc, channel_name):
                     continue
 
                 details[item["id"]] = {
                     "video_id": item["id"],
                     "title": title,
-                    "channel_masked": mask_channel(item["snippet"]["channelTitle"]),
+                    "channel_masked": mask_channel(channel_name),
                     "views": int(s.get("viewCount", 0)),
                     "likes": int(s.get("likeCount", 0)),
                     "published": item["snippet"]["publishedAt"][:10],
