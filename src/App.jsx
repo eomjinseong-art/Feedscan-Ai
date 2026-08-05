@@ -1,199 +1,269 @@
 import React, { useState, useEffect, useMemo } from 'react'
 
-const CATEGORIES_KO = ["전체","제휴마케팅","디지털상품","서비스대행","콘텐츠채널","드랍쉬핑","강의판매","자동화에이전시","기타"]
-const CATEGORIES_EN = ["All","Affiliate","Digital Product","Freelance","Content Channel","Dropshipping","Course Sales","AI Agency","Other"]
-const CAT_MAP = {"전체":"All","제휴마케팅":"Affiliate","디지털상품":"Digital Product","서비스대행":"Freelance","콘텐츠채널":"Content Channel","드랍쉬핑":"Dropshipping","강의판매":"Course Sales","자동화에이전시":"AI Agency","기타":"Other"}
+// === i18n ===
+const CATEGORIES_KO = ['전체','제휴마케팅','디지털상품','서비스대행','콘텐츠채널','드랍쉬핑','강의판매','자동화에이전시','AI코딩','AI영상','AI이미지','AI음악','AI문서','AI자동화','AI비즈니스','기타']
+const CATEGORIES_EN = ['All','Affiliate','Digital Products','Service','Content Channel','Dropshipping','Course','Automation Agency','AI Coding','AI Video','AI Image','AI Music','AI Docs','AI Automation','AI Business','Other']
 
 const UI = {
   ko: {
-    siteName: "FeedScan AI",
-    siteTagline: "AI 수익화 & 부업 트렌드 랭킹",
-    updated: "최근 업데이트",
-    waiting: "업데이트 대기 중",
+    siteTagline: "AI 수익화 영상 일간 랭킹",
+    heroTitle: "AI로 돈 버는 영상,\n매일 자동 분석",
+    heroSub: "YouTube에서 AI 수익화 관련 인기 영상을 자동 수집하고 분석합니다",
     regionKr: "🇰🇷 한국",
     regionGlobal: "🌍 글로벌",
-    tabDaily: "일간 TOP 10",
-    tabWeekly: "주간 TOP 5",
-    tabMonthly: "월간 TOP 5",
-    search: "키워드로 검색 (예: ChatGPT, dropshipping, 부업...)",
-    noData: "데이터가 없습니다.",
+    regionAitool: "🤖 AI Tool",
+    tabShorts: "📱 쇼츠",
+    tabVideos: "🎬 영상",
+    tabDaily: "일간",
+    tabWeekly: "주간",
+    tabMonthly: "월간",
+    search: "영상 제목, 채널명 검색...",
+    noData: "데이터를 불러오는 중이거나 해당 조건의 영상이 없습니다.",
+    watchVideo: "영상 보기",
+    copyUrl: "URL 복사",
+    copied: "복사됨!",
     method: "수익화 방법",
     principle: "핵심 원리",
     requirements: "필요한 것",
     difficulty: "난이도",
     cost: "초기비용",
-    time: "수익까지 시간",
-    watchVideo: "영상 보기",
-    sampleAlert: "이 링크는 샘플 데이터입니다.",
-    filterTitle: "조건 필터",
-    filterReset: "초기화",
-    trendKeywords: "트렌드 키워드",
+    time: "수익까지",
+    schedule: "매일 6회 자동 업데이트 (KST 01:00 / 05:00 / 09:00 / 13:00 / 17:00 / 21:00)",
+    updated: "최근 업데이트",
+    waiting: "업데이트 대기 중",
+    disclaimer: "면책조항",
+    disclaimerText: "본 사이트의 모든 정보는 AI가 자동 생성한 것으로, 투자 조언이 아닙니다. 모든 판단과 행동은 이용자 본인의 책임입니다.",
+    source: "데이터 출처: YouTube Data API · 분석: OpenAI",
+    masked: "채널명은 개인정보 보호를 위해 마스킹 처리됩니다",
     analyzeTitle: "영상 분석",
     analyzePlaceholder: "YouTube 영상 URL을 붙여넣으세요",
     analyzeBtn: "분석하기",
-    analyzing: "분석 중...",
+    analyzingText: "AI가 영상을 분석하고 있습니다",
     analyzeError: "분석에 실패했습니다. URL을 확인해주세요.",
-    analyzeDisclaimer: "본 분석은 AI 시스템이 공개된 메타데이터를 기반으로 자동 생성한 구조적 의견이며, 특정 개인이나 채널에 대한 주관적 평가가 아닙니다. 수익 수치는 일반적 시장 데이터에 기반한 추정이며, 실제 결과를 보장하지 않습니다. 모든 판단과 행동은 이용자 본인의 책임입니다.",
-    filterHint: "레벨을 클릭하면 해당 수준 이하만 표시됩니다",
-    filterLabels: {1:"매우 쉬움",2:"쉬움",3:"보통",4:"어려움",5:"매우 어려움"},
-    filterCostLabels: {1:"거의 무료",2:"2만원 이하",3:"5만원 이하",4:"20만원 이하",5:"20만원+"},
-    filterTimeLabels: {1:"1주 이내",2:"1개월",3:"3개월",4:"6개월",5:"6개월+"},
-    analyzeReject: "이 영상은 AI 수익화 관련 콘텐츠가 아니므로 분석할 수 없습니다. AI, 부업, 수익화 관련 영상을 입력해주세요.",
-    schedule: "하루 6회 업데이트 (07:00 / 10:00 / 13:00 / 16:00 / 19:00 / 22:00 KST)",
+    analyzeDisclaimer: "본 분석은 AI 시스템이 공개된 메타데이터를 기반으로 자동 생성한 구조적 의견이며, 특정 개인이나 채널에 대한 주관적 평가가 아닙니다.",
     revenuePotential: "수익 잠재력",
     competition: "경쟁 강도",
     reproducibility: "재현 가능성",
     growthOutlook: "성장 전망",
     keyInsight: "핵심 인사이트",
     actionRoadmap: "실행 로드맵",
-    aiRelevance: "AI 수익화 관련도",
-    verdict: "최종 판단",
-    revenueScore: "수익 잠재력 점수",
+    revenueScore: "수익 점수",
+    aiRelevance: "AI 관련도",
     contactTitle: "문의하기",
     contactName: "이름",
     contactEmail: "이메일",
-    contactType: "문의 유형",
-    contactTypes: ["광고 문의","업무 제휴","전자책 구매","기타"],
-    contactMessage: "메시지",
+    contactMessage: "내용",
     contactSend: "보내기",
-    contactSent: "전송 완료! 빠른 시일 내 답변드리겠습니다.",
+    contactSent: "전송 완료! 빠르게 답변드리겠습니다.",
+    contactTypes: ["일반 문의","광고 문의","삭제 요청","버그 제보","기타"],
     termsTitle: "이용약관",
-    disclaimer: "면책 고지",
-    disclaimerText: "본 사이트는 공개된 YouTube 메타데이터를 자동 수집하여 정리한 것으로, 특정 채널이나 콘텐츠에 대한 평가·추천·비방의 목적이 없습니다. 표시된 정보는 수집 시점 기준이며, 실제와 다를 수 있습니다. 투자 수익을 보장하지 않으며, 모든 판단과 행동은 이용자 본인의 책임입니다.",
-    source: "데이터 출처: YouTube Data API v3 (공개 메타데이터)",
-    masked: "채널명은 개인정보 보호를 위해 일부 마스킹 처리되었습니다.",
-    visitors: "총 방문자",
-    adSlotEmpty: "광고 문의",
-    ranking: "일 연속 랭킹",
     aboutTitle: "이 사이트는?",
-    aboutText: "FeedScan AI는 매일 YouTube에서 AI 수익화 관련 인기 콘텐츠를 자동 수집·분석하여 랭킹으로 정리합니다. URL을 입력하면 개별 영상도 분석할 수 있습니다.",
+    aboutText: "FeedScan AI는 매일 YouTube에서 AI 수익화 관련 인기 콘텐츠를 자동 수집·분석하여 랭킹으로 정리합니다.",
     rankTitle: "랭킹 기준",
     rankRules: ["일간: 최근 7일 내 업로드, 조회수 순","주간: 7일간 누적 등장 × 조회수","월간: 30일간 누적 등장 × 조회수"],
     reportBtn: "삭제 요청",
+    adSlotEmpty: "광고 문의",
+    shareText: "공유",
+    likeText: "추천",
+    filterTitle: "필터",
+    filterHint: "레벨 클릭 시 해당 수준 이하만 표시",
   },
   en: {
-    siteName: "FeedScan AI",
-    siteTagline: "AI Monetization & Side Hustle Trend Ranking",
-    updated: "Last updated",
-    waiting: "Waiting for update",
+    siteTagline: "AI Monetization Video Daily Ranking",
+    heroTitle: "AI Money-Making Videos,\nAnalyzed Daily",
+    heroSub: "Auto-collecting and analyzing popular AI monetization videos from YouTube",
     regionKr: "🇰🇷 Korea",
     regionGlobal: "🌍 Global",
-    tabDaily: "Daily TOP 10",
-    tabWeekly: "Weekly TOP 5",
-    tabMonthly: "Monthly TOP 5",
-    search: "Search by keyword (e.g., ChatGPT, dropshipping, side hustle...)",
-    noData: "No data available.",
+    regionAitool: "🤖 AI Tool",
+    tabShorts: "📱 Shorts",
+    tabVideos: "🎬 Videos",
+    tabDaily: "Daily",
+    tabWeekly: "Weekly",
+    tabMonthly: "Monthly",
+    search: "Search by title, channel...",
+    noData: "Loading data or no videos match the criteria.",
+    watchVideo: "Watch",
+    copyUrl: "Copy URL",
+    copied: "Copied!",
     method: "Monetization Method",
     principle: "Core Principle",
     requirements: "Requirements",
     difficulty: "Difficulty",
     cost: "Initial Cost",
     time: "Time to Profit",
-    watchVideo: "Watch Video",
-    sampleAlert: "This is sample data.",
-    filterTitle: "Filter by Level",
-    filterReset: "Reset",
-    trendKeywords: "Trend Keywords",
+    schedule: "Auto-updated 6x daily (UTC 16:00 / 20:00 / 00:00 / 04:00 / 08:00 / 12:00)",
+    updated: "Last updated",
+    waiting: "Waiting for update",
+    disclaimer: "Disclaimer",
+    disclaimerText: "All information on this site is AI-generated and does not constitute investment advice. All decisions and actions are the user's own responsibility.",
+    source: "Data: YouTube Data API · Analysis: OpenAI",
+    masked: "Channel names are masked for privacy",
     analyzeTitle: "Analyze Video",
     analyzePlaceholder: "Paste a YouTube video URL here",
     analyzeBtn: "Analyze",
-    analyzing: "Analyzing...",
+    analyzingText: "AI is analyzing the video",
     analyzeError: "Analysis failed. Please check the URL.",
-    analyzeDisclaimer: "This analysis is a structural opinion automatically generated by an AI system based on public metadata. It is not a subjective evaluation of any individual or channel. Revenue figures are estimates based on general market data and do not guarantee actual results. All decisions and actions are the user's own responsibility.",
-    filterHint: "Click a level to show only items at or below that level",
-    filterLabels: {1:"Very Easy",2:"Easy",3:"Medium",4:"Hard",5:"Very Hard"},
-    filterCostLabels: {1:"Nearly Free",2:"Under $20",3:"Under $50",4:"Under $200",5:"$200+"},
-    filterTimeLabels: {1:"Within 1 week",2:"1 month",3:"3 months",4:"6 months",5:"6+ months"},
-    analyzeReject: "This video is not related to AI monetization and cannot be analyzed. Please enter a video about AI, side hustles, or making money.",
-    schedule: "Updated 6x daily (07:00 / 10:00 / 13:00 / 16:00 / 19:00 / 22:00 KST)",
+    analyzeDisclaimer: "This analysis is automatically generated by an AI system based on public metadata. It is not a subjective evaluation of any individual or channel.",
     revenuePotential: "Revenue Potential",
-    competition: "Competition Level",
+    competition: "Competition",
     reproducibility: "Reproducibility",
     growthOutlook: "Growth Outlook",
     keyInsight: "Key Insight",
     actionRoadmap: "Action Roadmap",
-    aiRelevance: "AI Relevance",
-    verdict: "Final Verdict",
     revenueScore: "Revenue Score",
-    contactTitle: "Contact Us",
+    aiRelevance: "AI Relevance",
+    contactTitle: "Contact",
     contactName: "Name",
     contactEmail: "Email",
-    contactType: "Inquiry Type",
-    contactTypes: ["Advertising","Partnership","E-book Purchase","Other"],
     contactMessage: "Message",
     contactSend: "Send",
     contactSent: "Sent! We'll get back to you soon.",
+    contactTypes: ["General","Advertising","Removal Request","Bug Report","Other"],
     termsTitle: "Terms of Service",
-    disclaimer: "Disclaimer",
-    disclaimerText: "This site automatically collects and organizes public YouTube metadata. It does not evaluate, recommend, or defame any channel or content. It does not guarantee investment returns. All decisions and actions are the user's own responsibility.",
-    source: "Data source: YouTube Data API v3 (public metadata)",
-    masked: "Channel names are partially masked for privacy protection.",
-    visitors: "Total visitors",
-    adSlotEmpty: "Advertise here",
-    ranking: " days on chart",
-    aboutTitle: "About this site",
-    aboutText: "FeedScan AI automatically collects and analyzes popular AI monetization content from YouTube daily, organizing them into rankings. You can also analyze individual videos by entering a URL.",
+    aboutTitle: "About",
+    aboutText: "FeedScan AI automatically collects and analyzes popular AI monetization content from YouTube daily, organizing them into rankings.",
     rankTitle: "Ranking Criteria",
     rankRules: ["Daily: Uploaded within 7 days, sorted by views","Weekly: 7-day appearance count × views","Monthly: 30-day appearance count × views"],
     reportBtn: "Request Removal",
+    adSlotEmpty: "Advertise here",
+    shareText: "Share",
+    likeText: "Upvote",
+    filterTitle: "Filter",
+    filterHint: "Click a level to show only items at or below that level",
   }
 }
 
-function formatViews(n){ return n>=1e6?(n/1e6).toFixed(1)+'M':n>=1e3?Math.round(n/1e3)+'K':n+'' }
-function MeterBar({value, max=5, color}){ return <div className="flex gap-0.5">{Array.from({length:max},(_,i)=>(<div key={i} className={`h-2 w-5 rounded-sm ${i<value?color:'bg-slate-700'}`}/>))}</div> }
-function ClickableMeter({label, value, onChange, color, max=5}){
-  return (<div className="flex items-center gap-2"><span className="text-slate-400 text-xs w-24 flex-shrink-0">{label}</span><div className="flex gap-0.5">{Array.from({length:max},(_,i)=>(<button key={i} onClick={()=>onChange(value===i+1?null:i+1)} className={`h-4 w-5 rounded-sm transition-all ${i<(value||0)?color:'bg-slate-700 hover:bg-slate-600'}`}/>))}</div>{value && <span className="text-slate-500 text-xs">≤{value}</span>}</div>)
+// === COMPONENTS ===
+function MeterBar({value, color}) {
+  return (<div className="flex gap-0.5">{Array.from({length:5},(_,i)=>(<div key={i} className={`h-2.5 w-5 rounded-sm ${i<value?color:'bg-slate-700'}`}/>))}</div>)
 }
 
-function RankItem({item, rank, isExpanded, onToggle, lang, t, onWatch}){
-  const catLabel = lang==='en'?(CAT_MAP[item.category]||item.category):item.category
-  let mainTitle, subTitle
-  if(lang==='ko'){ mainTitle=item.title_ko||item.title; subTitle=item.title_en||(item.language==='en'?item.title:null) }
-  else { mainTitle=item.title_en||item.title; subTitle=null }
+function ClickableMeter({label, value, onChange, color}) {
+  return (<div className="flex items-center gap-2"><span className="w-16 text-slate-400 text-xs shrink-0">{label}</span><div className="flex gap-0.5">{Array.from({length:5},(_,i)=>(<button key={i} onClick={()=>onChange(value===i+1?null:i+1)} className={`h-3 w-5 rounded-sm transition-all ${i<(value||0)?color:'bg-slate-700'} hover:opacity-80`}/>))}</div></div>)
+}
+
+function formatViews(n) {
+  if (!n) return '0'
+  if (n >= 1000000) return (n/1000000).toFixed(1) + 'M'
+  if (n >= 1000) return (n/1000).toFixed(1) + 'K'
+  return n.toString()
+}
+
+// Product Hunt style rank item
+function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch}) {
+  const title = lang==='ko' ? (item.title_ko||item.title) : (item.title_en||item.title)
+  const subtitle = lang==='ko' ? (item.title_en||'') : (item.title_ko||'')
+  const method = lang==='ko' ? (item.method||'') : (item.method_en||item.method||'')
+  const [liked, setLiked] = useState(false)
+  const [copyFeedback, setCopyFeedback] = useState(false)
+
+  const handleLike = (e) => {
+    e.stopPropagation()
+    setLiked(!liked)
+    // localStorage에 저장
+    const key = `like_${item.video_id}`
+    if (!liked) { localStorage.setItem(key, '1') } else { localStorage.removeItem(key) }
+  }
+
+  const handleCopy = (e) => {
+    e.stopPropagation()
+    const url = item.is_short !== false
+      ? `https://www.youtube.com/shorts/${item.video_id}`
+      : `https://www.youtube.com/watch?v=${item.video_id}`
+    navigator.clipboard.writeText(url)
+    setCopyFeedback(true)
+    setTimeout(() => setCopyFeedback(false), 2000)
+  }
+
+  const handleShare = (e) => {
+    e.stopPropagation()
+    const url = item.is_short !== false
+      ? `https://www.youtube.com/shorts/${item.video_id}`
+      : `https://www.youtube.com/watch?v=${item.video_id}`
+    const text = `${title} - FeedScan AI`
+    if (navigator.share) {
+      navigator.share({ title: text, url })
+    } else {
+      window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(url)}`, '_blank')
+    }
+  }
+
+  // 좋아요 초기 상태
+  useEffect(() => {
+    const key = `like_${item.video_id}`
+    if (localStorage.getItem(key)) setLiked(true)
+  }, [item.video_id])
+
   return (
-    <div className="bg-slate-800/50 border border-slate-700 rounded-xl overflow-hidden hover:border-indigo-500/50 transition-all">
-      <div className="p-4 cursor-pointer flex items-start gap-4" onClick={onToggle}>
-        <span className={`inline-flex items-center justify-center w-9 h-9 rounded-full font-bold text-sm flex-shrink-0 ${rank===1?'bg-yellow-500 text-black':rank===2?'bg-gray-300 text-black':rank===3?'bg-amber-700 text-white':'bg-slate-700 text-slate-300'}`}>{rank}</span>
+    <div className="bg-slate-900/60 border border-slate-800 rounded-xl overflow-hidden hover:border-slate-600 transition-all">
+      {/* Main row - PH style */}
+      <div className="flex items-center gap-3 p-4 cursor-pointer" onClick={onToggle}>
+        {/* Rank number */}
+        <span className="text-slate-500 font-bold text-lg w-8 text-center shrink-0">{rank}</span>
+
+        {/* Content */}
         <div className="flex-1 min-w-0">
-          <h3 className="text-white font-medium text-sm md:text-base leading-tight">{mainTitle}</h3>
-          {subTitle && <p className="text-slate-400 text-xs mt-1 italic">{subTitle}</p>}
-          <div className="flex flex-wrap items-center gap-2 mt-2 text-xs text-slate-400">
-            <span>👁 {formatViews(item.views)}</span><span>♥ {formatViews(item.likes)}</span><span>{item.channel_masked}</span><span>{item.published}</span>
-            <span className={`px-2 py-0.5 rounded ${item.language==='ko'?'bg-blue-900/50 text-blue-300 border border-blue-700':'bg-emerald-900/50 text-emerald-300 border border-emerald-700'}`}>{item.language==='ko'?'KR':'EN'}</span>
-            <span className="px-2 py-0.5 rounded bg-purple-900/50 text-purple-300 border border-purple-700">{catLabel}</span>
-            {item.is_new && <span className="px-2 py-0.5 rounded bg-red-900/50 text-red-300 border border-red-600 animate-pulse">NEW</span>}
+          <h3 className="text-white font-medium text-sm leading-tight truncate">{title}</h3>
+          {method && <p className="text-slate-400 text-xs mt-1 truncate">{method}</p>}
+          <div className="flex items-center gap-2 mt-1.5 flex-wrap">
+            <span className="text-slate-500 text-xs">👁 {formatViews(item.views)}</span>
+            <span className="text-slate-500 text-xs">♥ {formatViews(item.likes)}</span>
+            <span className={`px-1.5 py-0.5 rounded text-[10px] ${item.language==='ko'?'bg-blue-900/50 text-blue-300':'bg-emerald-900/50 text-emerald-300'}`}>{item.language==='ko'?'KR':'EN'}</span>
+            {item.is_new && <span className="px-1.5 py-0.5 rounded bg-red-900/50 text-red-300 text-[10px] animate-pulse">NEW</span>}
           </div>
         </div>
-        <svg className={`w-5 h-5 text-slate-400 transition-transform flex-shrink-0 mt-1 ${isExpanded?'rotate-180':''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
+
+        {/* Right side - Upvote button (PH style) */}
+        <button onClick={handleLike} className={`flex flex-col items-center px-3 py-2 rounded-lg border transition-all shrink-0 ${liked?'border-indigo-500 bg-indigo-900/30 text-indigo-300':'border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-500'}`}>
+          <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 15l7-7 7 7"/></svg>
+          <span className="text-xs font-medium mt-0.5">{formatViews(item.views)}</span>
+        </button>
       </div>
+
+      {/* Expanded detail */}
       {isExpanded && (
-        <div className="border-t border-slate-700 p-4 bg-slate-900/50 space-y-4">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-            <div><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.method}</h4><p className="text-white text-sm">{lang==='ko'?(item.method||''):(item.method_en||item.method||'')}</p>{lang==='ko'&&item.method_en&&<p className="text-slate-400 text-xs mt-1">{item.method_en}</p>}</div>
-            <div><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.principle}</h4><p className="text-white text-sm">{lang==='ko'?(item.principle||''):(item.principle_en||item.principle||'')}</p>{lang==='ko'&&item.principle_en&&<p className="text-slate-400 text-xs mt-1">{item.principle_en}</p>}</div>
+        <div className="border-t border-slate-800 p-4 bg-slate-950/50 space-y-4">
+          {subtitle && <p className="text-slate-400 text-xs">{subtitle}</p>}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+            <div className="bg-slate-800/50 rounded-lg p-3">
+              <h4 className="text-indigo-400 text-xs font-medium mb-1">{t.method}</h4>
+              <p className="text-white text-sm">{lang==='ko'?(item.method||''):(item.method_en||item.method||'')}</p>
+            </div>
+            <div className="bg-slate-800/50 rounded-lg p-3">
+              <h4 className="text-indigo-400 text-xs font-medium mb-1">{t.principle}</h4>
+              <p className="text-white text-sm">{lang==='ko'?(item.principle||''):(item.principle_en||item.principle||'')}</p>
+            </div>
           </div>
-          <div><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.requirements}</h4><p className="text-white text-sm">{lang==='ko'?(item.requirements||''):(item.requirements_en||item.requirements||'')}</p>{lang==='ko'&&item.requirements_en&&<p className="text-slate-400 text-xs mt-1">{item.requirements_en}</p>}</div>
+          <div className="bg-slate-800/50 rounded-lg p-3">
+            <h4 className="text-indigo-400 text-xs font-medium mb-1">{t.requirements}</h4>
+            <p className="text-white text-sm">{lang==='ko'?(item.requirements||''):(item.requirements_en||item.requirements||'')}</p>
+          </div>
           <div className="flex flex-wrap gap-6">
             <div><span className="text-slate-400 text-xs block mb-1">{t.difficulty}</span><MeterBar value={item.difficulty} color="bg-orange-500"/></div>
             <div><span className="text-slate-400 text-xs block mb-1">{t.cost}</span><MeterBar value={item.initial_cost} color="bg-red-500"/></div>
             <div><span className="text-slate-400 text-xs block mb-1">{t.time}</span><MeterBar value={item.time_to_profit} color="bg-yellow-500"/></div>
           </div>
-          {item.video_id && (
-            <div className="flex gap-2 flex-wrap">
-              <button onClick={(e)=>{e.stopPropagation();onWatch(item.video_id)}} className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm rounded-lg transition-colors">
-                <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
-                {t.watchVideo}
-              </button>
-              <button onClick={(e)=>{e.stopPropagation();navigator.clipboard.writeText(`https://www.youtube.com/shorts/${item.video_id}`);const btn=e.currentTarget;btn.textContent=lang==='ko'?'✅ 복사됨!':'✅ Copied!';setTimeout(()=>{btn.textContent=lang==='ko'?'📋 URL 복사':'📋 Copy URL'},2000)}} className="inline-flex items-center gap-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-colors">{lang==='ko'?'📋 URL 복사':'📋 Copy URL'}</button>
-            </div>
-          )}
+          {/* Action buttons */}
+          <div className="flex gap-2 flex-wrap">
+            <button onClick={(e)=>{e.stopPropagation();onWatch(item.video_id)}} className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm rounded-lg transition-colors">
+              <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814z"/><path fill="#fff" d="M9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+              {t.watchVideo}
+            </button>
+            <button onClick={handleCopy} className="inline-flex items-center gap-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-colors">
+              {copyFeedback ? `✅ ${t.copied}` : `📋 ${t.copyUrl}`}
+            </button>
+            <button onClick={handleShare} className="inline-flex items-center gap-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-colors">
+              🔗 {t.shareText}
+            </button>
+          </div>
         </div>
       )}
     </div>
   )
 }
 
-function AdAsRank({ad, lang}){ if(!ad) return null; const title=lang==='en'?(ad.title_en||ad.title):ad.title; const desc=lang==='en'?(ad.description_en||ad.description):ad.description; return (<a href={ad.url} target="_blank" rel="noopener noreferrer nofollow" className="block bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-500/20 rounded-xl p-4 hover:border-indigo-400/40 transition-all"><div className="flex items-start gap-4"><span className="inline-flex items-center justify-center w-9 h-9 rounded-full bg-indigo-600/50 text-indigo-200 font-bold text-xs flex-shrink-0">AD</span><div className="flex-1"><h3 className="text-white font-medium text-sm">{title}</h3><p className="text-slate-400 text-xs mt-1">{desc}</p></div><span className="text-indigo-400 text-xs whitespace-nowrap self-center">{lang==='en'?'Visit →':'바로가기 →'}</span></div></a>) }
+function AdAsRank({ad, lang}){ if(!ad) return null; const title=lang==='en'?(ad.title_en||ad.title):ad.title; const desc=lang==='en'?(ad.description_en||ad.description):ad.description; return (<a href={ad.url} target="_blank" rel="noopener noreferrer nofollow" className="block bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-500/20 rounded-xl p-4 hover:border-indigo-400/40 transition-all"><div className="flex items-start gap-4"><span className="inline-flex items-center justify-center w-8 h-8 rounded-full bg-indigo-600/50 text-indigo-200 font-bold text-[10px] flex-shrink-0">AD</span><div className="flex-1 min-w-0"><h3 className="text-white font-medium text-sm truncate">{title}</h3><p className="text-slate-400 text-xs mt-1 truncate">{desc}</p></div><span className="text-indigo-400 text-xs whitespace-nowrap self-center">{lang==='en'?'Visit →':'바로가기 →'}</span></div></a>) }
+
 function SidebarAdSlot({ad, lang, t}){ if(!ad) return (<div className="border border-dashed border-slate-700 rounded-xl p-4 text-center"><p className="text-slate-600 text-xs">{t.adSlotEmpty}</p></div>); const title=lang==='en'?(ad.title_en||ad.title):ad.title; const desc=lang==='en'?(ad.description_en||ad.description):ad.description; const cta=lang==='en'?(ad.cta_en||'Learn more →'):(ad.cta||'자세히 보기 →'); return (<a href={ad.url} target="_blank" rel="noopener noreferrer nofollow" className="block bg-gradient-to-r from-indigo-900/30 to-purple-900/30 border border-indigo-500/30 rounded-xl p-4 hover:border-indigo-400/50 transition-all"><span className="text-[10px] text-slate-500 uppercase">AD</span><h4 className="text-white font-medium text-sm mt-1">{title}</h4><p className="text-slate-400 text-xs mt-1">{desc}</p><span className="inline-block mt-2 text-xs text-indigo-400">{cta}</span></a>) }
 
 function TrendKeywords({data}){
@@ -201,13 +271,14 @@ function TrendKeywords({data}){
     if(!data) return []; const allItems=[...(data.shorts_top10||[]),...(data.videos_top10||[]),...(data.top10||[])]; const wordMap={}
     const stopwords=new Set(['the','to','with','a','an','and','or','how','make','money','ai','in','for','from','your','this','that','is','are','was','were','be','been','have','has','had','do','does','did','will','can','could','would','should','may','might','i','you','he','she','it','we','they','my','our','its','his','her','their','of','on','at','by','up','out','about','into','over','after','per','day','using'])
     allItems.forEach(item=>{ const text=`${item.title} ${item.title_en||''} ${item.method_en||''}`; const words=text.toLowerCase().replace(/[^a-z가-힣0-9\s]/g,' ').split(/\s+/); words.forEach(w=>{ if(w.length<3||stopwords.has(w)||/^\d+$/.test(w)) return; wordMap[w]=(wordMap[w]||0)+1 }) })
-    return Object.entries(wordMap).sort((a,b)=>b[1]-a[1]).slice(0,15).map(([word,count])=>({word,count}))
+    return Object.entries(wordMap).sort((a,b)=>b[1]-a[1]).slice(0,12).map(([word,count])=>({word,count}))
   },[data])
   if(keywords.length===0) return null; const maxCount=keywords[0]?.count||1
-  const colors=['text-indigo-300','text-purple-300','text-cyan-300','text-emerald-300','text-amber-300','text-rose-300','text-sky-300']
+  const colors=['text-indigo-300','text-purple-300','text-cyan-300','text-emerald-300','text-amber-300','text-rose-300']
   return (<div className="flex flex-wrap gap-2">{keywords.map((kw,i)=>{const size=kw.count/maxCount;const fontSize=size>0.7?'text-sm font-bold':size>0.4?'text-xs font-medium':'text-xs';return(<span key={kw.word} className={`${fontSize} ${colors[i%colors.length]} bg-slate-800/80 px-2 py-0.5 rounded-full border border-slate-700`}>{kw.word}</span>)})}</div>)
 }
 
+// === MAIN APP ===
 export default function App(){
   const [lang, setLang] = useState(()=>{ if(typeof navigator!=='undefined'&&navigator.language.startsWith('ko')) return 'ko'; return 'en' })
   const t = UI[lang]
@@ -215,7 +286,7 @@ export default function App(){
   const [weeklyData, setWeeklyData] = useState(null)
   const [monthlyData, setMonthlyData] = useState(null)
   const [adsConfig, setAdsConfig] = useState(null)
-  const [region, setRegion] = useState('global') // 'global', 'korea', 'aitool'
+  const [region, setRegion] = useState('global')
   const [contentType, setContentType] = useState('shorts')
   const [period, setPeriod] = useState('daily')
   const [searchQuery, setSearchQuery] = useState('')
@@ -225,17 +296,15 @@ export default function App(){
   const [filterCost, setFilterCost] = useState(null)
   const [filterTime, setFilterTime] = useState(null)
   const [popupVideoId, setPopupVideoId] = useState(null)
-  // URL Analyzer
   const [showAnalyzer, setShowAnalyzer] = useState(false)
   const [analyzeUrl, setAnalyzeUrl] = useState('')
   const [analyzeResult, setAnalyzeResult] = useState(null)
   const [analyzeLoading, setAnalyzeLoading] = useState(false)
   const [analyzeError, setAnalyzeError] = useState('')
-  // Contact form
   const [showContact, setShowContact] = useState(false)
   const [contactSent, setContactSent] = useState(false)
-  // Terms
   const [showTerms, setShowTerms] = useState(false)
+
   useEffect(()=>{
     loadLatestDaily()
     fetch('/config/ads.json').then(r=>r.ok?r.json():null).then(setAdsConfig).catch(()=>{})
@@ -253,15 +322,13 @@ export default function App(){
     try{
       const res=await fetch('/api/analyze',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({url:analyzeUrl})})
       if(!res.ok){const err=await res.json();throw new Error(err.error||'Failed')}
-      const data=await res.json()
-      if(data.ai_relevance==='낮음'||data.ai_relevance_en==='Low'){setAnalyzeError(t.analyzeReject);return}
-      setAnalyzeResult(data)
+      setAnalyzeResult(await res.json())
     }catch(e){setAnalyzeError(t.analyzeError)}
     finally{setAnalyzeLoading(false)}
   }
 
   function getDisplayData(){ let data=[]; if(period==='daily'){ let key; if(region==='korea') key=contentType==='shorts'?'kr_shorts_top10':'kr_videos_top10'; else if(region==='aitool') key=contentType==='shorts'?'aitool_shorts_top10':'aitool_videos_top10'; else key=contentType==='shorts'?'shorts_top10':'videos_top10'; data=dailyData?.[key]||[]; if(data.length===0) data=dailyData?.top10||[] } else if(period==='weekly') data=weeklyData?.top5||[]; else if(period==='monthly') data=monthlyData?.top5||[]; return data }
-  function getFilteredData(){ let data=getDisplayData(); if(region==='korea') data=data.filter(i=>i.language==='ko'); if(activeCategory!=='전체') data=data.filter(i=>i.category===activeCategory); if(searchQuery.trim()){const q=searchQuery.toLowerCase();data=data.filter(i=>i.title.toLowerCase().includes(q)||(i.title_ko||'').toLowerCase().includes(q)||(i.title_en||'').toLowerCase().includes(q)||i.channel_masked.toLowerCase().includes(q))} if(filterDifficulty) data=data.filter(i=>i.difficulty<=filterDifficulty); if(filterCost) data=data.filter(i=>i.initial_cost<=filterCost); if(filterTime) data=data.filter(i=>i.time_to_profit<=filterTime); return data }
+  function getFilteredData(){ let data=getDisplayData(); if(activeCategory!=='전체') data=data.filter(i=>i.category===activeCategory); if(searchQuery.trim()){const q=searchQuery.toLowerCase();data=data.filter(i=>i.title.toLowerCase().includes(q)||(i.title_ko||'').toLowerCase().includes(q)||(i.title_en||'').toLowerCase().includes(q)||i.channel_masked.toLowerCase().includes(q))} if(filterDifficulty) data=data.filter(i=>i.difficulty<=filterDifficulty); if(filterCost) data=data.filter(i=>i.initial_cost<=filterCost); if(filterTime) data=data.filter(i=>i.time_to_profit<=filterTime); return data }
 
   const bannerAd=adsConfig?.ads?.find(a=>a.position==='banner'&&a.active)
   const inlineAd=adsConfig?.ads?.find(a=>a.position==='inline'&&a.active)
@@ -272,10 +339,10 @@ export default function App(){
   const hasFilters=filterDifficulty||filterCost||filterTime
   const popupAd=bannerAd||inlineAd
 
-  function formatUpdateTime(){ if(!dailyData?.scanned_at) return t.waiting; const d=new Date(dailyData.scanned_at); if(lang==='ko') return `${t.updated}: ${d.getMonth()+1}/${d.getDate()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`; return `${t.updated}: ${d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}` }
+  function formatUpdateTime(){ if(!dailyData?.scanned_at) return t.waiting; const d=new Date(dailyData.scanned_at); if(lang==='ko') return `${d.getMonth()+1}/${d.getDate()} ${d.getHours().toString().padStart(2,'0')}:${d.getMinutes().toString().padStart(2,'0')}`; return `${d.toLocaleString('en-US',{month:'short',day:'numeric',hour:'2-digit',minute:'2-digit'})}` }
 
   return (
-    <div className="min-h-screen">
+    <div className="min-h-screen bg-[#0f0f1a]">
       {/* Video Popup */}
       {popupVideoId&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={()=>setPopupVideoId(null)}><div className="relative w-full max-w-sm mx-4" onClick={e=>e.stopPropagation()}><button onClick={()=>setPopupVideoId(null)} className="absolute -top-10 right-0 text-white text-2xl hover:text-red-400">&times;</button><div className="rounded-xl overflow-hidden bg-black shadow-2xl"><iframe src={`https://www.youtube.com/embed/${popupVideoId}?autoplay=1&loop=1`} className="w-full aspect-[9/16]" allow="autoplay; encrypted-media" allowFullScreen title="YouTube Shorts"/></div><a href={`https://www.youtube.com/shorts/${popupVideoId}`} target="_blank" rel="noopener noreferrer" className="block mt-2 text-center text-indigo-400 text-xs hover:text-indigo-300">{lang==='ko'?'YouTube에서 직접 보기 →':'Open in YouTube →'}</a>{popupAd&&(<a href={popupAd.url} target="_blank" rel="noopener noreferrer nofollow" className="block mt-2 bg-gradient-to-r from-indigo-900/40 to-purple-900/40 border border-indigo-500/30 rounded-lg p-3 text-center hover:border-indigo-400/60 transition-all"><p className="text-white text-sm font-medium">{lang==='en'?(popupAd.title_en||popupAd.title):popupAd.title}</p><p className="text-slate-400 text-xs mt-1">{lang==='en'?(popupAd.description_en||popupAd.description):popupAd.description}</p></a>)}</div></div>)}
 
@@ -283,27 +350,33 @@ export default function App(){
       {showContact&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm" onClick={()=>{setShowContact(false);setContactSent(false)}}><div className="bg-slate-900 border border-slate-700 rounded-xl p-6 w-full max-w-md mx-4" onClick={e=>e.stopPropagation()}><h3 className="text-white font-bold text-lg mb-4">{t.contactTitle}</h3>{contactSent?(<p className="text-emerald-400 text-sm">{t.contactSent}</p>):(<form action="https://formspree.io/f/xyeggkzq" method="POST" onSubmit={()=>setTimeout(()=>setContactSent(true),500)}><div className="space-y-3"><input name="name" required placeholder={t.contactName} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500"/><input name="email" type="email" required placeholder={t.contactEmail} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500"/><select name="type" className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white">{t.contactTypes.map(ct=>(<option key={ct} value={ct}>{ct}</option>))}</select><textarea name="message" required rows={4} placeholder={t.contactMessage} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-3 py-2 text-sm text-white placeholder-slate-500"/><button type="submit" className="w-full bg-indigo-600 hover:bg-indigo-500 text-white py-2 rounded-lg text-sm font-medium">{t.contactSend}</button></div></form>)}<button onClick={()=>{setShowContact(false);setContactSent(false)}} className="mt-4 text-slate-400 text-xs hover:text-white">닫기 / Close</button></div></div>)}
 
       {/* Terms Modal */}
-      {showTerms&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto" onClick={()=>setShowTerms(false)}><div className="bg-slate-900 border border-slate-700 rounded-xl p-6 w-full max-w-lg mx-4 my-8 max-h-[80vh] overflow-y-auto" onClick={e=>e.stopPropagation()}><h3 className="text-white font-bold text-lg mb-4">{t.termsTitle}</h3><div className="text-slate-300 text-xs space-y-3 leading-relaxed"><p><strong>1. 서비스 목적 / Purpose</strong><br/>FeedScan AI는 공개된 YouTube 메타데이터를 자동 수집·분석하여 정보를 제공하는 도구입니다. 투자 자문, 수익 보장, 특정 행동 권유의 목적이 아닙니다.</p><p><strong>2. 면책 / Disclaimer</strong><br/>본 사이트에 표시된 정보는 AI가 자동 생성한 것으로, 정확성·완전성·최신성을 보장하지 않습니다. 이용자의 판단과 행동에 대한 책임은 전적으로 이용자 본인에게 있습니다.</p><p><strong>3. 저작권 / Copyright</strong><br/>본 사이트는 YouTube의 공식 임베드 기능과 공개 API만을 사용합니다. 콘텐츠 제작자의 권리를 존중하며, 삭제 요청 시 즉시 대응합니다.</p><p><strong>4. 채널명 마스킹 / Channel Masking</strong><br/>모든 채널명은 개인정보 보호를 위해 일부 마스킹 처리됩니다. 특정 채널을 비방하거나 평가하는 목적이 아닙니다.</p><p><strong>5. 삭제 요청 / Removal Request</strong><br/>본인의 콘텐츠가 표시되는 것을 원하지 않는 경우, 문의 폼을 통해 삭제를 요청할 수 있습니다.</p><p><strong>6. 광고 / Advertising</strong><br/>본 사이트에는 제휴 광고가 포함되어 있습니다. 광고 클릭 시 외부 사이트로 이동하며, 해당 사이트의 내용은 FeedScan AI와 무관합니다.</p></div><button onClick={()=>setShowTerms(false)} className="mt-4 text-indigo-400 text-sm hover:text-white">닫기 / Close</button></div></div>)}
+      {showTerms&&(<div className="fixed inset-0 z-[100] flex items-center justify-center bg-black/80 backdrop-blur-sm overflow-y-auto" onClick={()=>setShowTerms(false)}><div className="bg-slate-900 border border-slate-700 rounded-xl p-6 w-full max-w-lg mx-4 my-8 max-h-[80vh] overflow-y-auto" onClick={e=>e.stopPropagation()}><h3 className="text-white font-bold text-lg mb-4">{t.termsTitle}</h3><div className="text-slate-300 text-xs space-y-3 leading-relaxed"><p><strong>1. 서비스 목적 / Purpose</strong><br/>FeedScan AI는 공개된 YouTube 메타데이터를 자동 수집·분석하여 정보를 제공하는 도구입니다. 투자 자문, 수익 보장, 특정 행동 권유의 목적이 아닙니다.</p><p><strong>2. 면책 / Disclaimer</strong><br/>본 사이트에 표시된 정보는 AI가 자동 생성한 것으로, 정확성·완전성·최신성을 보장하지 않습니다. 이용자의 판단과 행동에 대한 책임은 전적으로 이용자 본인에게 있습니다.</p><p><strong>3. 저작권 / Copyright</strong><br/>본 사이트는 YouTube의 공식 임베드 기능과 공개 API만을 사용합니다. 콘텐츠 제작자의 권리를 존중하며, 삭제 요청 시 즉시 대응합니다.</p><p><strong>4. 채널명 마스킹 / Channel Masking</strong><br/>모든 채널명은 개인정보 보호를 위해 일부 마스킹 처리됩니다.</p><p><strong>5. 삭제 요청 / Removal Request</strong><br/>본인의 콘텐츠가 표시되는 것을 원하지 않는 경우, 문의 폼을 통해 삭제를 요청할 수 있습니다.</p><p><strong>6. 광고 / Advertising</strong><br/>본 사이트에는 제휴 광고가 포함되어 있습니다. 광고 클릭 시 외부 사이트로 이동하며, 해당 사이트의 내용은 FeedScan AI와 무관합니다.</p></div><button onClick={()=>setShowTerms(false)} className="mt-4 text-indigo-400 text-sm hover:text-white">닫기 / Close</button></div></div>)}
 
-      {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-900/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-          <div><h1 className="text-xl md:text-2xl font-bold text-white"><span className="text-indigo-400">Feed</span>Scan AI</h1><p className="text-slate-400 text-sm mt-1">{t.siteTagline}</p></div>
+      {/* Header - Clean & minimal */}
+      <header className="border-b border-slate-800/50 bg-[#0f0f1a]/90 backdrop-blur-sm sticky top-0 z-50">
+        <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-
-            <span className="hidden md:inline-flex items-center px-3 py-1 rounded-full bg-slate-800 border border-slate-600 text-slate-300 text-xs">{formatUpdateTime()}</span>
-            <button onClick={()=>setShowContact(true)} className="hidden md:inline-flex px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors">{t.contactTitle}</button>
-            <button onClick={()=>setLang(lang==='ko'?'en':'ko')} className="px-3 py-1.5 rounded border border-slate-600 text-xs text-slate-300 hover:bg-slate-700 transition-colors font-medium">{lang==='ko'?'EN':'한국어'}</button>
+            <h1 className="text-lg font-bold text-white"><span className="text-indigo-400">Feed</span>Scan AI</h1>
+            <span className="hidden md:inline text-slate-500 text-xs border-l border-slate-700 pl-3">{t.siteTagline}</span>
+          </div>
+          <div className="flex items-center gap-2">
+            <span className="hidden md:inline text-yellow-400 font-medium text-xs">{formatUpdateTime()}</span>
+            <button onClick={()=>setShowContact(true)} className="hidden md:inline px-2.5 py-1 rounded border border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition-colors">{t.contactTitle}</button>
+            <button onClick={()=>setLang(lang==='ko'?'en':'ko')} className="px-2.5 py-1 rounded border border-slate-700 text-xs text-slate-400 hover:bg-slate-800 transition-colors font-medium">{lang==='ko'?'EN':'한국어'}</button>
           </div>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 py-6">
-        {/* Schedule info */}
-        <div className="text-center mb-4"><span className="text-yellow-400 font-semibold text-sm">{t.schedule}</span></div>
+      <main className="max-w-6xl mx-auto px-4 py-6">
+        {/* Hero section - mobile first impression */}
+        <div className="text-center mb-6 py-4">
+          <h2 className="text-2xl md:text-3xl font-bold text-white whitespace-pre-line leading-tight">{t.heroTitle}</h2>
+          <p className="text-slate-400 text-sm mt-2">{t.heroSub}</p>
+          <p className="text-yellow-400 font-semibold text-xs mt-3">{t.schedule}</p>
+        </div>
 
-        {/* URL Analyzer Section - Collapsible */}
-        <div className="bg-gradient-to-r from-indigo-900/20 to-purple-900/20 border border-indigo-500/20 rounded-xl mb-6 overflow-hidden">
+        {/* URL Analyzer - Collapsible */}
+        <div className="bg-gradient-to-r from-indigo-900/10 to-purple-900/10 border border-indigo-500/20 rounded-xl mb-6 overflow-hidden">
           <button onClick={()=>setShowAnalyzer(!showAnalyzer)} className="w-full p-3 flex items-center justify-between hover:bg-indigo-900/10 transition-colors">
             <span className="text-indigo-300 font-medium text-sm">{t.analyzeTitle} — {lang==='ko'?'YouTube 영상의 수익 구조를 분석해보세요':'Analyze the revenue structure of any YouTube video'}</span>
             <svg className={`w-4 h-4 text-indigo-400 transition-transform ${showAnalyzer?'rotate-180':''}`} fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7"/></svg>
@@ -311,76 +384,105 @@ export default function App(){
           {showAnalyzer&&(<div className="px-4 pb-4">
             <div className="flex gap-2">
               <input type="text" value={analyzeUrl} onChange={e=>setAnalyzeUrl(e.target.value)} placeholder={t.analyzePlaceholder} className="flex-1 bg-slate-800 border border-slate-700 rounded-lg px-4 py-2 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500" onKeyDown={e=>{if(e.key==='Enter')handleAnalyze()}}/>
-              <button onClick={handleAnalyze} disabled={analyzeLoading} className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 text-white text-sm rounded-lg transition-colors whitespace-nowrap">{analyzeLoading?(<span className="inline-flex items-center gap-2"><svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg>{lang==='ko'?'AI 분석중...':'AI Analyzing...'}</span>):t.analyzeBtn}</button>
+              <button onClick={handleAnalyze} disabled={analyzeLoading} className="px-4 py-2 bg-indigo-600 hover:bg-indigo-500 disabled:bg-slate-700 text-white text-sm rounded-lg transition-colors whitespace-nowrap">
+                {analyzeLoading?(<span className="inline-flex items-center gap-2"><svg className="animate-spin h-4 w-4" viewBox="0 0 24 24"><circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" fill="none"/><path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4z"/></svg><span className="hidden sm:inline">{t.analyzingText}</span><span className="sm:hidden">...</span></span>):t.analyzeBtn}
+              </button>
             </div>
             {analyzeError&&<p className="text-red-400 text-xs mt-2">{analyzeError}</p>}
+            {analyzeLoading&&<div className="mt-3 flex items-center gap-3"><div className="flex gap-1"><div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{animationDelay:'0ms'}}/><div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{animationDelay:'150ms'}}/><div className="w-2 h-2 bg-indigo-400 rounded-full animate-bounce" style={{animationDelay:'300ms'}}/></div><span className="text-indigo-300 text-xs">{t.analyzingText}...</span></div>}
             {analyzeResult&&(
               <div className="mt-4 bg-slate-900/50 border border-slate-700 rounded-lg p-4 space-y-4">
-                <div className="flex items-center justify-between"><h3 className="text-white font-bold text-base">{lang==='ko'?(analyzeResult.title_ko||analyzeResult.title):(analyzeResult.title_en||analyzeResult.title)}</h3><span className={`px-2 py-0.5 rounded text-xs ${analyzeResult.ai_relevance==='높음'||analyzeResult.ai_relevance_en==='High'?'bg-emerald-900/50 text-emerald-300 border border-emerald-700':analyzeResult.ai_relevance==='낮음'||analyzeResult.ai_relevance_en==='Low'?'bg-red-900/50 text-red-300 border border-red-700':'bg-yellow-900/50 text-yellow-300 border border-yellow-700'}`}>{t.aiRelevance}: {lang==='ko'?analyzeResult.ai_relevance:analyzeResult.ai_relevance_en}</span></div>
-                {/* Verdict */}
+                <div className="flex items-center justify-between flex-wrap gap-2"><h3 className="text-white font-bold text-base">{lang==='ko'?(analyzeResult.title_ko||analyzeResult.title):(analyzeResult.title_en||analyzeResult.title)}</h3><span className={`px-2 py-0.5 rounded text-xs ${analyzeResult.ai_relevance==='높음'||analyzeResult.ai_relevance_en==='High'?'bg-emerald-900/50 text-emerald-300 border border-emerald-700':'bg-yellow-900/50 text-yellow-300 border border-yellow-700'}`}>{t.aiRelevance}: {lang==='ko'?analyzeResult.ai_relevance:analyzeResult.ai_relevance_en}</span></div>
                 <div className="bg-indigo-900/30 border border-indigo-500/30 rounded-lg p-3"><p className="text-indigo-200 text-sm font-medium">{lang==='ko'?analyzeResult.verdict:analyzeResult.verdict_en}</p></div>
-                {/* Revenue Score */}
                 <div className="flex items-center gap-3"><span className="text-slate-400 text-xs">{t.revenueScore}</span><div className="flex gap-0.5">{Array.from({length:10},(_,i)=>(<div key={i} className={`h-3 w-4 rounded-sm ${i<analyzeResult.revenue_score?'bg-emerald-500':'bg-slate-700'}`}/>))}</div><span className="text-emerald-400 text-sm font-bold">{analyzeResult.revenue_score}/10</span></div>
-                {/* Main analysis grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
                   <div className="bg-slate-800/50 rounded-lg p-3"><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.method}</h4><p className="text-white text-sm">{lang==='ko'?analyzeResult.monetization_method:analyzeResult.monetization_method_en}</p></div>
                   <div className="bg-slate-800/50 rounded-lg p-3"><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.principle}</h4><p className="text-white text-sm">{lang==='ko'?analyzeResult.core_principle:analyzeResult.core_principle_en}</p></div>
                   <div className="bg-slate-800/50 rounded-lg p-3"><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.revenuePotential}</h4><p className="text-white text-sm">{lang==='ko'?analyzeResult.revenue_potential:analyzeResult.revenue_potential_en}</p></div>
                   <div className="bg-slate-800/50 rounded-lg p-3"><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.competition}</h4><p className="text-white text-sm">{lang==='ko'?analyzeResult.competition_level:analyzeResult.competition_level_en}</p></div>
-                  <div className="bg-slate-800/50 rounded-lg p-3"><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.reproducibility}</h4><p className="text-white text-sm">{lang==='ko'?analyzeResult.reproducibility:analyzeResult.reproducibility_en}</p></div>
-                  <div className="bg-slate-800/50 rounded-lg p-3"><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.growthOutlook}</h4><p className="text-white text-sm">{lang==='ko'?analyzeResult.growth_outlook:analyzeResult.growth_outlook_en}</p></div>
                 </div>
                 <div><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.requirements}</h4><p className="text-white text-sm">{lang==='ko'?analyzeResult.requirements:analyzeResult.requirements_en}</p></div>
                 <div><h4 className="text-indigo-400 text-xs font-medium mb-1">{t.keyInsight}</h4><p className="text-yellow-300 text-sm font-medium">{lang==='ko'?analyzeResult.key_insight:analyzeResult.key_insight_en}</p></div>
-                {/* Action Roadmap */}
-                <div><h4 className="text-indigo-400 text-xs font-medium mb-2">{t.actionRoadmap}</h4><div className="space-y-1">{(lang==='ko'?analyzeResult.action_roadmap:analyzeResult.action_roadmap_en||[]).map((step,i)=>(<p key={i} className="text-white text-sm pl-2 border-l-2 border-indigo-500/50">{step}</p>))}</div></div>
-                {/* Meters */}
                 <div className="flex flex-wrap gap-6">
                   <div><span className="text-slate-400 text-xs block mb-1">{t.difficulty}</span><MeterBar value={analyzeResult.difficulty} color="bg-orange-500"/></div>
                   <div><span className="text-slate-400 text-xs block mb-1">{t.cost}</span><MeterBar value={analyzeResult.initial_cost} color="bg-red-500"/></div>
                   <div><span className="text-slate-400 text-xs block mb-1">{t.time}</span><MeterBar value={analyzeResult.time_to_profit} color="bg-yellow-500"/></div>
                 </div>
-                <button onClick={()=>setPopupVideoId(analyzeResult.video_id)} className="inline-flex items-center gap-2 px-4 py-2 bg-red-600 hover:bg-red-500 text-white text-sm rounded-lg">{t.watchVideo}</button>
-                <p className="text-slate-500 text-[10px] mt-2 leading-relaxed">{t.analyzeDisclaimer}</p>
+                <p className="text-slate-500 text-[10px] leading-relaxed">{t.analyzeDisclaimer}</p>
               </div>
             )}
           </div>)}
         </div>
 
+        {/* Navigation tabs - PH style */}
         <div className="flex flex-col lg:flex-row gap-6 items-start">
-          {/* Main Content */}
           <div className="flex-1 min-w-0">
-            <div className="flex gap-2 mb-3">
-              <button onClick={()=>setRegion('korea')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionKr}</button>
-              <button onClick={()=>setRegion('global')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{t.regionGlobal}</button>
-              <button onClick={()=>setRegion('aitool')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${region==='aitool'?'bg-cyan-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'🤖 AI Tool':'🤖 AI Tool'}</button>
+            {/* Region + Content type tabs */}
+            <div className="flex flex-wrap gap-2 mb-3">
+              <button onClick={()=>setRegion('korea')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white'}`}>{t.regionKr}</button>
+              <button onClick={()=>setRegion('global')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='global'?'bg-emerald-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white'}`}>{t.regionGlobal}</button>
+              <button onClick={()=>setRegion('aitool')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='aitool'?'bg-cyan-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white'}`}>{t.regionAitool}</button>
+              <div className="w-px bg-slate-700 mx-1 hidden sm:block"/>
+              <button onClick={()=>setContentType('shorts')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white'}`}>{t.tabShorts}</button>
+              <button onClick={()=>setContentType('videos')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white'}`}>{t.tabVideos}</button>
             </div>
-            <div className="flex gap-2 mb-3">
-              <button onClick={()=>setContentType('shorts')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='shorts'?'bg-rose-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'📱 유튜브 쇼츠':'📱 YouTube Shorts'}</button>
-              <button onClick={()=>setContentType('videos')} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${contentType==='videos'?'bg-violet-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{lang==='ko'?'🎬 유튜브 영상':'🎬 YouTube Videos'}</button>
+
+            {/* Period tabs */}
+            <div className="flex gap-2 mb-4">
+              {['daily','weekly','monthly'].map((p,i)=>(<button key={p} onClick={()=>setPeriod(p)} className={`px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${period===p?'bg-indigo-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white'}`}>{[t.tabDaily,t.tabWeekly,t.tabMonthly][i]}</button>))}
             </div>
-            <div className="flex gap-2 mb-4">{['daily','weekly','monthly'].map((p,i)=>(<button key={p} onClick={()=>setPeriod(p)} className={`px-4 py-2 rounded-lg text-sm font-medium transition-all ${period===p?'bg-indigo-600 text-white':'bg-slate-800 text-slate-400 hover:text-white hover:bg-slate-700'}`}>{[t.tabDaily,t.tabWeekly,t.tabMonthly][i]}</button>))}</div>
-            <div className="flex flex-wrap gap-1.5 mb-4">{categoryKeys.map((cat,i)=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-3 py-1 rounded-full text-xs transition-all ${activeCategory===cat?'bg-purple-600 text-white':'bg-slate-800 text-slate-400 hover:text-white border border-slate-700'}`}>{categories[i]}</button>))}</div>
-            <div className="bg-slate-800/30 border border-slate-700 rounded-lg p-3 mb-4"><div className="flex items-center justify-between mb-1"><h4 className="text-slate-300 text-xs font-medium">{t.filterTitle}</h4>{(hasFilters||region!=='global')&&(<button onClick={()=>{setFilterDifficulty(null);setFilterCost(null);setFilterTime(null);setRegion('global')}} className="text-indigo-400 text-xs hover:text-indigo-300">{t.filterReset}</button>)}</div><p className="text-slate-500 text-[10px] mb-2">{t.filterHint}</p><div className="space-y-2"><div className="flex items-center gap-2">            <span className="w-24 text-slate-400 text-xs shrink-0">{lang==='ko'?'지역':'Region'}</span><button onClick={()=>setRegion('global')} className={`px-2 py-0.5 rounded text-xs ${region==='global'?'bg-indigo-600 text-white':'bg-slate-700 text-slate-400 hover:text-white'}`}>{lang==='ko'?'🌍 글로벌':'🌍 Global'}</button><button onClick={()=>setRegion('korea')} className={`px-2 py-0.5 rounded text-xs ${region==='korea'?'bg-indigo-600 text-white':'bg-slate-700 text-slate-400 hover:text-white'}`}>{lang==='ko'?'🇰🇷 한국':'🇰🇷 Korea'}</button><button onClick={()=>setRegion('aitool')} className={`px-2 py-0.5 rounded text-xs ${region==='aitool'?'bg-indigo-600 text-white':'bg-slate-700 text-slate-400 hover:text-white'}`}>{lang==='ko'?'🤖 AI Tool':'🤖 AI Tool'}</button></div><div className="flex items-center gap-2"><ClickableMeter label={t.difficulty} value={filterDifficulty} onChange={setFilterDifficulty} color="bg-orange-500"/>{filterDifficulty&&<span className="text-slate-500 text-[10px]">{t.filterLabels[filterDifficulty]}</span>}</div><div className="flex items-center gap-2"><ClickableMeter label={t.cost} value={filterCost} onChange={setFilterCost} color="bg-red-500"/>{filterCost&&<span className="text-slate-500 text-[10px]">{t.filterCostLabels[filterCost]}</span>}</div><div className="flex items-center gap-2"><ClickableMeter label={t.time} value={filterTime} onChange={setFilterTime} color="bg-yellow-500"/>{filterTime&&<span className="text-slate-500 text-[10px]">{t.filterTimeLabels[filterTime]}</span>}</div></div></div>
-            <div className="relative mb-4"><input type="text" placeholder={t.search} value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} className="w-full bg-slate-800 border border-slate-700 rounded-lg px-4 py-3 pl-10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"/><svg className="absolute left-3 top-3.5 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg></div>
-            {items.length===0?(<div className="bg-slate-800/50 border border-slate-700 rounded-xl p-12 text-center"><p className="text-slate-400">{t.noData}</p></div>):(<div className="space-y-3">{items.map((item,index)=>(<React.Fragment key={item.video_id}>{index===3&&bannerAd&&<AdAsRank ad={bannerAd} lang={lang}/>}<RankItem item={item} rank={index+1} lang={lang} t={t} isExpanded={expandedId===item.video_id} onToggle={()=>setExpandedId(expandedId===item.video_id?null:item.video_id)} onWatch={setPopupVideoId}/>{index===6&&inlineAd&&<AdAsRank ad={inlineAd} lang={lang}/>}</React.Fragment>))}</div>)}
+
+            {/* Category chips */}
+            <div className="flex flex-wrap gap-1.5 mb-4">{categoryKeys.map((cat,i)=>(<button key={cat} onClick={()=>setActiveCategory(cat)} className={`px-2.5 py-1 rounded-full text-[11px] transition-all ${activeCategory===cat?'bg-purple-600 text-white':'bg-slate-800/80 text-slate-400 hover:text-white border border-slate-700/50'}`}>{categories[i]}</button>))}</div>
+
+            {/* Filter bar - compact */}
+            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-3 mb-4">
+              <div className="flex items-center justify-between mb-2">
+                <h4 className="text-slate-300 text-xs font-medium">{t.filterTitle}</h4>
+                {hasFilters&&(<button onClick={()=>{setFilterDifficulty(null);setFilterCost(null);setFilterTime(null)}} className="text-indigo-400 text-xs hover:text-indigo-300">Reset</button>)}
+              </div>
+              <div className="flex flex-wrap gap-4">
+                <ClickableMeter label={t.difficulty} value={filterDifficulty} onChange={setFilterDifficulty} color="bg-orange-500"/>
+                <ClickableMeter label={t.cost} value={filterCost} onChange={setFilterCost} color="bg-red-500"/>
+                <ClickableMeter label={t.time} value={filterTime} onChange={setFilterTime} color="bg-yellow-500"/>
+              </div>
+            </div>
+
+            {/* Search */}
+            <div className="relative mb-4">
+              <input type="text" placeholder={t.search} value={searchQuery} onChange={e=>setSearchQuery(e.target.value)} className="w-full bg-slate-900/50 border border-slate-800 rounded-lg px-4 py-2.5 pl-10 text-sm text-white placeholder-slate-500 focus:outline-none focus:border-indigo-500"/>
+              <svg className="absolute left-3 top-3 w-4 h-4 text-slate-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/></svg>
+            </div>
+
+            {/* Ranking list - PH style */}
+            {items.length===0?(<div className="bg-slate-900/50 border border-slate-800 rounded-xl p-12 text-center"><p className="text-slate-400 text-sm">{t.noData}</p></div>):(
+              <div className="space-y-2">
+                {items.map((item,index)=>(
+                  <React.Fragment key={item.video_id}>
+                    {index===3&&bannerAd&&<AdAsRank ad={bannerAd} lang={lang}/>}
+                    <RankItem item={item} rank={index+1} lang={lang} t={t} isExpanded={expandedId===item.video_id} onToggle={()=>setExpandedId(expandedId===item.video_id?null:item.video_id)} onWatch={setPopupVideoId}/>
+                    {index===6&&inlineAd&&<AdAsRank ad={inlineAd} lang={lang}/>}
+                  </React.Fragment>
+                ))}
+              </div>
+            )}
           </div>
 
           {/* Sidebar */}
-          <aside className="w-full lg:w-72 lg:sticky lg:top-24 space-y-3 flex-shrink-0">
+          <aside className="w-full lg:w-64 lg:sticky lg:top-16 space-y-3 flex-shrink-0">
             {sidebarAds.map(ad=><SidebarAdSlot key={ad.id} ad={ad} lang={lang} t={t}/>)}
-            {Array.from({length:Math.max(0,5-sidebarAds.length)},(_,i)=>(<SidebarAdSlot key={`e-${i}`} ad={null} lang={lang} t={t}/>))}
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-2">{t.aboutTitle}</h4><p className="text-slate-400 text-xs leading-relaxed">{t.aboutText}</p></div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-2">{t.rankTitle}</h4><ul className="text-slate-400 text-xs space-y-1">{t.rankRules.map((r,i)=><li key={i}>• {r}</li>)}</ul></div>
-            <div className="bg-slate-800/50 border border-slate-700 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-3">{t.trendKeywords}</h4><TrendKeywords data={dailyData}/></div>
+            {Array.from({length:Math.max(0,3-sidebarAds.length)},(_,i)=>(<SidebarAdSlot key={`e-${i}`} ad={null} lang={lang} t={t}/>))}
+            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-2">{t.aboutTitle}</h4><p className="text-slate-400 text-xs leading-relaxed">{t.aboutText}</p></div>
+            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-2">{t.rankTitle}</h4><ul className="text-slate-400 text-xs space-y-1">{t.rankRules.map((r,i)=><li key={i}>• {r}</li>)}</ul></div>
+            <div className="bg-slate-900/50 border border-slate-800 rounded-xl p-4"><h4 className="text-white font-medium text-sm mb-3">Trend Keywords</h4><TrendKeywords data={dailyData}/></div>
           </aside>
         </div>
       </main>
 
       {/* Footer */}
-      <footer className="border-t border-slate-800 mt-12">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="bg-slate-900 border border-slate-800 rounded-lg p-4 mb-6"><p className="text-slate-500 text-xs leading-relaxed"><span className="text-slate-400 font-medium">{t.disclaimer}: </span>{t.disclaimerText}</p></div>
+      <footer className="border-t border-slate-800/50 mt-12">
+        <div className="max-w-6xl mx-auto px-4 py-8">
+          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-4 mb-6"><p className="text-slate-500 text-xs leading-relaxed"><span className="text-slate-400 font-medium">{t.disclaimer}: </span>{t.disclaimerText}</p></div>
           <div className="flex flex-col md:flex-row items-center justify-between gap-4 text-slate-600 text-xs">
             <p>{t.source}</p><p>{t.masked}</p>
           </div>
@@ -389,7 +491,6 @@ export default function App(){
             <button onClick={()=>setShowContact(true)} className="text-slate-500 text-xs hover:text-indigo-400">{t.contactTitle}</button>
             <button onClick={()=>setShowContact(true)} className="text-slate-500 text-xs hover:text-indigo-400">{t.reportBtn}</button>
           </div>
-
         </div>
       </footer>
     </div>
