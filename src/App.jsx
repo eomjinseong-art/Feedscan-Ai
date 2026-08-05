@@ -375,7 +375,7 @@ export default function App(){
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-6">
+      <main className="max-w-6xl mx-auto px-4 py-6 overflow-hidden">
         {/* Hero section - mobile first impression */}
         <div className="text-center mb-6 py-4 px-2">
           <h2 className={`text-xl sm:text-2xl md:text-3xl font-bold leading-tight break-keep ${isDark?'text-white':'text-gray-900'}`}>{t.heroTitle}</h2>
@@ -422,8 +422,8 @@ export default function App(){
         </div>
 
         {/* Navigation tabs - PH style */}
-        <div className="flex flex-col lg:flex-row gap-6 items-start">
-          <div className="flex-1 min-w-0">
+        <div className="flex flex-col lg:flex-row gap-6 items-start overflow-hidden">
+          <div className="flex-1 min-w-0 overflow-hidden">
             {/* Region + Content type tabs - wrap on mobile */}
             <div className="flex flex-wrap gap-2 mb-3">
               <button onClick={()=>setRegion('korea')} className={`px-3 py-1.5 rounded-lg text-sm font-medium transition-all ${region==='korea'?'bg-blue-600 text-white':isDark?'bg-slate-800/80 text-slate-400 hover:text-white':'bg-gray-200 text-gray-600 hover:text-gray-900'}`}>{t.regionKr}</button>
