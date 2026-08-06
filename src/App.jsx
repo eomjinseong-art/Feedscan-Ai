@@ -284,6 +284,7 @@ export default function App(){
   const [weeklyData, setWeeklyData] = useState(null)
   const [monthlyData, setMonthlyData] = useState(null)
   const [adsConfig, setAdsConfig] = useState(null)
+  const [visitorCount, setVisitorCount] = useState(null)
   const [region, setRegion] = useState('global')
   const [contentType, setContentType] = useState('shorts')
   const [period, setPeriod] = useState('daily')
@@ -310,9 +311,29 @@ export default function App(){
     localStorage.setItem('theme', theme)
   },[theme, isDark])
 
+  const SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbwCI2lXGZtByYz23QXZHVfgoHKT6RvqE1l1jkPQtV2pVSr4oB-ijoojJrWcyJXhKcx6/exec'
   useEffect(()=>{
     loadLatestDaily()
-    fetch('/config/ads.json').then(r=>r.ok?r.json():null).then(setAdsConfig).catch(()=>{})
+    // 구글 시트에서 광고 로드
+    fetch(SCRIPT_URL+'?action=ads').then(r=>r.ok?r.json():null).then(data=>{
+      if(data&&Array.isArray(data)){
+        const ads=data.map(d=>({
+          id:d.id,
+          title:d.hook,
+          title_en:d.hook,
+          description:d.desc,
+          description_en:d.desc,
+          url:d.url,
+          cta:'바로가기 →',
+          cta_en:'Visit →',
+          position:d.shot==='sidebar'?'sidebar':d.shot==='inline'?'inline':'banner',
+          active:true
+        }))
+        setAdsConfig({ads})
+      }
+    }).catch(()=>fetch('/config/ads.json').then(r=>r.ok?r.json():null).then(setAdsConfig).catch(()=>{}))
+    // 방문자 기록
+    fetch(SCRIPT_URL+'?action=visit').then(r=>r.ok?r.json():null).then(d=>{if(d)setVisitorCount(d.total)}).catch(()=>{})
   },[])
   useEffect(()=>{
     const suffix = contentType === 'shorts' ? '_shorts' : '_videos'
@@ -363,6 +384,7 @@ export default function App(){
           <div className="flex items-center gap-3">
             <h1 className="text-lg font-bold"><span className="text-indigo-500">Feed</span>Scan AI</h1>
             <span className={`hidden md:inline text-xs border-l pl-3 ${isDark?'text-slate-500 border-slate-700':'text-gray-500 border-gray-300'}`}>{t.siteTagline}</span>
+            {visitorCount&&<span className={`hidden md:inline text-xs border-l pl-3 ${isDark?'text-slate-500 border-slate-700':'text-gray-500 border-gray-300'}`}>👥 {visitorCount.toLocaleString()}</span>}
           </div>
           <div className="flex items-center gap-2">
             <span className="hidden md:inline text-yellow-500 font-medium text-xs">{formatUpdateTime()}</span>
