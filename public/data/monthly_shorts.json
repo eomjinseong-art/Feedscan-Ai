@@ -1,6 +1,6 @@
 {
   "period": "2026-07-08 ~ 2026-08-06",
-  "updated_at": "2026-08-06T08:11:33.655432",
+  "updated_at": "2026-08-06T10:30:17.906209",
   "top5": [
     {
       "video_id": "8YEdm-ZTgT4",
@@ -92,29 +92,29 @@
       "score": 528352
     },
     {
-      "video_id": "RNB4-ZS68nk",
-      "title": "AI만 믿고 100만원 지르면 어떻게 될까?",
-      "channel_masked": "돼끼 ***",
-      "views": 484389,
-      "likes": 4360,
+      "video_id": "lS2lILL4Fa0",
+      "title": "Create Viral Ai Funny Kids Video | How To Create Ai Kids Video | Ai Se Kids Video Kaise Banaye",
+      "channel_masked": "Raj***",
+      "views": 465797,
+      "likes": 0,
       "published": "2026-07-17",
       "is_short": true,
-      "language": "ko",
-      "title_ko": "AI만 믿고 100만원 지르면 어떻게 될까?",
-      "title_en": "What Happens If You Trust AI and Spend 1 Million Won?",
-      "method": "AI에 대한 신뢰를 바탕으로 투자",
-      "method_en": "Investing based on trust in AI",
-      "principle": "AI의 잠재력을 믿고 투자하는 것이 중요합니다. 하지만 결과는 예측할 수 없으므로 신중해야 합니다.",
-      "principle_en": "It's important to trust in the potential of AI when investing. However, the outcomes are unpredictable, so caution is necessary.",
-      "requirements": "100만원, AI 관련 정보",
-      "requirements_en": "1 million won, information related to AI",
-      "category": "기타",
+      "language": "en",
+      "title_ko": "바이럴 AI 재미있는 키즈 비디오 만들기 | AI 키즈 비디오 만드는 법",
+      "title_en": "Create Viral Ai Funny Kids Video | How To Create Ai Kids Video",
+      "method": "AI를 사용하여 재미있는 키즈 비디오 제작",
+      "method_en": "Creating funny kids videos using AI",
+      "principle": "AI를 활용하여 재미있고 매력적인 키즈 비디오를 만드는 방법을 안내합니다.",
+      "principle_en": "It guides on how to create engaging and funny kids videos using AI.",
+      "requirements": "AI 비디오 생성 도구, 인터넷 연결",
+      "requirements_en": "AI video generation tools, internet connection",
+      "category": "콘텐츠채널",
       "difficulty": 3,
-      "initial_cost": 4,
-      "time_to_profit": 2,
-      "is_new": true,
+      "initial_cost": 1,
+      "time_to_profit": 3,
+      "is_new": false,
       "appearances": 1,
-      "score": 484389
+      "score": 465797
     }
   ]
 }
