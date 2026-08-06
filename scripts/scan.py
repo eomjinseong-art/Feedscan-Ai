@@ -325,20 +325,29 @@ def apply_analysis(items, analyses):
         item.pop("duration_sec", None)
 
 # === RANKINGS ===
-def update_rankings(period_days, filename, top_n, content_type=None):
+def update_rankings(period_days, filename, top_n, content_type=None, source_keys=None):
+    """주간/월간 랭킹 집계 - 과거 일간 데이터를 누적하여 score 계산"""
     data = {}
     today = datetime.now()
     all_prev_ids = set()
+    if source_keys is None:
+        source_keys = ["shorts_top10", "videos_top10", "kr_shorts_top10", "kr_videos_top10",
+                       "aitool_shorts_top10", "aitool_videos_top10", "top10"]
 
     for i in range(period_days):
         fp = DAILY_DIR / f"{(today - timedelta(days=i)).strftime('%Y-%m-%d')}.json"
         if fp.exists():
             day_data = json.loads(fp.read_text(encoding="utf-8"))
-            for key in ["shorts_top10", "videos_top10", "kr_shorts_top10", "kr_videos_top10",
-                        "aitool_shorts_top10", "aitool_videos_top10", "top10"]:
+            for key in source_keys:
                 for item in day_data.get(key, []):
                     if content_type == "shorts" and not item.get("is_short", True): continue
                     if content_type == "videos" and item.get("is_short", True): continue
+                    # 과거 데이터에도 콘텐츠 필터 적용 (인도/블랙리스트 제거)
+                    title = item.get("title", "")
+                    desc = item.get("description", "")
+                    channel = item.get("channel_masked", "")
+                    if not passes_content_filter(title, desc, channel):
+                        continue
                     vid = item["video_id"]
                     if i > 0: all_prev_ids.add(vid)
                     if vid in data:
@@ -359,6 +368,7 @@ def update_rankings(period_days, filename, top_n, content_type=None):
         f"top{top_n}": top
     }
     (DATA_DIR / filename).write_text(json.dumps(output, ensure_ascii=False, indent=2), encoding="utf-8")
+    print(f"  {filename}: {len(top)} items (from {len(data)} unique)")
 
 # === MAIN ===
 def main():
@@ -513,20 +523,38 @@ def main():
         json.dumps(daily, ensure_ascii=False, indent=2), encoding="utf-8")
     print(f"\nSaved: {today_str}")
 
-    # 주간/월간 랭킹
-    update_rankings(7, "weekly_shorts.json", 5, "shorts")
-    update_rankings(7, "weekly_videos.json", 5, "videos")
-    update_rankings(30, "monthly_shorts.json", 5, "shorts")
-    update_rankings(30, "monthly_videos.json", 5, "videos")
+    # 주간/월간 랭킹 (글로벌)
+    print("\n=== WEEKLY/MONTHLY RANKINGS ===")
+    update_rankings(7, "weekly_shorts.json", 5, "shorts", ["shorts_top10"])
+    update_rankings(7, "weekly_videos.json", 5, "videos", ["videos_top10"])
+    update_rankings(30, "monthly_shorts.json", 5, "shorts", ["shorts_top10"])
+    update_rankings(30, "monthly_videos.json", 5, "videos", ["videos_top10"])
+    # 주간/월간 랭킹 (한국)
+    update_rankings(7, "weekly_kr_shorts.json", 5, "shorts", ["kr_shorts_top10"])
+    update_rankings(7, "weekly_kr_videos.json", 5, "videos", ["kr_videos_top10"])
+    update_rankings(30, "monthly_kr_shorts.json", 5, "shorts", ["kr_shorts_top10"])
+    update_rankings(30, "monthly_kr_videos.json", 5, "videos", ["kr_videos_top10"])
+    # 주간/월간 랭킹 (AI Tool)
+    update_rankings(7, "weekly_aitool_shorts.json", 5, "shorts", ["aitool_shorts_top10"])
+    update_rankings(7, "weekly_aitool_videos.json", 5, "videos", ["aitool_videos_top10"])
+    update_rankings(30, "monthly_aitool_shorts.json", 5, "shorts", ["aitool_shorts_top10"])
+    update_rankings(30, "monthly_aitool_videos.json", 5, "videos", ["aitool_videos_top10"])
 
     # 주간/월간 비어있으면 일간 데이터로 채우기
-    for fname, src_key in [("weekly_shorts.json", "shorts_top10"), ("weekly_videos.json", "videos_top10"),
-                           ("monthly_shorts.json", "shorts_top10"), ("monthly_videos.json", "videos_top10")]:
+    fallback_map = [
+        ("weekly_shorts.json", "shorts_top10"), ("weekly_videos.json", "videos_top10"),
+        ("monthly_shorts.json", "shorts_top10"), ("monthly_videos.json", "videos_top10"),
+        ("weekly_kr_shorts.json", "kr_shorts_top10"), ("weekly_kr_videos.json", "kr_videos_top10"),
+        ("monthly_kr_shorts.json", "kr_shorts_top10"), ("monthly_kr_videos.json", "kr_videos_top10"),
+        ("weekly_aitool_shorts.json", "aitool_shorts_top10"), ("weekly_aitool_videos.json", "aitool_videos_top10"),
+        ("monthly_aitool_shorts.json", "aitool_shorts_top10"), ("monthly_aitool_videos.json", "aitool_videos_top10"),
+    ]
+    for fname, src_key in fallback_map:
         fp = DATA_DIR / fname
         if fp.exists():
             content = json.loads(fp.read_text(encoding="utf-8"))
             if not content.get("top5"):
-                content["top5"] = daily[src_key][:5]
+                content["top5"] = daily.get(src_key, [])[:5]
                 fp.write_text(json.dumps(content, ensure_ascii=False, indent=2), encoding="utf-8")
                 print(f"  Filled {fname} with daily data")
 
