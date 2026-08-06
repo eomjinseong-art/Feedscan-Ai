@@ -150,7 +150,7 @@ function formatViews(n) {
 }
 
 // Product Hunt style rank item
-function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch, isDark}) {
+function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch, isDark, ads}) {
   const title = lang==='ko' ? (item.title_ko||item.title) : (item.title_en||item.title)
   const subtitle = lang==='ko' ? (item.title_en||'') : (item.title_ko||'')
   const method = lang==='ko' ? (item.method||'') : (item.method_en||item.method||'')
@@ -252,8 +252,9 @@ function RankItem({item, rank, lang, t, isExpanded, onToggle, onWatch, isDark}) 
             <button onClick={handleCopy} className="inline-flex items-center gap-1 px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white text-sm rounded-lg transition-colors">
               {copyFeedback ? `✅ ${t.copied}` : `📋 ${t.copyUrl}`}
             </button>
-
           </div>
+          {/* Random ad */}
+          {ads&&ads.length>0&&(()=>{const ad=ads[Math.floor(Math.random()*ads.length)];const adTitle=lang==='en'?(ad.title_en||ad.title):ad.title;const adDesc=lang==='en'?(ad.description_en||ad.description):ad.description;return ad.url?(<a href={ad.url} target="_blank" rel="noopener noreferrer nofollow" className={`block mt-3 rounded-lg p-3 border transition-all ${isDark?'bg-indigo-900/10 border-indigo-500/20 hover:border-indigo-400/40':'bg-indigo-50 border-indigo-200 hover:border-indigo-400'}`}><div className="flex items-center gap-3"><span className="text-[9px] text-indigo-400 font-bold uppercase">AD</span><span className={`text-sm font-medium ${isDark?'text-white':'text-gray-800'}`}>{adTitle}</span><span className={`text-xs ml-auto ${isDark?'text-slate-400':'text-gray-500'}`}>{adDesc}</span></div></a>):null})()}
         </div>
       )}
     </div>
@@ -497,7 +498,7 @@ export default function App(){
                 {items.map((item,index)=>(
                   <React.Fragment key={item.video_id}>
                     {index===3&&bannerAd&&<AdAsRank ad={bannerAd} lang={lang}/>}
-                    <RankItem item={item} rank={index+1} lang={lang} t={t} isDark={isDark} isExpanded={expandedId===item.video_id} onToggle={()=>setExpandedId(expandedId===item.video_id?null:item.video_id)} onWatch={setPopupVideoId}/>
+                    <RankItem item={item} rank={index+1} lang={lang} t={t} isDark={isDark} isExpanded={expandedId===item.video_id} onToggle={()=>setExpandedId(expandedId===item.video_id?null:item.video_id)} onWatch={setPopupVideoId} ads={adsConfig?.ads||[]}/>
                     {index===6&&inlineAd&&<AdAsRank ad={inlineAd} lang={lang}/>}
                   </React.Fragment>
                 ))}
