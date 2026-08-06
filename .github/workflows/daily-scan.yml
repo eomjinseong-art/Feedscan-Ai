@@ -2,10 +2,9 @@ name: Daily Shorts Scan
 
 on:
   schedule:
+    # 한국시간 기준: 7시, 19시 (UTC: -9h → 22, 10)
     - cron: '0 22 * * *'
-    - cron: '0 3 * * *'
-    - cron: '0 8 * * *'
-    - cron: '0 13 * * *'
+    - cron: '0 10 * * *'
   workflow_dispatch:
 
 jobs:
