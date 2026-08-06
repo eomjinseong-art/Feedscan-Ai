@@ -338,9 +338,10 @@ export default function App(){
   },[])
   useEffect(()=>{
     const suffix = contentType === 'shorts' ? '_shorts' : '_videos'
-    fetch(`/data/weekly${suffix}.json`).then(r=>r.ok?r.json():null).then(setWeeklyData).catch(()=>setWeeklyData(null))
-    fetch(`/data/monthly${suffix}.json`).then(r=>r.ok?r.json():null).then(setMonthlyData).catch(()=>setMonthlyData(null))
-  },[contentType])
+    const prefix = region==='korea'?'_kr':region==='aitool'?'_aitool':''
+    fetch(`/data/weekly${prefix}${suffix}.json`).then(r=>r.ok?r.json():null).then(setWeeklyData).catch(()=>setWeeklyData(null))
+    fetch(`/data/monthly${prefix}${suffix}.json`).then(r=>r.ok?r.json():null).then(setMonthlyData).catch(()=>setMonthlyData(null))
+  },[contentType, region])
 
   async function loadLatestDaily(){ const today=new Date(); for(let i=0;i<7;i++){const d=new Date(today);d.setDate(d.getDate()-i);const ds=d.toISOString().split('T')[0];try{const r=await fetch(`/data/daily/${ds}.json`);if(r.ok){setDailyData(await r.json());return}}catch(e){}} }
 
