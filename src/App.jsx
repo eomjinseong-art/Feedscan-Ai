@@ -28,7 +28,7 @@ const UI = {
     difficulty: "난이도",
     cost: "초기비용",
     time: "수익까지",
-    schedule: "매일 4회 자동 업데이트 (KST 07:00 / 12:00 / 17:00 / 22:00)",
+    schedule: "매일 2회 자동 업데이트 (KST 07:00 / 19:00)",
     updated: "최근 업데이트",
     waiting: "업데이트 대기 중",
     disclaimer: "면책조항",
@@ -91,7 +91,7 @@ const UI = {
     difficulty: "Difficulty",
     cost: "Initial Cost",
     time: "Time to Profit",
-    schedule: "Auto-updated 4x daily (KST 07:00 / 12:00 / 17:00 / 22:00)",
+    schedule: "Auto-updated 2x daily (KST 07:00 / 19:00)",
     updated: "Last updated",
     waiting: "Waiting for update",
     disclaimer: "Disclaimer",
@@ -383,7 +383,7 @@ export default function App(){
       <header className={`border-b sticky top-0 z-50 backdrop-blur-sm ${isDark?'border-slate-800/50 bg-[#0f0f1a]/90':'border-gray-200 bg-white/90'}`}>
         <div className="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
           <div className="flex items-center gap-3">
-            <h1 className="text-lg font-bold"><span className="text-indigo-500">Feed</span>Scan AI</h1>
+            <h1 className="text-lg font-bold cursor-pointer" onClick={()=>window.location.reload()}><span className="text-indigo-500">Feed</span>Scan AI</h1>
             <span className={`hidden md:inline text-xs border-l pl-3 ${isDark?'text-slate-500 border-slate-700':'text-gray-500 border-gray-300'}`}>{t.siteTagline}</span>
             {visitorCount&&<span className={`hidden md:inline text-xs border-l pl-3 ${isDark?'text-slate-500 border-slate-700':'text-gray-500 border-gray-300'}`}>👥 {visitorCount.toLocaleString()}</span>}
           </div>
