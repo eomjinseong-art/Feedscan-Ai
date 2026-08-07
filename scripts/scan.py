@@ -166,7 +166,7 @@ def has_ai_relevance(title, description=""):
             return True
     return False
 
-def passes_content_filter(title, description="", channel_name=""):
+def passes_content_filter(title, description="", channel_name="", skip_relevance=False):
     """모든 필터를 통과하는지 확인"""
     # 1. 블랙리스트 체크
     if is_blacklisted(title, description):
@@ -177,8 +177,8 @@ def passes_content_filter(title, description="", channel_name=""):
     # 3. 아랍어 차단 (채널명 포함)
     if has_arabic(title) or has_arabic(channel_name):
         return False
-    # 4. AI 관련성 검증
-    if not has_ai_relevance(title, description):
+    # 4. AI 관련성 검증 (skip_relevance=True면 건너뜀 - 검색 키워드 자체가 AI 관련일 때)
+    if not skip_relevance and not has_ai_relevance(title, description):
         return False
     return True
 
@@ -225,8 +225,8 @@ def get_details(yt, ids):
                 desc = item["snippet"].get("description", "")[:300]
                 channel_name = item["snippet"].get("channelTitle", "")
 
-                # 콘텐츠 필터 적용 (채널명 포함)
-                if not passes_content_filter(title, desc, channel_name):
+                # 콘텐츠 필터 적용 (채널명 포함, AI 관련성은 검색 키워드가 보장)
+                if not passes_content_filter(title, desc, channel_name, skip_relevance=True):
                     continue
 
                 details[item["id"]] = {
