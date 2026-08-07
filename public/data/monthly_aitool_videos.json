@@ -1,6 +1,6 @@
 {
   "period": "2026-07-09 ~ 2026-08-07",
-  "updated_at": "2026-08-07T14:16:23.978473",
+  "updated_at": "2026-08-07T22:31:26.452329",
   "top5": [
     {
       "video_id": "m8uUUUsMD3Y",
@@ -31,31 +31,6 @@
       "score": 251505
     },
     {
-      "video_id": "Fzppm4yOrTw",
-      "title": "How to Make Videos Inside Claude: Kling MCP AI Tutorial",
-      "channel_masked": "Jon***",
-      "views": 186331,
-      "likes": 466,
-      "published": "2026-07-18",
-      "is_short": false,
-      "language": "en",
-      "title_ko": "클로드 안에서 비디오 만드는 방법: 클링 MCP AI 튜토리얼",
-      "title_en": "How to Make Videos Inside Claude: Kling MCP AI Tutorial",
-      "method": "AI 비디오 생성 및 설정",
-      "method_en": "AI video generation and setup",
-      "principle": "클링 MCP는 Claude, Cursor, Codex와 연결하여 사진 한 장으로 여러 제품 비디오를 생성합니다.",
-      "principle_en": "Kling MCP connects with Claude, Cursor, and Codex to generate multiple product videos from a single photo.",
-      "requirements": "비용: 무료, 도구: 클로드, 클링 MCP",
-      "requirements_en": "Cost: Free, Tools: Claude, Kling MCP",
-      "category": "AI영상",
-      "difficulty": 3,
-      "initial_cost": 1,
-      "time_to_profit": 3,
-      "is_new": true,
-      "appearances": 1,
-      "score": 186331
-    },
-    {
       "video_id": "wkurHT85g3g",
       "title": "claude code grátis pra sempre",
       "channel_masked": "man***",
@@ -70,29 +45,32 @@
       "score": 146333
     },
     {
-      "video_id": "jqvmORIAQjg",
-      "title": "3 AI Video Generators That Are ACTUALLY FREE & UNLIMITED",
-      "channel_masked": "Mal***",
-      "views": 133986,
-      "likes": 3359,
-      "published": "2026-07-10",
+      "video_id": "ZW7R3qNw4nk",
+      "title": "Build Anything with Kimi K3, Here’s How",
+      "channel_masked": "Dav***",
+      "views": 128537,
+      "likes": 3330,
+      "published": "2026-07-24",
+      "description": "Kimi API (Extra 15% bonus for new users' first purchase, until Oct 1)\nhttps://platform.kimi.ai?track_id=track-72e84e3c723246f7b19fabd2c5cf2767 \n\nGet everything from this video: https://www.davidondrej.com/kimi-in-any-harness\n\nWanna learn how to code with AI? Go here: https://www.skool.com/new-societ",
       "is_short": false,
       "language": "en",
-      "title_ko": "실제로 무료이자 무제한인 3개의 AI 비디오 생성기",
-      "title_en": "3 AI Video Generators That Are ACTUALLY FREE & UNLIMITED",
-      "method": "AI 비디오 생성 및 편집",
-      "method_en": "AI video generation and editing",
-      "principle": "무료로 제공되는 AI 비디오 생성기를 사용하여 비디오를 생성하고 편집할 수 있습니다.",
-      "principle_en": "You can generate and edit videos using AI video generators that are offered for free.",
-      "requirements": "비용: 무료, 도구: 제미나이 옴니 플래시",
-      "requirements_en": "Cost: Free, Tools: Gemini Omni Flash",
-      "category": "AI영상",
-      "difficulty": 2,
-      "initial_cost": 1,
-      "time_to_profit": 2,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
-      "score": 133986
+      "score": 128537
+    },
+    {
+      "video_id": "To0kYStFS3I",
+      "title": "I Tested Kimi K3 So You Don't Have To...",
+      "channel_masked": "Nic***",
+      "views": 105791,
+      "likes": 2627,
+      "published": "2026-07-16",
+      "description": "🔥 Join Maker School & get customer #1 guaranteed: https://skool.com/makerschool/about\n📁 Get all my free resources: https://skool.com/maker-zero/about\n➡️ If this is your first video: I'm Nick Saraev. I run LeftClick, an AI growth consultancy. We've done work for large brands you're likely familiar wi",
+      "is_short": false,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 105791
     }
   ]
 }
