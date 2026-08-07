@@ -1,0 +1,76 @@
+{
+  "period": "2026-07-09 ~ 2026-08-07",
+  "updated_at": "2026-08-07T01:30:35.945418",
+  "top5": [
+    {
+      "video_id": "m8uUUUsMD3Y",
+      "title": "Introducing the Codex Micro",
+      "channel_masked": "Ope***",
+      "views": 260571,
+      "likes": 5683,
+      "published": "2026-07-15",
+      "description": "See how the Codex Micro, a customizable keyboard built with Work Louder for Codex, helps you move through a build without leaving your flow. In this demo, GPT-5.6 Sol creates a word game while the Micro handles voice dictation, task switching, reasoning controls, permission requests, and follow-up p",
+      "is_short": false,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 260571
+    },
+    {
+      "video_id": "8vl61ok6dlE",
+      "title": "AI Apps are Getting Hacked. Use these prompts to fix it #vibecoding #cybersecurity #apps #coding",
+      "channel_masked": "May***",
+      "views": 251505,
+      "likes": 19927,
+      "published": "2026-07-10",
+      "description": "Everyone can build an app in a weekend now. almost nobody can secure one. here's the problem: AI builders write code that works, but 'works' and 'safe' are different things. your API keys are sitting in plain text. your database trusts anyone who asks. change one number in a URL and you're reading s",
+      "is_short": false,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 251505
+    },
+    {
+      "video_id": "wkurHT85g3g",
+      "title": "claude code grátis pra sempre",
+      "channel_masked": "man***",
+      "views": 146333,
+      "likes": 10388,
+      "published": "2026-07-22",
+      "description": "Rodei o claude code de graça usando o 9router: um proxy que junta vários free-tiers (Claude, Cursor, Copilot, Gemini e uma penca de modelo chinês) atrás de um endpoint só e faz rotação de conta pra você nunca mais bater no \"you've hit your limit\". \n\n🔥 RODA NUMA VPS DA HOSTINGER (deploy 1-clique do 9",
+      "is_short": false,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 146333
+    },
+    {
+      "video_id": "ZW7R3qNw4nk",
+      "title": "Build Anything with Kimi K3, Here’s How",
+      "channel_masked": "Dav***",
+      "views": 128537,
+      "likes": 3330,
+      "published": "2026-07-24",
+      "description": "Kimi API (Extra 15% bonus for new users' first purchase, until Oct 1)\nhttps://platform.kimi.ai?track_id=track-72e84e3c723246f7b19fabd2c5cf2767 \n\nGet everything from this video: https://www.davidondrej.com/kimi-in-any-harness\n\nWanna learn how to code with AI? Go here: https://www.skool.com/new-societ",
+      "is_short": false,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 128537
+    },
+    {
+      "video_id": "To0kYStFS3I",
+      "title": "I Tested Kimi K3 So You Don't Have To...",
+      "channel_masked": "Nic***",
+      "views": 105791,
+      "likes": 2627,
+      "published": "2026-07-16",
+      "description": "🔥 Join Maker School & get customer #1 guaranteed: https://skool.com/makerschool/about\n📁 Get all my free resources: https://skool.com/maker-zero/about\n➡️ If this is your first video: I'm Nick Saraev. I run LeftClick, an AI growth consultancy. We've done work for large brands you're likely familiar wi",
+      "is_short": false,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 105791
+    }
+  ]
+}

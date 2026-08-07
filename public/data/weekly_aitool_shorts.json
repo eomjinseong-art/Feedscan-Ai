@@ -1,0 +1,34 @@
+{
+  "period": "2026-08-01 ~ 2026-08-07",
+  "updated_at": "2026-08-07T01:30:35.940012",
+  "top5": [
+    {
+      "video_id": "mqm0awFsOgU",
+      "title": "invented a dumb smartphone - built w/ cursor",
+      "channel_masked": "kar***",
+      "views": 528352,
+      "likes": 14050,
+      "published": "2026-07-10",
+      "description": "",
+      "is_short": true,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 528352
+    },
+    {
+      "video_id": "fZIBK_4fKq8",
+      "title": "Use Claude Code for free with unlimited usage using Omniroute",
+      "channel_masked": "Nic***",
+      "views": 177606,
+      "likes": 6082,
+      "published": "2026-07-18",
+      "description": "You can now run Claude Code for completely free, with almost unlimited usage.\n\nSomeone on GitHub just built a free tool called OmniRoute.\n\nIt links your Claude Code to over 200 free AI providers.\n\nThe moment your Claude limit runs out, it automatically switches you to the next best model.\n\nSo your s",
+      "is_short": true,
+      "language": "en",
+      "is_new": false,
+      "appearances": 1,
+      "score": 177606
+    }
+  ]
+}
