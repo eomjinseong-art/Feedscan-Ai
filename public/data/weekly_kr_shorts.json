@@ -1,6 +1,6 @@
 {
-  "period": "2026-08-01 ~ 2026-08-07",
-  "updated_at": "2026-08-07T22:31:26.440011",
+  "period": "2026-08-02 ~ 2026-08-08",
+  "updated_at": "2026-08-08T04:03:02.992108",
   "top5": [
     {
       "video_id": "mnET5VAtf_8",
@@ -73,7 +73,7 @@
       "difficulty": 4,
       "initial_cost": 3,
       "time_to_profit": 4,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
       "score": 79561
     },
