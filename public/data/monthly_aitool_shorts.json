@@ -1,6 +1,6 @@
 {
   "period": "2026-07-12 ~ 2026-08-10",
-  "updated_at": "2026-08-10T14:22:27.254568",
+  "updated_at": "2026-08-10T22:35:36.649959",
   "top5": [
     {
       "video_id": "5d2eSjfSW6c",
@@ -84,6 +84,31 @@
       "score": 739496
     },
     {
+      "video_id": "5p2B-3l7mjQ",
+      "title": "Her Expressions Are UNREAL 😂 #shorts #reaction #KlingAI #KlingExpressionChallenge",
+      "channel_masked": "Cre***",
+      "views": 673662,
+      "likes": 819,
+      "published": "2026-07-30",
+      "is_short": true,
+      "language": "en",
+      "title_ko": "그녀의 표정은 비현실적이다 😂 #shorts #reaction #KlingAI #KlingExpressionChallenge",
+      "title_en": "Her Expressions Are UNREAL 😂 #shorts #reaction #KlingAI #KlingExpressionChallenge",
+      "method": "KlingAI를 사용한 얼굴 표정 생성",
+      "method_en": "Creating facial expressions using KlingAI",
+      "principle": "KlingAI 3.0을 사용하여 매우 사실적인 얼굴 표정을 생성합니다. 자연스러운 눈 맞춤과 생생한 감정 전환이 특징입니다.",
+      "principle_en": "Using KlingAI 3.0 to create incredibly realistic facial expressions, featuring natural eye contact and lifelike emotional transitions.",
+      "requirements": "KlingAI 3.0 사용, 비용은 구독 기반",
+      "requirements_en": "Using KlingAI 3.0, subscription-based cost",
+      "category": "AI영상",
+      "difficulty": 2,
+      "initial_cost": 3,
+      "time_to_profit": 2,
+      "is_new": true,
+      "appearances": 1,
+      "score": 673662
+    },
+    {
       "video_id": "mqm0awFsOgU",
       "title": "invented a dumb smartphone - built w/ cursor",
       "channel_masked": "kar***",
@@ -96,31 +121,6 @@
       "is_new": false,
       "appearances": 1,
       "score": 528352
-    },
-    {
-      "video_id": "fZIBK_4fKq8",
-      "title": "Use Claude Code for free with unlimited usage using Omniroute",
-      "channel_masked": "Nic***",
-      "views": 193703,
-      "likes": 6588,
-      "published": "2026-07-18",
-      "is_short": true,
-      "language": "en",
-      "title_ko": "Omniroute로 Claude Code 무료 사용하기",
-      "title_en": "Use Claude Code for free with unlimited usage using Omniroute",
-      "method": "OmniRoute를 통한 Claude Code 사용",
-      "method_en": "Using Claude Code via OmniRoute",
-      "principle": "OmniRoute는 Claude Code를 무료로 사용하고 다른 AI 모델로 자동 전환합니다.",
-      "principle_en": "OmniRoute allows free usage of Claude Code and automatically switches to other AI models.",
-      "requirements": "비용: 무료, 도구: OmniRoute, Claude Code",
-      "requirements_en": "Cost: Free, Tools: OmniRoute, Claude Code",
-      "category": "AI코딩",
-      "difficulty": 2,
-      "initial_cost": 1,
-      "time_to_profit": 2,
-      "is_new": false,
-      "appearances": 2,
-      "score": 387406
     }
   ]
 }
