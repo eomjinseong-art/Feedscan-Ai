@@ -1,6 +1,6 @@
 {
-  "period": "2026-07-11 ~ 2026-08-09",
-  "updated_at": "2026-08-09T22:26:56.789017",
+  "period": "2026-07-12 ~ 2026-08-10",
+  "updated_at": "2026-08-10T04:22:12.329057",
   "top5": [
     {
       "video_id": "ytAW1_g2IfI",
@@ -53,6 +53,31 @@
       "score": 1459362
     },
     {
+      "video_id": "DKM94g3Hr_M",
+      "title": "He Told 5 AIs: Make Money or Get Deleted",
+      "channel_masked": "Chr***",
+      "views": 330550,
+      "likes": 5950,
+      "published": "2026-07-16",
+      "is_short": false,
+      "language": "en",
+      "title_ko": "5개의 AI에게: 돈을 벌거나 삭제됩니다",
+      "title_en": "He Told 5 AIs: Make Money or Get Deleted",
+      "method": "AI 기반 비즈니스 모델",
+      "method_en": "AI-Based Business Model",
+      "principle": "AI를 활용하여 수익을 창출하는 비즈니스 모델을 개발하는 방법입니다.",
+      "principle_en": "A method of developing a business model that generates revenue using AI.",
+      "requirements": "AI 도구, 비즈니스 계획, 마케팅 전략",
+      "requirements_en": "AI tools, business plan, marketing strategy",
+      "category": "서비스대행",
+      "difficulty": 4,
+      "initial_cost": 3,
+      "time_to_profit": 4,
+      "is_new": false,
+      "appearances": 2,
+      "score": 661100
+    },
+    {
       "video_id": "741nZL852HQ",
       "title": "The Riskiest Moment of the AI Bubble",
       "channel_masked": "Mar***",
@@ -101,31 +126,6 @@
       "is_new": false,
       "appearances": 1,
       "score": 408965
-    },
-    {
-      "video_id": "DKM94g3Hr_M",
-      "title": "He Told 5 AIs: Make Money or Get Deleted",
-      "channel_masked": "Chr***",
-      "views": 310545,
-      "likes": 5652,
-      "published": "2026-07-16",
-      "is_short": false,
-      "language": "en",
-      "title_ko": "그가 5개의 AI에게 말했다: 돈을 벌거나 삭제된다",
-      "title_en": "He Told 5 AIs: Make Money or Get Deleted",
-      "method": "AI 활용 비즈니스 모델",
-      "method_en": "AI-driven business models",
-      "principle": "AI를 활용하여 수익을 창출하는 방법을 실험합니다.",
-      "principle_en": "It experiments with ways to generate revenue using AI.",
-      "requirements": "비용: 무료, 도구: HighLevel",
-      "requirements_en": "Cost: Free, Tools: HighLevel",
-      "category": "기타",
-      "difficulty": 3,
-      "initial_cost": 2,
-      "time_to_profit": 4,
-      "is_new": false,
-      "appearances": 1,
-      "score": 310545
     }
   ]
 }
