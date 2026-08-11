@@ -1,6 +1,6 @@
 {
   "period": "2026-07-13 ~ 2026-08-11",
-  "updated_at": "2026-08-11T14:22:05.489977",
+  "updated_at": "2026-08-11T22:38:40.860274",
   "top5": [
     {
       "video_id": "ytAW1_g2IfI",
@@ -53,6 +53,31 @@
       "score": 729681
     },
     {
+      "video_id": "If_U_zmXWYo",
+      "title": "2026년 클로드, 1시간 올인원 강의 (claude)",
+      "channel_masked": "찍***",
+      "views": 325373,
+      "likes": 18216,
+      "published": "2026-08-04",
+      "is_short": false,
+      "language": "ko",
+      "title_ko": "2026년 클로드, 1시간 올인원 강의 (claude)",
+      "title_en": "2026 Claude, 1-Hour All-in-One Lecture (claude)",
+      "method": "클로드 도구 요약 및 활용",
+      "method_en": "Summary and utilization of Claude tools",
+      "principle": "클로드의 다양한 기능을 요약하고, 필요에 따라 선택적으로 활용할 수 있도록 안내합니다.",
+      "principle_en": "Summarizes various features of Claude and guides users to utilize them selectively as needed.",
+      "requirements": "비용: 무료, 도구: 클로드 웹사이트",
+      "requirements_en": "Cost: Free, Tools: Claude website",
+      "category": "AI자동화",
+      "difficulty": 2,
+      "initial_cost": 1,
+      "time_to_profit": 2,
+      "is_new": true,
+      "appearances": 1,
+      "score": 325373
+    },
+    {
       "video_id": "QucgvbO5gsM",
       "title": "Free AI Tools So Good They're Making Paid Versions Obsolete",
       "channel_masked": "Vai***",
@@ -101,20 +126,6 @@
       "is_new": false,
       "appearances": 1,
       "score": 298467
-    },
-    {
-      "video_id": "m8uUUUsMD3Y",
-      "title": "Introducing the Codex Micro",
-      "channel_masked": "Ope***",
-      "views": 260571,
-      "likes": 5683,
-      "published": "2026-07-15",
-      "description": "See how the Codex Micro, a customizable keyboard built with Work Louder for Codex, helps you move through a build without leaving your flow. In this demo, GPT-5.6 Sol creates a word game while the Micro handles voice dictation, task switching, reasoning controls, permission requests, and follow-up p",
-      "is_short": false,
-      "language": "en",
-      "is_new": false,
-      "appearances": 1,
-      "score": 260571
     }
   ]
 }
