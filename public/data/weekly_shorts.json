@@ -1,6 +1,6 @@
 {
   "period": "2026-08-06 ~ 2026-08-12",
-  "updated_at": "2026-08-12T14:22:31.316294",
+  "updated_at": "2026-08-12T22:36:08.498531",
   "top5": [
     {
       "video_id": "4EIzQt41gOA",
@@ -103,29 +103,29 @@
       "score": 174129
     },
     {
-      "video_id": "rnYfoDydAQU",
-      "title": "I Built an AI Financial Operating System for Business #shorts #finance #automation",
-      "channel_masked": "Str***",
-      "views": 76351,
-      "likes": 4211,
-      "published": "2026-07-14",
+      "video_id": "kURp6YM6O5Q",
+      "title": "The Easiest AI Business Idea 💡💰",
+      "channel_masked": "Mat***",
+      "views": 17932,
+      "likes": 874,
+      "published": "2026-07-24",
       "is_short": true,
       "language": "en",
-      "title_ko": "비즈니스를 위한 AI 재무 운영 시스템을 구축했습니다 #shorts #finance #automation",
-      "title_en": "I Built an AI Financial Operating System for Business #shorts #finance #automation",
-      "method": "AI 재무 운영 시스템 구축",
-      "method_en": "Building an AI Financial Operating System",
-      "principle": "이 시스템은 비즈니스의 재무 관리를 자동화하여 효율성을 높입니다. Gmail과 QuickBooks와 연결된 여러 에이전트를 통해 운영됩니다.",
-      "principle_en": "This system automates financial management for businesses, enhancing efficiency. It operates through multiple agents connected to Gmail and QuickBooks.",
-      "requirements": "비용: 월 $50, 도구: Claude AI, Gmail, QuickBooks",
-      "requirements_en": "Cost: $50/month, Tools: Claude AI, Gmail, QuickBooks",
-      "category": "기타",
+      "title_ko": "가장 쉬운 AI 비즈니스 아이디어 💡💰",
+      "title_en": "The Easiest AI Business Idea 💡💰",
+      "method": "로컬 비즈니스 웹사이트 개선",
+      "method_en": "Improving local business websites",
+      "principle": "구식 웹사이트를 개선하여 로컬 비즈니스에 가치를 제공하고 수익을 창출할 수 있습니다.",
+      "principle_en": "By improving outdated websites, you can provide value to local businesses and generate revenue.",
+      "requirements": "Hyperagentapp 사용, 이메일 템플릿",
+      "requirements_en": "Using Hyperagentapp, email templates",
+      "category": "서비스대행",
       "difficulty": 3,
-      "initial_cost": 3,
+      "initial_cost": 2,
       "time_to_profit": 4,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
-      "score": 76351
+      "score": 17932
     }
   ]
 }
