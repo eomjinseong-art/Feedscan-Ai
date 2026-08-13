@@ -1,6 +1,6 @@
 {
-  "period": "2026-07-14 ~ 2026-08-12",
-  "updated_at": "2026-08-12T22:36:08.503917",
+  "period": "2026-07-15 ~ 2026-08-13",
+  "updated_at": "2026-08-13T04:43:43.897921",
   "top5": [
     {
       "video_id": "4EIzQt41gOA",
@@ -78,6 +78,31 @@
       "score": 756787
     },
     {
+      "video_id": "VHzvNrcAuck",
+      "title": "I MADE $15B WITH CHAT GPT",
+      "channel_masked": "The***",
+      "views": 457534,
+      "likes": 14977,
+      "published": "2026-08-06",
+      "is_short": true,
+      "language": "en",
+      "title_ko": "나는 CHAT GPT로 150억 달러를 벌었다",
+      "title_en": "I MADE $15B WITH CHAT GPT",
+      "method": "AI를 활용한 비즈니스 모델 구축",
+      "method_en": "Building a business model using AI",
+      "principle": "마이클 세일러는 AI 기술을 활용하여 비즈니스를 성공적으로 운영하고 막대한 수익을 창출했다. 이는 혁신적인 아이디어와 기술의 결합이 중요함을 보여준다.",
+      "principle_en": "Michael Saylor successfully operated a business using AI technology, generating massive profits. This demonstrates the importance of combining innovative ideas with technology.",
+      "requirements": "AI 도구 및 초기 투자 필요, 약 1000달러 이상",
+      "requirements_en": "AI tools and initial investment needed, around $1000 or more",
+      "category": "디지털상품",
+      "difficulty": 4,
+      "initial_cost": 3,
+      "time_to_profit": 4,
+      "is_new": true,
+      "appearances": 1,
+      "score": 457534
+    },
+    {
       "video_id": "yGve_qsyG30",
       "title": "Try this #ai #sidehustle #business #businessgrowth #codingbat #study #college #makemoneyperday",
       "channel_masked": "Ras***",
@@ -101,31 +126,6 @@
       "is_new": false,
       "appearances": 1,
       "score": 401474
-    },
-    {
-      "video_id": "qEG-VV948qs",
-      "title": "Earning money with AI",
-      "channel_masked": "Nei***",
-      "views": 280347,
-      "likes": 0,
-      "published": "2026-07-08",
-      "is_short": true,
-      "language": "en",
-      "title_ko": "AI로 돈 벌기",
-      "title_en": "Earning money with AI",
-      "method": "AI를 활용한 서비스 제공",
-      "method_en": "Providing services using AI",
-      "principle": "AI를 사용하여 고객에게 서비스를 제공하고 그 대가를 받는 방법을 보여줍니다.",
-      "principle_en": "It shows how to provide services to clients using AI and get paid for it.",
-      "requirements": "AI 도구, 촬영 장비",
-      "requirements_en": "AI tools, filming equipment",
-      "category": "서비스대행",
-      "difficulty": 4,
-      "initial_cost": 3,
-      "time_to_profit": 4,
-      "is_new": false,
-      "appearances": 1,
-      "score": 280347
     }
   ]
 }

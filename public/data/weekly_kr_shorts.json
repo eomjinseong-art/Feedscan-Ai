@@ -1,6 +1,6 @@
 {
-  "period": "2026-08-06 ~ 2026-08-12",
-  "updated_at": "2026-08-12T22:36:08.509272",
+  "period": "2026-08-07 ~ 2026-08-13",
+  "updated_at": "2026-08-13T04:43:43.903296",
   "top5": [
     {
       "video_id": "BzkwXSkQh80",
@@ -49,8 +49,8 @@
       "initial_cost": 4,
       "time_to_profit": 3,
       "is_new": false,
-      "appearances": 4,
-      "score": 468208
+      "appearances": 3,
+      "score": 351156
     },
     {
       "video_id": "zYGy48-J9yw",
@@ -74,8 +74,8 @@
       "initial_cost": 2,
       "time_to_profit": 3,
       "is_new": false,
-      "appearances": 2,
-      "score": 254090
+      "appearances": 1,
+      "score": 127045
     },
     {
       "video_id": "5KoZSU1VjVQ",
@@ -99,33 +99,33 @@
       "initial_cost": 3,
       "time_to_profit": 3,
       "is_new": false,
-      "appearances": 4,
-      "score": 50748
+      "appearances": 3,
+      "score": 38061
     },
     {
-      "video_id": "QptUBTei1BM",
-      "title": "바이브코딩으로 앱 수익화",
-      "channel_masked": "나민수***",
-      "views": 15555,
-      "likes": 473,
-      "published": "2026-07-22",
+      "video_id": "jYsqLurwQTQ",
+      "title": "3년 회수하고 남은 3년은 순익? AI 거품론 비웃는 아마존의 기적의 계산기 #아마존AI투자 #손익분기점",
+      "channel_masked": "세상***",
+      "views": 34513,
+      "likes": 284,
+      "published": "2026-07-31",
       "is_short": true,
       "language": "ko",
-      "title_ko": "바이브코딩으로 앱 수익화",
-      "title_en": "Monetizing Apps with Vibe Coding",
-      "method": "노코드 AI 앱 개발",
-      "method_en": "No-code AI app development",
-      "principle": "코딩 없이도 특정 집단의 문제를 해결하는 앱을 통해 수익을 창출할 수 있습니다.",
-      "principle_en": "You can generate revenue by creating apps that solve specific group problems without coding.",
-      "requirements": "Vibe Coding 및 Base 44 사용",
-      "requirements_en": "Use of Vibe Coding and Base 44",
+      "title_ko": "3년 회수하고 남은 3년은 순익? AI 거품론 비웃는 아마존의 기적의 계산기 #아마존AI투자 #손익분기점",
+      "title_en": "Recover in 3 Years and Profit in the Remaining 3? Amazon's Miracle Calculator Laughs at AI Bubble Theory",
+      "method": "AI 투자 수익 회수 계산",
+      "method_en": "Calculating ROI for AI investments",
+      "principle": "아마존은 AI 투자가 단기 손실을 극복하고 장기적으로 수익을 창출할 수 있음을 보여주었습니다.",
+      "principle_en": "Amazon shows that AI investments can overcome short-term losses and generate long-term profits.",
+      "requirements": "비즈니스 모델 이해 및 계산기 필요",
+      "requirements_en": "Understanding of business models and a calculator needed",
       "category": "디지털상품",
-      "difficulty": 2,
+      "difficulty": 3,
       "initial_cost": 2,
-      "time_to_profit": 3,
+      "time_to_profit": 4,
       "is_new": false,
-      "appearances": 3,
-      "score": 46665
+      "appearances": 1,
+      "score": 34513
     }
   ]
 }
