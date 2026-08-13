@@ -1,6 +1,6 @@
 {
   "period": "2026-08-07 ~ 2026-08-13",
-  "updated_at": "2026-08-13T14:24:31.986170",
+  "updated_at": "2026-08-13T22:38:24.905416",
   "top5": [
     {
       "video_id": "4EIzQt41gOA",
@@ -103,29 +103,29 @@
       "score": 174129
     },
     {
-      "video_id": "Oi2tpR2KtT8",
-      "title": "Handshake Ai Remote Jobs career",
-      "channel_masked": "Rae***",
-      "views": 25683,
-      "likes": 74,
-      "published": "2026-07-19",
+      "video_id": "kURp6YM6O5Q",
+      "title": "The Easiest AI Business Idea 💡💰",
+      "channel_masked": "Mat***",
+      "views": 17932,
+      "likes": 874,
+      "published": "2026-07-24",
       "is_short": true,
       "language": "en",
-      "title_ko": "핸드쉐이크 AI 원격 직업 경력",
-      "title_en": "Handshake Ai Remote Jobs career",
-      "method": "AI를 활용한 원격 직업 탐색",
-      "method_en": "Exploring remote jobs using AI",
-      "principle": "AI 기술을 통해 원격 직업의 기회를 발견하고, 이를 통해 경력을 쌓는 방법을 제시합니다.",
-      "principle_en": "It presents ways to discover remote job opportunities through AI technology and build a career.",
-      "requirements": "인터넷, 컴퓨터, AI 도구 사용 능력",
-      "requirements_en": "Internet, computer, ability to use AI tools",
-      "category": "기타",
+      "title_ko": "가장 쉬운 AI 비즈니스 아이디어 💡💰",
+      "title_en": "The Easiest AI Business Idea 💡💰",
+      "method": "로컬 비즈니스 웹사이트 개선",
+      "method_en": "Improving local business websites",
+      "principle": "구식 웹사이트를 개선하여 로컬 비즈니스에 가치를 제공하고 수익을 창출할 수 있습니다.",
+      "principle_en": "By improving outdated websites, you can provide value to local businesses and generate revenue.",
+      "requirements": "Hyperagentapp 사용, 이메일 템플릿",
+      "requirements_en": "Using Hyperagentapp, email templates",
+      "category": "서비스대행",
       "difficulty": 3,
       "initial_cost": 2,
       "time_to_profit": 4,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
-      "score": 25683
+      "score": 17932
     }
   ]
 }
