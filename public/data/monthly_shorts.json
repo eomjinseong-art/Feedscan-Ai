@@ -1,6 +1,6 @@
 {
   "period": "2026-07-16 ~ 2026-08-14",
-  "updated_at": "2026-08-14T14:18:29.484083",
+  "updated_at": "2026-08-14T22:19:33.474325",
   "top5": [
     {
       "video_id": "4EIzQt41gOA",
@@ -103,29 +103,29 @@
       "score": 401474
     },
     {
-      "video_id": "xurHeoN3V5E",
-      "title": "NO MORE AI BUSINESSES!",
-      "channel_masked": "The***",
-      "views": 175393,
-      "likes": 5957,
-      "published": "2026-07-20",
+      "video_id": "qEG-VV948qs",
+      "title": "Earning money with AI",
+      "channel_masked": "Nei***",
+      "views": 280347,
+      "likes": 0,
+      "published": "2026-07-08",
       "is_short": true,
       "language": "en",
-      "title_ko": "더 이상 AI 비즈니스는 없다!",
-      "title_en": "NO MORE AI BUSINESSES!",
-      "method": "기존 비즈니스 재구성",
-      "method_en": "Rebuilding existing business",
-      "principle": "AI를 활용하여 기존 비즈니스를 혁신하는 것이 핵심입니다. 단순히 AI 회사를 시작하는 것이 아니라, 현재의 비즈니스 모델을 개선하는 방법을 찾아야 합니다.",
-      "principle_en": "The key is to innovate existing businesses using AI. Instead of just starting an AI company, one should find ways to improve the current business model.",
-      "requirements": "비용: 최소한의 투자, 도구: AI 도구 및 소프트웨어",
-      "requirements_en": "Cost: Minimal investment, Tools: AI tools and software",
-      "category": "기타",
-      "difficulty": 3,
-      "initial_cost": 2,
-      "time_to_profit": 3,
+      "title_ko": "AI로 돈 벌기",
+      "title_en": "Earning money with AI",
+      "method": "AI를 활용한 서비스 제공",
+      "method_en": "Providing services using AI",
+      "principle": "AI를 사용하여 고객에게 서비스를 제공하고 그 대가를 받는 방법을 보여줍니다.",
+      "principle_en": "It shows how to provide services to clients using AI and get paid for it.",
+      "requirements": "AI 도구, 촬영 장비",
+      "requirements_en": "AI tools, filming equipment",
+      "category": "서비스대행",
+      "difficulty": 4,
+      "initial_cost": 3,
+      "time_to_profit": 4,
       "is_new": false,
-      "appearances": 2,
-      "score": 350786
+      "appearances": 1,
+      "score": 280347
     }
   ]
 }
