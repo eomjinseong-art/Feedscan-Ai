@@ -1,6 +1,6 @@
 {
   "period": "2026-07-17 ~ 2026-08-15",
-  "updated_at": "2026-08-15T13:32:00.372059",
+  "updated_at": "2026-08-15T22:18:07.454610",
   "top5": [
     {
       "video_id": "4EIzQt41gOA",
@@ -78,31 +78,6 @@
       "score": 756787
     },
     {
-      "video_id": "VHzvNrcAuck",
-      "title": "I MADE $15B WITH CHAT GPT",
-      "channel_masked": "The***",
-      "views": 477027,
-      "likes": 15774,
-      "published": "2026-08-06",
-      "is_short": true,
-      "language": "en",
-      "title_ko": "나는 CHAT GPT로 150억 달러를 벌었다",
-      "title_en": "I MADE $15B WITH CHAT GPT",
-      "method": "ChatGPT를 통한 비즈니스 구축",
-      "method_en": "Building a business using ChatGPT",
-      "principle": "마이클 세일러는 ChatGPT를 활용하여 큰 수익을 올릴 수 있는 방법을 제시한다.",
-      "principle_en": "Michael Saylor presents ways to generate significant profits using ChatGPT.",
-      "requirements": "비용: 0-100달러, 도구: ChatGPT",
-      "requirements_en": "Cost: $0-$100, Tools: ChatGPT",
-      "category": "서비스대행",
-      "difficulty": 3,
-      "initial_cost": 2,
-      "time_to_profit": 4,
-      "is_new": true,
-      "appearances": 1,
-      "score": 477027
-    },
-    {
       "video_id": "yGve_qsyG30",
       "title": "Try this #ai #sidehustle #business #businessgrowth #codingbat #study #college #makemoneyperday",
       "channel_masked": "Ras***",
@@ -126,6 +101,31 @@
       "is_new": false,
       "appearances": 1,
       "score": 401474
+    },
+    {
+      "video_id": "qEG-VV948qs",
+      "title": "Earning money with AI",
+      "channel_masked": "Nei***",
+      "views": 280347,
+      "likes": 0,
+      "published": "2026-07-08",
+      "is_short": true,
+      "language": "en",
+      "title_ko": "AI로 돈 벌기",
+      "title_en": "Earning money with AI",
+      "method": "AI를 활용한 서비스 제공",
+      "method_en": "Providing services using AI",
+      "principle": "AI를 사용하여 고객에게 서비스를 제공하고 그 대가를 받는 방법을 보여줍니다.",
+      "principle_en": "It shows how to provide services to clients using AI and get paid for it.",
+      "requirements": "AI 도구, 촬영 장비",
+      "requirements_en": "AI tools, filming equipment",
+      "category": "서비스대행",
+      "difficulty": 4,
+      "initial_cost": 3,
+      "time_to_profit": 4,
+      "is_new": false,
+      "appearances": 1,
+      "score": 280347
     }
   ]
 }

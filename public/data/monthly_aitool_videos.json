@@ -1,6 +1,6 @@
 {
   "period": "2026-07-17 ~ 2026-08-15",
-  "updated_at": "2026-08-15T13:32:00.414355",
+  "updated_at": "2026-08-15T22:18:07.493701",
   "top5": [
     {
       "video_id": "ytAW1_g2IfI",
@@ -53,31 +53,6 @@
       "score": 729681
     },
     {
-      "video_id": "TUtg_Sm2024",
-      "title": "How I Make Full Videos With Claude | No Editing, No Camera",
-      "channel_masked": "Nic***",
-      "views": 233884,
-      "likes": 461,
-      "published": "2026-07-18",
-      "is_short": false,
-      "language": "en",
-      "title_ko": "클로드로 전체 영상을 만드는 방법 | 편집 없음, 카메라 없음",
-      "title_en": "How I Make Full Videos With Claude | No Editing, No Camera",
-      "method": "클로드와 하이퍼프레임을 이용한 영상 제작",
-      "method_en": "Creating videos using Claude and HyperFrames",
-      "principle": "AI 도구를 활용하여 영상 제작 과정을 간소화하고, 편집 기술 없이도 완성된 영상을 만들 수 있다.",
-      "principle_en": "Utilizing AI tools to simplify the video creation process, allowing for finished videos without editing skills.",
-      "requirements": "하이퍼프레임(무료), 클로드 AI",
-      "requirements_en": "HyperFrames (free), Claude AI",
-      "category": "AI영상",
-      "difficulty": 2,
-      "initial_cost": 1,
-      "time_to_profit": 3,
-      "is_new": false,
-      "appearances": 2,
-      "score": 467768
-    },
-    {
       "video_id": "If_U_zmXWYo",
       "title": "2026년 클로드, 1시간 올인원 강의 (claude)",
       "channel_masked": "찍***",
@@ -126,6 +101,31 @@
       "is_new": false,
       "appearances": 1,
       "score": 324574
+    },
+    {
+      "video_id": "5p-sq8v3OXw",
+      "title": "AI Agents: The Most Valuable Skill You Can Learn in 2026 (Full Course)",
+      "channel_masked": "Ope***",
+      "views": 298467,
+      "likes": 9627,
+      "published": "2026-07-22",
+      "is_short": false,
+      "language": "en",
+      "title_ko": "AI 에이전트: 2026년에 배워야 할 가장 가치 있는 기술 (전체 과정)",
+      "title_en": "AI Agents: The Most Valuable Skill You Can Learn in 2026 (Full Course)",
+      "method": "AI 에이전트 운영 교육",
+      "method_en": "Training on operating AI agents",
+      "principle": "AI 에이전트를 활용하여 비즈니스를 운영하는 방법을 교육합니다.",
+      "principle_en": "Teaches how to operate a business using AI agents.",
+      "requirements": "비용: 무료, 도구: PDF 자료",
+      "requirements_en": "Cost: Free, Tools: PDF materials",
+      "category": "AI자동화",
+      "difficulty": 3,
+      "initial_cost": 1,
+      "time_to_profit": 3,
+      "is_new": false,
+      "appearances": 1,
+      "score": 298467
     }
   ]
 }
