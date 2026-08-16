@@ -1,7 +1,32 @@
 {
-  "period": "2026-08-09 ~ 2026-08-15",
-  "updated_at": "2026-08-15T22:18:07.483859",
+  "period": "2026-08-10 ~ 2026-08-16",
+  "updated_at": "2026-08-16T03:39:35.367760",
   "top5": [
+    {
+      "video_id": "ytAW1_g2IfI",
+      "title": "Laziest Ways to Make Money with AI (For Beginners)",
+      "channel_masked": "Mar***",
+      "views": 1499888,
+      "likes": 60858,
+      "published": "2026-07-25",
+      "is_short": false,
+      "language": "en",
+      "title_ko": "AI로 돈 버는 가장 게으른 방법 (초보자를 위한)",
+      "title_en": "Laziest Ways to Make Money with AI (For Beginners)",
+      "method": "AI 기반의 쇼핑몰 구축",
+      "method_en": "Building an AI-based Shopify store",
+      "principle": "AI 도구를 활용하여 수익을 창출하는 방법을 소개합니다. 초보자도 쉽게 시작할 수 있는 방법입니다.",
+      "principle_en": "This video introduces ways to generate income using AI tools, making it accessible for beginners.",
+      "requirements": "비용: 무료/저렴한 도구들",
+      "requirements_en": "Cost: Free/affordable tools",
+      "category": "AI비즈니스",
+      "difficulty": 2,
+      "initial_cost": 1,
+      "time_to_profit": 3,
+      "is_new": true,
+      "appearances": 1,
+      "score": 1499888
+    },
     {
       "video_id": "If_U_zmXWYo",
       "title": "2026년 클로드, 1시간 올인원 강의 (claude)",
@@ -101,31 +126,6 @@
       "is_new": false,
       "appearances": 1,
       "score": 122532
-    },
-    {
-      "video_id": "vbqR91k-mVg",
-      "title": "클로드(Claude) 사용법 A to Z｜가입부터 업무 활용법까지 20분 총정리!",
-      "channel_masked": "온선 ***",
-      "views": 110122,
-      "likes": 2408,
-      "published": "2026-07-27",
-      "is_short": false,
-      "language": "ko",
-      "title_ko": "클로드(Claude) 사용법 A to Z｜가입부터 업무 활용법까지 20분 총정리!",
-      "title_en": "Claude (Claude) Usage A to Z | 20-Minute Summary from Signup to Work Utilization!",
-      "method": "클로드 기능 소개 및 활용법",
-      "method_en": "Introduction and utilization of Claude features",
-      "principle": "클로드의 핵심 기능을 쉽게 정리하여 초보자도 빠르게 이해할 수 있도록 돕습니다.",
-      "principle_en": "Easily summarizes the core features of Claude to help beginners understand quickly.",
-      "requirements": "비용: 무료, 도구: 클로드 웹사이트",
-      "requirements_en": "Cost: Free, Tools: Claude website",
-      "category": "AI자동화",
-      "difficulty": 2,
-      "initial_cost": 1,
-      "time_to_profit": 2,
-      "is_new": false,
-      "appearances": 1,
-      "score": 110122
     }
   ]
 }
