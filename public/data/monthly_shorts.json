@@ -1,6 +1,6 @@
 {
   "period": "2026-07-19 ~ 2026-08-17",
-  "updated_at": "2026-08-17T13:40:58.884518",
+  "updated_at": "2026-08-17T22:21:50.590781",
   "top5": [
     {
       "video_id": "4EIzQt41gOA",
@@ -78,31 +78,6 @@
       "score": 756787
     },
     {
-      "video_id": "VHzvNrcAuck",
-      "title": "I MADE $15B WITH CHAT GPT",
-      "channel_masked": "The***",
-      "views": 483610,
-      "likes": 15983,
-      "published": "2026-08-06",
-      "is_short": true,
-      "language": "en",
-      "title_ko": "나는 챗 GPT로 150억 달러를 벌었다",
-      "title_en": "I MADE $15B WITH CHAT GPT",
-      "method": "챗 GPT를 통한 비즈니스 성공 사례",
-      "method_en": "Business success story using Chat GPT",
-      "principle": "마이클 세일러는 챗 GPT를 활용하여 큰 수익을 올린 경험을 공유하며, 혁신적인 아이디어에 대한 투자의 중요성을 강조한다.",
-      "principle_en": "Michael Saylor shares his experience of generating significant profits using Chat GPT, emphasizing the importance of investing in innovative ideas.",
-      "requirements": "챗 GPT 사용을 위한 구독료 필요",
-      "requirements_en": "Subscription fee for using Chat GPT required",
-      "category": "디지털상품",
-      "difficulty": 3,
-      "initial_cost": 2,
-      "time_to_profit": 4,
-      "is_new": true,
-      "appearances": 1,
-      "score": 483610
-    },
-    {
       "video_id": "yGve_qsyG30",
       "title": "Try this #ai #sidehustle #business #businessgrowth #codingbat #study #college #makemoneyperday",
       "channel_masked": "Ras***",
@@ -126,6 +101,31 @@
       "is_new": false,
       "appearances": 1,
       "score": 401474
+    },
+    {
+      "video_id": "xurHeoN3V5E",
+      "title": "NO MORE AI BUSINESSES!",
+      "channel_masked": "The***",
+      "views": 175808,
+      "likes": 5964,
+      "published": "2026-07-20",
+      "is_short": true,
+      "language": "en",
+      "title_ko": "더 이상 AI 비즈니스는 없다!",
+      "title_en": "NO MORE AI BUSINESSES!",
+      "method": "기존 비즈니스 재구성",
+      "method_en": "Rebuilding existing businesses",
+      "principle": "AI 회사를 시작하는 대신, 기존 비즈니스를 AI 중심으로 재구성하는 것이 더 큰 기회가 될 수 있습니다.",
+      "principle_en": "Instead of starting an AI company, restructuring your existing business around AI can present a greater opportunity.",
+      "requirements": "비즈니스 모델 분석 및 전략 수립, 비용은 비즈니스에 따라 다름",
+      "requirements_en": "Business model analysis and strategy development, costs vary by business",
+      "category": "기타",
+      "difficulty": 4,
+      "initial_cost": 3,
+      "time_to_profit": 4,
+      "is_new": false,
+      "appearances": 2,
+      "score": 351616
     }
   ]
 }

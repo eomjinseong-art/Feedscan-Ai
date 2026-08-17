@@ -1,6 +1,6 @@
 {
   "period": "2026-07-19 ~ 2026-08-17",
-  "updated_at": "2026-08-17T13:40:58.920477",
+  "updated_at": "2026-08-17T22:21:50.626456",
   "top5": [
     {
       "video_id": "5d2eSjfSW6c",
@@ -109,29 +109,18 @@
       "score": 673662
     },
     {
-      "video_id": "fZIBK_4fKq8",
-      "title": "Use Claude Code for free with unlimited usage using Omniroute",
-      "channel_masked": "Nic***",
-      "views": 207937,
-      "likes": 7090,
-      "published": "2026-07-18",
+      "video_id": "mqm0awFsOgU",
+      "title": "invented a dumb smartphone - built w/ cursor",
+      "channel_masked": "kar***",
+      "views": 528352,
+      "likes": 14050,
+      "published": "2026-07-10",
+      "description": "",
       "is_short": true,
       "language": "en",
-      "title_ko": "Omniroute를 사용하여 Claude Code를 무료로 무제한 사용하기",
-      "title_en": "Use Claude Code for free with unlimited usage using Omniroute",
-      "method": "OmniRoute를 사용하여 AI 모델 전환",
-      "method_en": "Switching AI models using OmniRoute",
-      "principle": "OmniRoute는 Claude Code의 사용 한계를 초과할 때 자동으로 다른 AI 모델로 전환하여 무제한 사용을 가능하게 합니다.",
-      "principle_en": "OmniRoute allows unlimited usage by automatically switching to another AI model when the Claude Code usage limit is exceeded.",
-      "requirements": "무료, OmniRoute 툴",
-      "requirements_en": "Free, OmniRoute tool",
-      "category": "AI코딩",
-      "difficulty": 2,
-      "initial_cost": 1,
-      "time_to_profit": 2,
       "is_new": false,
-      "appearances": 3,
-      "score": 623811
+      "appearances": 1,
+      "score": 528352
     }
   ]
 }
