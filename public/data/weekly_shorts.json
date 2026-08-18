@@ -1,6 +1,6 @@
 {
   "period": "2026-08-12 ~ 2026-08-18",
-  "updated_at": "2026-08-18T13:43:48.784794",
+  "updated_at": "2026-08-18T22:20:17.068783",
   "top5": [
     {
       "video_id": "fmXYsMRH6uc",
@@ -53,6 +53,31 @@
       "score": 175808
     },
     {
+      "video_id": "MGt-kQXjUKU",
+      "title": "The No.1 Skill You Should Learn in 2026 | AI Bootcamp with Dhruv Rathee",
+      "channel_masked": "AI ***",
+      "views": 107513,
+      "likes": 4132,
+      "published": "2026-07-30",
+      "is_short": true,
+      "language": "en",
+      "title_ko": "2026년에 배워야 할 최고의 기술 | AI 부트캠프",
+      "title_en": "The No.1 Skill You Should Learn in 2026 | AI Bootcamp with Dhruv Rathee",
+      "method": "AI를 활용한 앱, 웹사이트, 게임 제작",
+      "method_en": "Building apps, websites, and games using AI",
+      "principle": "비전공자도 쉽게 배울 수 있는 AI 기술을 통해 실용적인 프로젝트를 만들어내는 것을 목표로 합니다.",
+      "principle_en": "The goal is to create practical projects using AI skills that can be easily learned by non-majors.",
+      "requirements": "부트캠프 비용 + 컴퓨터 + 인터넷",
+      "requirements_en": "Bootcamp fee + computer + internet",
+      "category": "강의판매",
+      "difficulty": 3,
+      "initial_cost": 4,
+      "time_to_profit": 3,
+      "is_new": true,
+      "appearances": 1,
+      "score": 107513
+    },
+    {
       "video_id": "TCjmeapZzDs",
       "title": "Earn Money 💰 from Instagram 🤑 #instagram #earnmoneyonline #affiliate",
       "channel_masked": "Raj***",
@@ -101,31 +126,6 @@
       "is_new": false,
       "appearances": 2,
       "score": 54886
-    },
-    {
-      "video_id": "LBpkIuRdlTA",
-      "title": "OpenAI (ChatGPT) is paying students | Earn as a student #openai",
-      "channel_masked": "Nis***",
-      "views": 15430,
-      "likes": 775,
-      "published": "2026-08-06",
-      "is_short": true,
-      "language": "en",
-      "title_ko": "오픈AI(챗GPT)가 학생들에게 돈을 지불합니다 | 학생으로서 수익을 올리세요 #openai",
-      "title_en": "OpenAI (ChatGPT) is paying students | Earn as a student #openai",
-      "method": "학생을 위한 수익 창출",
-      "method_en": "Earning for students",
-      "principle": "학생들이 ChatGPT를 활용하여 수익을 올리는 방법을 설명합니다.",
-      "principle_en": "Explains how students can earn money using ChatGPT.",
-      "requirements": "인터넷, 컴퓨터, ChatGPT 계정",
-      "requirements_en": "Internet, computer, ChatGPT account",
-      "category": "기타",
-      "difficulty": 2,
-      "initial_cost": 1,
-      "time_to_profit": 2,
-      "is_new": false,
-      "appearances": 1,
-      "score": 15430
     }
   ]
 }
