@@ -1,7 +1,32 @@
 {
-  "period": "2026-08-11 ~ 2026-08-17",
-  "updated_at": "2026-08-17T22:21:50.581545",
+  "period": "2026-08-12 ~ 2026-08-18",
+  "updated_at": "2026-08-18T03:35:51.349006",
   "top5": [
+    {
+      "video_id": "4EIzQt41gOA",
+      "title": "Softhour Twin Mattress Protector Waterproof, 16 Inch Deep Pocket Fitted | #amazonaffiliate",
+      "channel_masked": "Cli***",
+      "views": 1313795,
+      "likes": 6124,
+      "published": "2026-08-01",
+      "is_short": true,
+      "language": "en",
+      "title_ko": "소프트아워 트윈 매트리스 보호대 방수, 16인치 깊은 포켓 맞춤 | #아마존제휴",
+      "title_en": "Softhour Twin Mattress Protector Waterproof, 16 Inch Deep Pocket Fitted | #amazonaffiliate",
+      "method": "아마존 제휴 마케팅을 통한 수익 창출",
+      "method_en": "Generating revenue through Amazon affiliate marketing",
+      "principle": "아마존 제품을 홍보하고 판매에 따른 수수료를 받는 방식입니다.",
+      "principle_en": "This method involves promoting Amazon products and earning a commission on sales.",
+      "requirements": "아마존 제휴 계정, 마케팅 도구, 콘텐츠 제작 능력",
+      "requirements_en": "Amazon affiliate account, marketing tools, content creation skills",
+      "category": "제휴마케팅",
+      "difficulty": 3,
+      "initial_cost": 2,
+      "time_to_profit": 3,
+      "is_new": true,
+      "appearances": 1,
+      "score": 1313795
+    },
     {
       "video_id": "fmXYsMRH6uc",
       "title": "Funny Ai kids Video 😁👍🏻#funny #kids #shortvideo #ai",
@@ -23,7 +48,7 @@
       "difficulty": 2,
       "initial_cost": 1,
       "time_to_profit": 2,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
       "score": 239048
     },
@@ -48,7 +73,7 @@
       "difficulty": 4,
       "initial_cost": 3,
       "time_to_profit": 4,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
       "score": 175808
     },
@@ -73,7 +98,7 @@
       "difficulty": 3,
       "initial_cost": 1,
       "time_to_profit": 3,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
       "score": 57994
     },
@@ -101,31 +126,6 @@
       "is_new": false,
       "appearances": 2,
       "score": 54886
-    },
-    {
-      "video_id": "LBpkIuRdlTA",
-      "title": "OpenAI (ChatGPT) is paying students | Earn as a student #openai",
-      "channel_masked": "Nis***",
-      "views": 15430,
-      "likes": 775,
-      "published": "2026-08-06",
-      "is_short": true,
-      "language": "en",
-      "title_ko": "오픈AI(챗GPT)가 학생들에게 돈을 지불합니다 | 학생으로서 수익을 올리세요 #openai",
-      "title_en": "OpenAI (ChatGPT) is paying students | Earn as a student #openai",
-      "method": "학생을 위한 수익 창출",
-      "method_en": "Earning for students",
-      "principle": "학생들이 ChatGPT를 활용하여 수익을 올리는 방법을 설명합니다.",
-      "principle_en": "Explains how students can earn money using ChatGPT.",
-      "requirements": "인터넷, 컴퓨터, ChatGPT 계정",
-      "requirements_en": "Internet, computer, ChatGPT account",
-      "category": "기타",
-      "difficulty": 2,
-      "initial_cost": 1,
-      "time_to_profit": 2,
-      "is_new": false,
-      "appearances": 1,
-      "score": 15430
     }
   ]
 }
