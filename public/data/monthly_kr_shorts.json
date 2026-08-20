@@ -1,6 +1,6 @@
 {
   "period": "2026-07-22 ~ 2026-08-20",
-  "updated_at": "2026-08-20T13:49:03.927274",
+  "updated_at": "2026-08-20T22:23:47.241298",
   "top5": [
     {
       "video_id": "BzkwXSkQh80",
@@ -106,26 +106,26 @@
       "video_id": "8IIaQiYhspc",
       "title": "월가가 두 손 들었다, 팔란티어는 미래에서 돌아온 회사입니다#shortvideo #팔란티어 #ai #소버린ai #도이체방크 #소프트웨어 #방산산업 #미국주식 #경제 #주식",
       "channel_masked": "3CU***",
-      "views": 69837,
-      "likes": 750,
+      "views": 72637,
+      "likes": 770,
       "published": "2026-08-18",
       "is_short": true,
       "language": "ko",
       "title_ko": "월가가 두 손 들었다, 팔란티어는 미래에서 돌아온 회사입니다#shortvideo #팔란티어 #ai #소버린ai #도이체방크 #소프트웨어 #방산산업 #미국주식 #경제 #주식",
       "title_en": "Wall Street Throws Up Its Hands, Palantir is a Company Returned from the Future",
-      "method": "AI 데이터 활용의 기업 니즈",
-      "method_en": "Corporate needs for utilizing AI data",
-      "principle": "팔란티어는 기업들이 데이터와 노하우를 보호하면서 AI를 활용할 수 있도록 합니다.",
-      "principle_en": "Palantir allows companies to utilize AI while protecting their data and know-how.",
-      "requirements": "AI 솔루션 도입 비용",
-      "requirements_en": "Cost of implementing AI solutions",
+      "method": "AI 데이터 활용의 중요성",
+      "method_en": "The importance of utilizing AI data",
+      "principle": "팔란티어는 기업들이 자신의 데이터를 보호하면서 AI를 활용할 수 있도록 돕고 있습니다.",
+      "principle_en": "Palantir helps companies utilize AI while protecting their own data.",
+      "requirements": "AI 소프트웨어 및 데이터 분석 도구 필요",
+      "requirements_en": "AI software and data analysis tools required",
       "category": "기타",
       "difficulty": 4,
-      "initial_cost": 4,
+      "initial_cost": 3,
       "time_to_profit": 4,
       "is_new": false,
       "appearances": 2,
-      "score": 139674
+      "score": 145274
     }
   ]
 }
