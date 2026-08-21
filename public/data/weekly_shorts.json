@@ -1,6 +1,6 @@
 {
   "period": "2026-08-15 ~ 2026-08-21",
-  "updated_at": "2026-08-21T13:46:14.321182",
+  "updated_at": "2026-08-21T22:20:23.572271",
   "top5": [
     {
       "video_id": "3DzgV30RYpY",
@@ -53,31 +53,6 @@
       "score": 490025
     },
     {
-      "video_id": "UtQudI2Seuo",
-      "title": "HOW TO USE CHATGPT TO GET RICH",
-      "channel_masked": "The***",
-      "views": 238591,
-      "likes": 5060,
-      "published": "2026-08-07",
-      "is_short": true,
-      "language": "en",
-      "title_ko": "CHATGPT를 사용하여 부자가 되는 방법",
-      "title_en": "HOW TO USE CHATGPT TO GET RICH",
-      "method": "ChatGPT를 활용한 수익 창출 방법",
-      "method_en": "Using ChatGPT for profit generation",
-      "principle": "ChatGPT를 통해 다양한 비즈니스 아이디어와 전략을 생성하여 수익을 극대화할 수 있다.",
-      "principle_en": "You can maximize profits by generating various business ideas and strategies through ChatGPT.",
-      "requirements": "ChatGPT 사용 비용, 인터넷 연결, 컴퓨터",
-      "requirements_en": "Cost of using ChatGPT, internet connection, computer",
-      "category": "기타",
-      "difficulty": 3,
-      "initial_cost": 2,
-      "time_to_profit": 3,
-      "is_new": false,
-      "appearances": 2,
-      "score": 477182
-    },
-    {
       "video_id": "xurHeoN3V5E",
       "title": "NO MORE AI BUSINESSES!",
       "channel_masked": "The***",
@@ -126,6 +101,31 @@
       "is_new": false,
       "appearances": 1,
       "score": 239048
+    },
+    {
+      "video_id": "UtQudI2Seuo",
+      "title": "HOW TO USE CHATGPT TO GET RICH",
+      "channel_masked": "The***",
+      "views": 238334,
+      "likes": 5057,
+      "published": "2026-08-07",
+      "is_short": true,
+      "language": "en",
+      "title_ko": "CHATGPT를 사용하여 부자가 되는 방법",
+      "title_en": "HOW TO USE CHATGPT TO GET RICH",
+      "method": "ChatGPT를 활용한 수익 창출 방법",
+      "method_en": "Using ChatGPT for profit generation",
+      "principle": "ChatGPT를 통해 다양한 비즈니스 아이디어를 생성하고 이를 통해 수익을 창출하는 방법을 설명합니다.",
+      "principle_en": "The video explains how to generate various business ideas using ChatGPT and monetize them.",
+      "requirements": "비용: 없음, 도구: ChatGPT",
+      "requirements_en": "Cost: None, Tools: ChatGPT",
+      "category": "기타",
+      "difficulty": 3,
+      "initial_cost": 1,
+      "time_to_profit": 2,
+      "is_new": false,
+      "appearances": 1,
+      "score": 238334
     }
   ]
 }
