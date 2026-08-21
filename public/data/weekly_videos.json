@@ -1,6 +1,6 @@
 {
-  "period": "2026-08-14 ~ 2026-08-20",
-  "updated_at": "2026-08-20T22:23:47.211008",
+  "period": "2026-08-15 ~ 2026-08-21",
+  "updated_at": "2026-08-21T03:40:59.791796",
   "top5": [
     {
       "video_id": "ytAW1_g2IfI",
@@ -24,8 +24,8 @@
       "initial_cost": 1,
       "time_to_profit": 3,
       "is_new": false,
-      "appearances": 6,
-      "score": 9571452
+      "appearances": 5,
+      "score": 7976210
     },
     {
       "video_id": "_1x9czp15fE",
@@ -53,31 +53,6 @@
       "score": 2542140
     },
     {
-      "video_id": "kYPAlvnRiiI",
-      "title": "Claude + ChatGPT = $57,152 In 90 Days",
-      "channel_masked": "Kel***",
-      "views": 281247,
-      "likes": 10592,
-      "published": "2026-08-02",
-      "is_short": false,
-      "language": "en",
-      "title_ko": "클로드 + 챗GPT = 90일 만에 $57,152",
-      "title_en": "Claude + ChatGPT = $57,152 In 90 Days",
-      "method": "페이스리스 유튜브 쇼츠 채널 구축",
-      "method_en": "Building a faceless YouTube Shorts channel",
-      "principle": "AI를 활용하여 익명으로 유튜브 쇼츠 채널을 성장시키는 방법을 공유합니다.",
-      "principle_en": "Shares how to grow a faceless YouTube Shorts channel using AI.",
-      "requirements": "비용: 무료; 도구: Viblo",
-      "requirements_en": "Cost: Free; Tools: Viblo",
-      "category": "콘텐츠채널",
-      "difficulty": 3,
-      "initial_cost": 1,
-      "time_to_profit": 4,
-      "is_new": false,
-      "appearances": 3,
-      "score": 843741
-    },
-    {
       "video_id": "5p-sq8v3OXw",
       "title": "AI Agents: The Most Valuable Skill You Can Learn in 2026 (Full Course)",
       "channel_masked": "Ope***",
@@ -101,6 +76,31 @@
       "is_new": false,
       "appearances": 2,
       "score": 783274
+    },
+    {
+      "video_id": "kYPAlvnRiiI",
+      "title": "Claude + ChatGPT = $57,152 In 90 Days",
+      "channel_masked": "Kel***",
+      "views": 281247,
+      "likes": 10592,
+      "published": "2026-08-02",
+      "is_short": false,
+      "language": "en",
+      "title_ko": "클로드 + 챗GPT = 90일 만에 $57,152",
+      "title_en": "Claude + ChatGPT = $57,152 In 90 Days",
+      "method": "페이스리스 유튜브 쇼츠 채널 구축",
+      "method_en": "Building a faceless YouTube Shorts channel",
+      "principle": "AI를 활용하여 익명으로 유튜브 쇼츠 채널을 성장시키는 방법을 공유합니다.",
+      "principle_en": "Shares how to grow a faceless YouTube Shorts channel using AI.",
+      "requirements": "비용: 무료; 도구: Viblo",
+      "requirements_en": "Cost: Free; Tools: Viblo",
+      "category": "콘텐츠채널",
+      "difficulty": 3,
+      "initial_cost": 1,
+      "time_to_profit": 4,
+      "is_new": false,
+      "appearances": 2,
+      "score": 562494
     },
     {
       "video_id": "jVOk8oc-a70",

@@ -1,6 +1,6 @@
 {
-  "period": "2026-08-14 ~ 2026-08-20",
-  "updated_at": "2026-08-20T22:23:47.207016",
+  "period": "2026-08-15 ~ 2026-08-21",
+  "updated_at": "2026-08-21T03:40:59.788324",
   "top5": [
     {
       "video_id": "3DzgV30RYpY",
@@ -123,7 +123,7 @@
       "difficulty": 3,
       "initial_cost": 1,
       "time_to_profit": 2,
-      "is_new": true,
+      "is_new": false,
       "appearances": 1,
       "score": 238334
     }

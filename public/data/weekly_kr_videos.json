@@ -1,13 +1,13 @@
 {
-  "period": "2026-08-14 ~ 2026-08-20",
-  "updated_at": "2026-08-20T22:23:47.233684",
+  "period": "2026-08-15 ~ 2026-08-21",
+  "updated_at": "2026-08-21T03:40:59.814297",
   "top5": [
     {
       "video_id": "QWYnZG7LfEs",
       "title": "99% 모르는 AI로 주식수익 극대화 하는 법ㅣ대외비 EP.29",
       "channel_masked": "지식인***",
-      "views": 425626,
-      "likes": 7923,
+      "views": 426738,
+      "likes": 7934,
       "published": "2026-07-25",
       "is_short": false,
       "language": "ko",
@@ -15,17 +15,17 @@
       "title_en": "How to Maximize Stock Profits with AI That 99% Don't Know | Confidential EP.29",
       "method": "AI를 활용한 주식 투자 전략",
       "method_en": "Stock investment strategies using AI",
-      "principle": "AI를 통해 주식 시장의 패턴을 분석하고 예측하여 수익을 극대화하는 방법을 설명합니다.",
-      "principle_en": "Explains how to analyze and predict stock market patterns using AI to maximize profits.",
-      "requirements": "AI 소프트웨어 및 데이터 분석 도구 필요, 비용은 변동 가능",
-      "requirements_en": "Requires AI software and data analysis tools, costs may vary.",
+      "principle": "AI를 통해 주식 시장의 패턴을 분석하고 예측하여 수익을 극대화할 수 있습니다.",
+      "principle_en": "By analyzing and predicting stock market patterns using AI, profits can be maximized.",
+      "requirements": "AI 툴 사용 비용, 주식 투자 자본",
+      "requirements_en": "Cost of using AI tools, capital for stock investment",
       "category": "기타",
       "difficulty": 3,
       "initial_cost": 3,
       "time_to_profit": 4,
       "is_new": false,
-      "appearances": 4,
-      "score": 1702504
+      "appearances": 5,
+      "score": 2133690
     },
     {
       "video_id": "yMRr9QFsmgk",
@@ -74,8 +74,8 @@
       "initial_cost": 2,
       "time_to_profit": 3,
       "is_new": false,
-      "appearances": 5,
-      "score": 765495
+      "appearances": 4,
+      "score": 612396
     },
     {
       "video_id": "ZogDhpgIzAc",
@@ -99,8 +99,8 @@
       "initial_cost": 2,
       "time_to_profit": 4,
       "is_new": false,
-      "appearances": 6,
-      "score": 663072
+      "appearances": 5,
+      "score": 552560
     },
     {
       "video_id": "BoLfqYBkdO0",
